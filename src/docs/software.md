@@ -23,7 +23,7 @@ A Minecraft cheat client.
 
 ## Autoclicker
 
-An simple autoclicker.
+A simple autoclicker.
 
 - [Github](https://github.com/Minnowo/AutoClicker)
 - [Download](https://github.com/Minnowo/AutoClicker/releases)
@@ -34,3 +34,12 @@ An simple autoclicker.
 A CLI script for renaming files.
 
 - [Github](https://github.com/Minnowo/Rename)
+
+
+## Clipboard Watcher
+
+A CLI script that watches your clipboard for the regex you want.
+
+- [Github](https://github.com/Minnowo/Clipboard-Watcher)
+
+
