@@ -1,0 +1,41 @@
+site_name: OwO
+site_description: ""
+site_url: ''
+repo_url: https://github.com/Minnowo/minnowo.github.io
+repo_name: Minnowo/minnowo.github.io
+use_directory_urls: false
+
+plugins: []
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)" 
+      scheme: default
+      primary: blue grey
+      accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" 
+      scheme: slate
+      primary: black
+      accent: blue
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  # logo: assets/hydrus-white.svg 
+  favicon: assets/favicon.svg
+  font: false
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.sections
+    - navigation.tabs
+    - content.tabs.link
+    - navigation.top
+    - search.suggest
+    - content.code.annotate
+    #- navigation.indexes
+  icon:
+    repo: fontawesome/brands/github
