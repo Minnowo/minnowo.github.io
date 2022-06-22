@@ -9,7 +9,7 @@ hide:
 
 A cute worm sets out to eat some apples. 
 
-[Can play it here](./AppleWorm/index.html)
+I'm hosting it [here](./AppleWorm/index.html), but it's originally from [Cool Math Games](https://www.coolmathgames.com/0-apple-worm/play)
 
 
 ## Apple Worm 2
