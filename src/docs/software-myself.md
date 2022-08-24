@@ -1,11 +1,11 @@
 ---
-title: Software
-hide:
-  - navigation
+title: My Software
 ---
 
 
 ## Winking Cat Face
+
+[GUI] [Screenshot] [Image Viewer]
 
 Screenshot software for cats.
 
@@ -15,6 +15,8 @@ Screenshot software for cats.
 
 ## Cute-Client
 
+[GUI] [Minecraft Client]
+
 A Minecraft cheat client.
 
 - [Github](https://github.com/Gank-Squad/Cute-1.8.9-Client)
@@ -22,6 +24,8 @@ A Minecraft cheat client.
 
 
 ## Autoclicker
+
+[GUI] [Autoclicker]
 
 A simple autoclicker.
 
@@ -31,12 +35,16 @@ A simple autoclicker.
 
 ## File Renamer
 
+[CLI] [Batch]
+
 A CLI script for renaming files.
 
 - [Github](https://github.com/Minnowo/Rename)
 
 
 ## Clipboard Watcher
+
+[CLI]
 
 A CLI script that watches your clipboard for the regex you want.
 
