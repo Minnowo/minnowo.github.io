@@ -92,13 +92,6 @@ Software for designing and simulating digital logic circuits.
 
 - [Github](https://github.com/logisim-evolution/logisim-evolution)
 
-## Locale-Emulator
-
-[GUI] [Emulator]
-
-A System Region and Language Simulator.
-
-- [Guthub](https://github.com/xupefei/Locale-Emulator)
 
 ## Waifu2x Snowshell
 
@@ -221,3 +214,21 @@ A text editor.
 
 - [Website](https://notepad-plus-plus.org/)
 - [Github](https://github.com/notepad-plus-plus/notepad-plus-plus)
+
+
+## Croc
+
+[CLI] [File Sharing]
+
+Lets you share files with other people.
+
+- [Github](https://github.com/schollz/croc)
+
+
+## Onion Share
+
+[GUI] [CLI] [Tor] [File Sharing] 
+
+Securely and anonymously share files, host websites, and chat with friends using the Tor network.
+
+- [Github](https://github.com/onionshare/onionshare)

@@ -26,6 +26,9 @@ nav:
     - website-other.md
   - Guides:
     - guide-authy2keepassxc.md
+    - guide-seleniumpython.md
+  - Configs:
+    - config-mpv.md
 
 
 theme:
