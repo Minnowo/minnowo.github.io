@@ -35,7 +35,7 @@ You need to download a driver for the browser you want to interface with, you ca
 
 Since I'm going to be using Chromeium, I will also download a new copy of that, you can find downloads [here](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html).
 
-Specifically I'm using [chromium-browser-snapshots/Win_x64/1000027/chrome-win.zip](https://www.googleapis.com/download/storage/v1/b/chromium-browser-snapshots/o/Win_x64%2F1000027%2Fchrome-win.zip?generation=1651780728332948&alt=media)
+Specifically I'm using [chromium-browser-snapshots/Win_x64/1000027/](https://commondatastorage.googleapis.com/chromium-browser-snapshots/index.html?prefix=Win_x64/1000027/), this also comes with the Chrome Driver for each snapshot version of chrome which is very convenient.
 
 I recommend using a portable copy of the browser you choose, this allows you to take it with the application and prevents updates of system browsers from breaking your web driver. (One of my reasons for Chromium is that I couldn't find Firefox with a zip installer)
 

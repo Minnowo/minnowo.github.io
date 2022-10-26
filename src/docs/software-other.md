@@ -232,3 +232,12 @@ Lets you share files with other people.
 Securely and anonymously share files, host websites, and chat with friends using the Tor network.
 
 - [Github](https://github.com/onionshare/onionshare)
+
+
+## x64dbg
+
+[GUI] [Debugger]
+
+A debugger for modifying programs.
+
+- [Github](https://github.com/x64dbg/x64dbg)

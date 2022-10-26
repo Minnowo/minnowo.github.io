@@ -9,3 +9,5 @@ https://github.com/r-piratedgames/megathread
 https://torrends.to/proxy/
 
 https://github.com/Igglybuff/awesome-piracy
+
+https://www.slsknet.org/news/

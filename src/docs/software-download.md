@@ -53,3 +53,13 @@ Great for general direct-downloads, supports a lot of protocols (even bittorrent
 
 - [Website](https://aria2.github.io/)
 - [Github](https://github.com/aria2/aria2)
+
+
+## Nicotine+
+
+[GUI] [P2P]
+
+Nicotine+ is a graphical client for the Soulseek peer-to-peer network.
+
+- [Website](https://nicotine-plus.org/)
+- [Github](https://github.com/nicotine-plus/nicotine-plus)
