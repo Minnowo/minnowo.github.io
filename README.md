@@ -1,2 +1,0 @@
-
-Am using the `docs` folder for the actual site, src contains the markdown used with [mkdocs](https://squidfunk.github.io/mkdocs-material/) and then when I build it I just copy the site into the `docs` folder.
