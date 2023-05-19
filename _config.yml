@@ -25,6 +25,8 @@ social:
   github: Minnowo
   rss: feed.xml
 
+show_footer: false
+
 # Google Analytics key, leave blank to ignore
 google_analytics_key:
 # Yandex metrica (https://metrica.yandex.com/) leave blank to ignore or put true to use
