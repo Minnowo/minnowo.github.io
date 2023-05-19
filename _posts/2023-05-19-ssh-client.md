@@ -9,6 +9,8 @@ tags: [note,guide]
 
 This assumes Linux and has not been tested on windows.
 
+<br>
+
 ### Check Client Version
  
 ```sh
@@ -16,6 +18,7 @@ $ ssh -V
 OpenSSH_9.3p1, OpenSSL 3.0.8 7 Feb 2023
 ```
 
+<br>
 
 ### Client Usage
 
@@ -40,6 +43,7 @@ $ ssh root@172.21.0.142 -L 8080:172.21.0.142:8080
 
 You can see more about tunneling [here](https://www.ssh.com/academy/ssh/tunneling-example)
 
+<br>
 
 ### Client Configuration
 

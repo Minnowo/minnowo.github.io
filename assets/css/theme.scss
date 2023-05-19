@@ -17,16 +17,21 @@
 //********************************************************
 
 // Several accent colors, choose one or create your own!
-$accent-color: #3CA2A2;    // original =)
+$accent-color: #b99400;    // original =)
+$accent-color: #f7ce6e;    // original =)
+// $accent-color: #3CA2A2;    // original =)
 //$accent-color: #C38FD6;  // velvet
 //$accent-color: #8FD6B3;  // greenish
 //$accent-color: #35B4DE;  // bluish
 //$accent-color: #D2E354;  // yellowish
 //$accent-color: #52B54B;  // green
 
-$font-color: #dddddd;
-$background-color: #292929;
-$post-panel-color: #39393a;
+$font-color: #ffffff;
+// $font-color: #dddddd;
+$background-color: #1f1f1f;
+// $background-color: #292929;
+// $post-panel-color: #39393a;
+$post-panel-color: #1f1f1f;
 $footer-background-color: #292c2f;
 $note-color: #87CEFA;
 $warning-color: #ffff00;
@@ -79,6 +84,13 @@ blockquote {
 
 a {
   color: $accent-color;
+}
+a, a:hover {
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {
+    color: #EE4864;
 }
 
 //********************************************************
