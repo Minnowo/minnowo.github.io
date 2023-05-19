@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Notes 
+title: Tags 
 
 ---
 
@@ -8,8 +8,20 @@ title: Notes
 	<div class="post">
 		<h1>Tags</h1>  
 		<ul>
-			{% for tag in site.tags %}
-			<li><a href="{{ '/tag/' | append:tag[0] | relative_url }}">{{ tag[0] }}</a></li>
+			{% for post in site.posts %}
+              {% for tag in post.tags %}
+                {% if tag == "note" %}
+			      <li>
+                   <div class="post-time">
+                        <i class="fa fa-calendar-alt"></i>
+                        <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+                        <a href="{{ post.url | relative_url }}">
+                          {{ post.title }}
+                        </a>
+                   </div>
+                  </li>
+                {% endif %}
+			  {% endfor %}
 			{% endfor %}
 		</ul>
 	</div>
