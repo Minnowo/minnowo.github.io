@@ -1,6 +1,7 @@
 # Jekyll configuration
 
-name: FF00B2
+title: catfish
+name: catfish
 description: Shon?
 
 # Url is currently only used only for the RSS feed in feed.xml
