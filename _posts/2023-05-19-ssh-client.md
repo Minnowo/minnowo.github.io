@@ -1,17 +1,15 @@
 ---
 layout: post
-title: ssh client
+title: SSH Client
 date:   2023-05-19 06:37
 description: How to configure and use ssh client
 toc: true
 tags: [note,guide]
 ---
 
-This assumes Linux and has not been tested on windows.
-
 <br>
 
-### Check Client Version
+## Check Client Version
  
 ```sh
 $ ssh -V
@@ -20,7 +18,7 @@ OpenSSH_9.3p1, OpenSSL 3.0.8 7 Feb 2023
 
 <br>
 
-### Client Usage
+## Client Usage
 
 Standard usage is as follows:
 ```sh
@@ -45,7 +43,7 @@ You can see more about tunneling [here](https://www.ssh.com/academy/ssh/tunnelin
 
 <br>
 
-### Client Configuration
+## Client Configuration
 
 Config file usually belongs in `~/.ssh/config`, if this file does not exist, create it.
 
