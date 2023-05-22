@@ -2,7 +2,16 @@
 layout: page
 ---
 
-{% assign posts = site.posts | where: "hidden", null %}
+{% assign posts = "" | split: ',' %}
+
+{% for p in site.posts %}
+    {% if p.hidden == null or p.hidden == false %}
+
+       {% assign posts = posts | push: p %}
+
+    {% endif %}
+{% endfor %}
+
 
 {% for post in posts limit:10 %}
 
