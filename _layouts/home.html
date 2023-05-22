@@ -2,7 +2,7 @@
 layout: page
 ---
 
-{% assign posts = site.posts | where: "p", "p.hidden == null or p.hidden == false" %}
+{% assign posts = site.posts | where: "hidden", null %}
 
 {% for post in posts limit:10 %}
 
