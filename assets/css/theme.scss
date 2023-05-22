@@ -27,6 +27,7 @@ $accent-color: #f7ce6e;    // original =)
 //$accent-color: #D2E354;  // yellowish
 //$accent-color: #52B54B;  // green
 $link-highlight-color: #EE4864;
+$selection-color: #ee486484;
 $font-color: #ffffff;
 // $font-color: #dddddd;
 $background-color: #1f1f1f;
@@ -92,6 +93,14 @@ a, a:hover {
 }
 a:hover {
     color: $link-highlight-color ;
+}
+
+::-moz-selection { /* Code for Firefox */
+  background: $selection-color;
+}
+
+::selection {
+  background: $selection-color;
 }
 
 //********************************************************

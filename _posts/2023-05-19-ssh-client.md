@@ -25,7 +25,7 @@ Standard usage is as follows:
 $ ssh user@host
 ```
 
-Where `user` is the username on the server, and `host` is the server ip address.
+Where `user` is the username on the server, and `host` is the server ip address / domain name.
 
 Other common options are as follows:
 
