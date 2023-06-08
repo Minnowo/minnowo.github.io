@@ -37,15 +37,13 @@ $post-panel-color: #1f1f1f;
 $footer-background-color: #292c2f;
 $note-color: #87CEFA;
 $warning-color: #ffff00;
-// use this or pick any from /css/pics/background folder or from transparenttextures.com
-$background-pattern: 'black.png';
 
 //********************************************************
 //                  Common styles
 //********************************************************
 body {
   color: $font-color;
-  background: $background-color url(pics/background/#{$background-pattern});
+  background: $background-color url(/assets/background.png);
 }
 .card {
   background-color: $post-panel-color;
