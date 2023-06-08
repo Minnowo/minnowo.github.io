@@ -14,24 +14,10 @@ baseurl: ''
 author: Minno
 copyright: 2023
 
-share:
-  facebook: false
-  twitter: false
-  gplus: false
-  linkedin: false
-  pinterest: false
-  email: false
-
 social:
-  github: Minnowo
   rss: feed.xml
 
 show_footer: false
-
-# Google Analytics key, leave blank to ignore
-google_analytics_key:
-# Yandex metrica (https://metrica.yandex.com/) leave blank to ignore or put true to use
-yandex_metrica:
 
 
 # Set this to your disqus shortname to enable comments. Note that the 'comments'
