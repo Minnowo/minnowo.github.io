@@ -276,6 +276,7 @@ nav {
     color: #777;
   }
   .navbar-nav {
+    flex-wrap: wrap;
     margin-left: auto;
   }
   .navbar.shrink {
@@ -370,7 +371,6 @@ table.inner-borders {
 	margin:40px auto;
 }
 .wrapper{
-  padding-top: 80px;
   min-height: 100%;
   position: relative;
 }
@@ -443,6 +443,7 @@ table.inner-borders {
 
 //********************************************************
 
+
 @media (min-width: 1000px) {
   .twoRow .navbar-collapse {
     clear: left;
@@ -458,4 +459,3 @@ table.inner-borders {
     line-height: 1.8;
   }
 }
-

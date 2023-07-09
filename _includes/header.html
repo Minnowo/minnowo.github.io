@@ -18,25 +18,19 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark">
-    <div class="container">
-        <a class="navbar-brand" href="{{ '' | relative_url }}/">
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <div class="container navbar-collapse" style="display: block;">
+        <a class="navbar-brand " href="{{ '' | relative_url }}/">
             <img src="{{ '/favicon.png' | prepend: site.baseurl }}">
             {{ site.name }}
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{{ '' | relative_url }}/">/home</a>
-                <a class="nav-item nav-link" href="{{ 'notes' | relative_url }}/">/notes</a>
-                <a class="nav-item nav-link" href="{{ 'archive' | relative_url }}">/archive</a>
-                <a class="nav-item nav-link" href="{{ 'tags' | relative_url }}">/tags</a>
-                <a class="nav-item nav-link" href="{{ 'links' | relative_url }}">/links</a>
-            </div>
+
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="{{ '' | relative_url }}/">/home</a>
+            <a class="nav-item nav-link" href="{{ 'notes' | relative_url }}/">/notes</a>
+            <a class="nav-item nav-link" href="{{ 'archive' | relative_url }}">/archive</a>
+            <a class="nav-item nav-link" href="{{ 'tags' | relative_url }}">/tags</a>
+            <a class="nav-item nav-link" href="{{ 'links' | relative_url }}">/links</a>
         </div>
     </div>
 </nav>
