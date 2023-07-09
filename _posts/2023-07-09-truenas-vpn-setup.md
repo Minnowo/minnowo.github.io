@@ -4,7 +4,7 @@ title: TrueNAS Core VPN Setup
 date:   2023-07-09 01:18
 description: Setting up a VPN inside jail on TrueNAS Core
 toc: true
-tags: [guide,note,truenas_core]
+tags: [truenas_core,note,guide]
 ---
 
 <br>
