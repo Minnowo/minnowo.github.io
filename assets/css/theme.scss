@@ -276,8 +276,11 @@ nav {
     color: #777;
   }
   .navbar-nav {
-    flex-wrap: wrap;
     margin-left: auto;
+  }
+  .navbar-fw {
+    display: flex;
+    flex-wrap: wrap;
   }
   .navbar.shrink {
     min-height: 15px !important;
