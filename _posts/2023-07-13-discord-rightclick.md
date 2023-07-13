@@ -42,7 +42,7 @@ Just slap this gui into your userscript manager, it should be enabled by default
     var isAbsoluteModeEnabled = false;
     var eventsToStop = [
         'contextmenu',
-        'mouseup',
+        // 'mouseup',
     ];
 
 
@@ -146,7 +146,7 @@ javascript:(
 
         var eventsToStop = [
             'contextmenu',
-            'mouseup',
+            // 'mouseup',
         ];
 
         function absoluteMode()
