@@ -214,8 +214,12 @@ Note: these steps should work while the VM is running.
 
 7. Choose a name and size, then hit `Finish`
 
-8. Click you new disk and hit `Choose Volume` then hit `Finish`
+8. Click your new disk and hit `Choose Volume`
 
-9. Repeat steps 4 - 8 to create as many disks as you want 
+9. Drop down advanced and in `Serial` give it a unique value, doesn't matter what, you will want this
+
+10. Hit `Finish`
+
+11. Repeat steps 4 - 10 to create as many disks as you want 
 
 Once you've added more disks, you should see them appear in under `Storage` > `Disks` in the webui
