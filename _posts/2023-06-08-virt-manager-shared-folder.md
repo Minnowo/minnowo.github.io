@@ -4,7 +4,7 @@ title: Virt Manager Shared Folder
 date:   2023-06-08 11:54
 description: How to use shared folder with virt manager 
 toc: true
-tags: [note,guide]
+tags: [virt_manager,note,guide]
 ---
 
 <br>
