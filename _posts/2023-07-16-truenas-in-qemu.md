@@ -71,7 +71,7 @@ For this guide I'm using [TrueNAS-13.0-U5.2.iso](https://download.freenas.org/13
 
 2. Then hit `Manage`
 
-3. Then `Create new volume`
+3. Then the plus button next to **Volumes**: `Create new volume`
 
 4. Choose a name for you disk, I'm using `TrueNASCore_Boot`
 
@@ -192,3 +192,30 @@ Open the address in your browser to access the webui:
 
 Login using the root password you set and you're all done!
 
+<br>
+
+## Adding disks
+
+The whole purpose of installing TrueNAS in a VM is to mess around without breaking your disks. So lets add some disks!
+
+Note: these steps should work while the VM is running.
+
+1. If the VM window is not open, right click the VM and hit `Open`
+
+2. In the VM window hit `Show virtual hardware details` in the top left corner
+
+3. Hit `Add Hardware` at the bottom
+
+4. Choose `Storage`, it should already be selected
+
+5. Check `Select or create custom storage` the `Manage` and just like before, we're gonna make some disks
+
+6. Then the plus button next to **Volumes**: `Create new volume`
+
+7. Choose a name and size, then hit `Finish`
+
+8. Click you new disk and hit `Choose Volume` then hit `Finish`
+
+9. Repeat steps 4 - 8 to create as many disks as you want 
+
+Once you've added more disks, you should see them appear in under `Storage` > `Disks` in the webui
