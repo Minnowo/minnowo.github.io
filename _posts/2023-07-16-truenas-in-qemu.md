@@ -1,7 +1,7 @@
 ---
 layout: post
 title: TrueNAS Core In QEMU/VirtManager
-date:   2023-07-15 02:07
+date:   2023-07-16 02:07
 description: Installing TrueNAS Core inside QEMU/VirtManager
 toc: true
 tags: [virt_manager,truenas_core,guide]
