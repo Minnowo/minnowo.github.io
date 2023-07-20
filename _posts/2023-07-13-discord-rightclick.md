@@ -19,12 +19,15 @@ So anyway, I've written a userscript which I load using [Violentmonkey](https://
 
 I've also made it a [bookmarklet](https://en.wikipedia.org/wiki/Bookmarklet) so that it can be used without any userscript program.
 
+These can both be found in my repo [here](https://github.com/Minnowo/UserScripts).
 
 <br>
 
 # The userscript
 
 Just slap this gui into your userscript manager, it should be enabled by default, and should be toggleable using a button.
+
+[direct link](https://raw.githubusercontent.com/Minnowo/UserScripts/main/userscripts/discord_right_click/discord_right_click.js)
 
 ```js
 // ==UserScript==
