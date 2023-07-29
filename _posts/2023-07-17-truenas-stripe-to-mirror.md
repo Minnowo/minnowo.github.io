@@ -1,6 +1,6 @@
 ---
 layout: post
-title: TrueNAS Core In Stripe To Mirror
+title: TrueNAS Core Stripe To Mirror
 date:   2023-07-17 03:07
 description: Adding another drive to a stripe pool and making a mirror pool
 toc: False
