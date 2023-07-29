@@ -1,0 +1,194 @@
+---
+---
+
+@mixin rounded($radius:4px) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+$foreground: #A9B7C6;
+$linenos: #A9B7C6;
+
+$background: #181818;
+$selectionBackground: #264f7888;
+
+.highlight {
+
+  margin-bottom   : 1.5em;
+  color           : $foreground;
+  background-color: $background;
+
+  @include rounded(4px);
+
+  pre {
+    position        : relative;
+    margin          : 0;
+    padding         : 1em;
+    overflow-x      : auto;
+    word-wrap       : normal;
+    border          : none;
+    white-space     : pre;
+    background-color: $background;
+    color           : #ddd !important;
+
+    code {
+      white-space: pre;
+      color      : #ddd;
+    }
+  }
+
+  pre::-webkit-scrollbar {
+    height          : 10px;
+    background-color: #34362e;
+    border-radius   : 0 0 4px 4px;
+  }
+
+  pre::-webkit-scrollbar-thumb {
+    background-color: #555;
+    @include rounded(4px);
+  }
+
+  ::selection {
+    background-color: $selectionBackground;
+    // color           : $selectionForeground;
+  }
+}
+
+.highlight > pre {
+  -webkit-box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3), 
+                            0 1px 0 rgba(255, 255, 255, 0.1), 
+                            0 -1px 0 rgba(0, 0, 0, 0.5);
+
+  -moz-box-shadow   : inset 0 1px 10px rgba(0, 0, 0, 0.3), 
+                            0 1px 0 rgba(255, 255, 255, 0.1), 
+                            0 -1px 0 rgba(0, 0, 0, 0.5);
+
+  box-shadow        : inset 0 1px 10px rgba(0, 0, 0, 0.3),
+                            0 1px 0 rgba(255, 255, 255, 0.1), 
+                            0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.highlight, img, p > nobr > code, li > code, h5 > code, p > pre, p > code, .note > code {
+  color                : tomato;
+  background-color     : #333;
+  -webkit-border-radius: 5px;
+  -moz-border-radius   : 5px;
+  border-radius        : 5px;
+
+  -webkit-box-shadow   : inset 0  1px 10px rgba(0, 0, 0, 0.3),
+                               0  1px 0    rgba(255, 255, 255, 0.1), 
+                               0 -1px 0    rgba(0, 0, 0, 0.5);
+
+  -moz-box-shadow      : inset 0  1px 10px rgba(0, 0, 0, 0.3),
+                               0  1px 0    rgba(255, 255, 255, 0.1),
+                               0 -1px 0    rgba(0, 0, 0, 0.5);
+
+  box-shadow           : inset 0  1px 10px rgba(0, 0, 0, 0.3), 
+                               0  1px 0    rgba(255, 255, 255, 0.1), 
+                               0 -1px 0    rgba(0, 0, 0, 0.5);
+}
+
+.highlighter-rouge{
+  padding      : 1px 4px;
+  border-radius: 3px;
+}
+
+/* line numbers */
+.lineno { 
+  border-right : dashed 1px $linenos !important; 
+  color        : $linenos; 
+  padding-right: 5px; 
+  padding-left : 0 !important;
+}
+
+
+.hll { background-color: $background }
+.err { color: #FFFFFF; background-color: #82071E} /* Error */
+
+
+$comments: #6A9955;
+.c   { color: $comments } /* Comment */
+.cm  { color: $comments } /* Comment.Multiline */
+.cp  { color: $comments } /* Comment.Preproc */
+.c1  { color: $comments } /* Comment.Single */
+.cs  { color: $comments } /* Comment.Special */
+
+$numbers: #b5cea8;
+.l   { color: $numbers } /* Literal */
+.m   { color: $numbers } /* Literal.Number */
+.mf  { color: $numbers } /* Literal.Number.Float */
+.mh  { color: $numbers } /* Literal.Number.Hex */
+.mi  { color: $numbers } /* Literal.Number.Integer */
+.mo  { color: $numbers } /* Literal.Number.Oct */
+.se  { color: $numbers } /* Literal.String.Escape */
+.il  { color: $numbers } /* Literal.Number.Integer.Long */
+
+$name: #9CDCFE;
+$func: #DCDCAA;
+$clas: #4EC9B0;
+$blue: #569CD6;
+.n   { color: $name } /* Name */
+.nx  { color: $name } /* Name.Other */
+.na  { color: $name } /* Name.Attribute */
+.nv  { color: $name } /* Name.Variable in bash?? */
+.nl  { color: $name} /* Name.Label */
+.py  { color: $name} /* Name.Property */
+.nf  { color: $func } /* Name.Function */
+.nb  { color: $clas } /* Name.Builtin */
+.nc  { color: $clas } /* Name.Class */
+.nd  { color: $clas } /* Name.Decorator */
+.bp  { color: $blue } /* Name.Builtin.Pseudo */
+.sa  { color: $blue } /* 1 Char In Front Of String */
+.nt  { color: $blue} /* Name.Tag */
+.nn  { color: $blue} /* Name.Namespace */
+.ni  { color: $blue} /* Name.Entity */
+.no  { color: #4FC1FF } /* Name.Constant */
+.o   { color: #CCCCCC } /* Operator */
+
+.ne  { color: #960050 } /* Name.Exception */
+.vc  { color: #960050 } /* Name.Variable.Class */
+.vg  { color: #960050 } /* Name.Variable.Global */
+.vi  { color: #960050 } /* Name.Variable.Instance */
+
+.ow  { color: #569CD6 } /* Operator.Word */
+.p   { color: #ffb511 } /* Punctuation */
+
+
+$keywords: #C586C0;
+.k   { color: $keywords } /* Keyword */
+.kc  { color: $keywords } /* Keyword.Constant */
+.kd  { color: $keywords } /* Keyword.Declaration */
+.kn  { color: $keywords } /* Keyword.Namespace */
+.kp  { color: $keywords } /* Keyword.Pseudo */
+.kr  { color: $keywords } /* Keyword.Reserved */
+.kt  { color: $keywords } /* Keyword.Type */
+
+$strings: #ce8f67;
+.ge  { font-style: italic } /* Generic.Emph */
+.gs  { font-weight: bold } /* Generic.Strong */
+.ld  { color: $strings } /* Literal.Date */
+.cpf { color: $strings } /* C header string */
+.s   { color: $strings } /* Literal.String */
+.dl  { color: $strings  } /* Javascript " */
+.sb  { color: $strings } /* Literal.String.Backtick */
+.sc  { color: $strings } /* Literal.String.Char */
+.sd  { color: $strings } /* Literal.String.Doc */
+.s2  { color: $strings } /* Literal.String.Double */
+.sh  { color: $strings } /* Literal.String.Heredoc */
+.si  { color: $strings } /* Literal.String.Interpol */
+.sx  { color: $strings } /* Literal.String.Other */
+.sr  { color: $strings } /* Literal.String.Regex */
+.s1  { color: $strings } /* Literal.String.Single */
+.ss  { color: $strings } /* Literal.String.Symbol */
+
+$varAndProp: #A9B7C6;
+.w  { color: $varAndProp } /* Text.Whitespace */
+
+$names    : #97d6ff;
+$operators: #A9B7C6;
+.gh {                    } /* Generic Heading & Diff Header */
+.gu { color: #75715e;  } /* Generic.Subheading & Diff Unified/Comment? */
+.gd { color: $operators; } /* Generic.Deleted & Diff Deleted */
+.gi { color: $names;     } /* Generic.Inserted & Diff Inserted */
+
+.l-Scalar-Plain { color: $names }

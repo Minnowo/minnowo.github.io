@@ -4,6 +4,7 @@ title: Test
 date:   2023-05-19 01:08
 description: Test post for updated repo
 toc: true
+tags: [test]
 ---
 
 ## Hello
