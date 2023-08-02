@@ -94,6 +94,10 @@ Such that:
 
 - `credentials=<login-creds>` will provide the credentials to access the NAS
 
+Extra Options:
+
+- `noauto` can be added to the above args which will not mount until user manually does so, which is my personal preference 
+
 Just add as many of these lines to your fstab file as you need smb shares.
 
 My fstab looks something like:
