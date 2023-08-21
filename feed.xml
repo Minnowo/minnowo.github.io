@@ -9,7 +9,7 @@ layout: null
 		<description>{{ site.description }}</description>
 		<link>{{ '' | relative_url }}</link>
 		<atom:link href="{{ '/feed.xml' | relative_url }}" rel="self" type="application/rss+xml" />
-		{% for post in site.posts limit:10 %}
+		{% for post in site.posts limit:100 %}
 			<item>
 				<title>{{ post.title }}</title>
 				<description>{{ post.content | xml_escape }}</description>
