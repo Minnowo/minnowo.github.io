@@ -7,8 +7,8 @@ description: Shon?
 permalink: /:year/:title/
 
 # Url is currently only used only for the RSS feed in feed.xml
-url: http://minnowo.github.io
-source_code: http://github.com/minnowo/minnowo.github.io
+url: https://minnowo.github.io
+source_code: https://github.com/minnowo/minnowo.github.io
 
 # For a project page here should be a project name. 
 # Otherwise (for user's/organization's page leave it empty)
