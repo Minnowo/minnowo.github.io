@@ -1,10 +1,18 @@
-{% if site.show_footer %}
+{% if site.footer.visible %}
     <footer class="footer-distributed">
-      <div class="container">
-        <div class="footer">
-          <p>{{ site.author }} &copy; {{ site.copyright }}</p>
-        </div>
-      </div>
+  
+      {% if site.footer.show_source_code %}
+          <a href={{ site.source_code }} class="footer-link">Source Code</a>
+      {% endif %}
+
+      {% if site.footer.show_rss_url %}
+          <a href="{{ 'feed.xml' | relative_url }}" class="footer-link">RSS Feed</a>
+      {% endif %}
+
+      {% if site.footer.show_license_url %}
+          <a href="{{ 'LICENSE' | relative_url }}" class="footer-link">License</a>
+      {% endif %}
+          
     </footer>
 
 {% endif %}
