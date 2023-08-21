@@ -16,27 +16,16 @@
 //                    Variables
 //********************************************************
 
-// Several accent colors, choose one or create your own!
-// $accent-color: #b99400;    // original =)
-$accent-color: #f7ce6e;    // original =)
-// $accent-color: #F4AC45;    // original =)
-// $accent-color: #3CA2A2;    // original =)
-//$accent-color: #C38FD6;  // velvet
-//$accent-color: #8FD6B3;  // greenish
-//$accent-color: #35B4DE;  // bluish
-//$accent-color: #D2E354;  // yellowish
-//$accent-color: #52B54B;  // green
+$accent-color: #f7ce6e;   
 $link-highlight-color: #EE4864;
 $selection-color: #ee486484;
 $font-color: #ffffff;
-// $font-color: #dddddd;
 $background-color: #1f1f1f;
-// $background-color: #292929;
-// $post-panel-color: #39393a;
 $post-panel-color: #1f1f1f;
 $footer-background-color: #292c2f;
 $note-color: #87CEFA;
 $warning-color: #ffff00;
+
 
 //********************************************************
 //                  Common styles
@@ -50,7 +39,7 @@ body {
   box-shadow: 0 0 0 0, 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 20px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .main-page {
   width: 75%;
@@ -258,7 +247,7 @@ blockquote.warning p{
 nav {
   background-color: #222;
   border-color: #080808;
-  font-size: 18px;
+  font-size: 20px;
   font-family: "Ubuntu", sans-serif;
   padding: 0 10px !important;
   border-top: 3px #3CA2A2 solid;
@@ -394,11 +383,11 @@ table.inner-borders {
 }
 
 ::-webkit-scrollbar-track {
-  background: #343434;
+  background: #171717;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #171717;
+  background: #343434;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -457,4 +446,24 @@ table.inner-borders {
   .footer-distributed .footer {
     line-height: 1.8;
   }
+}
+
+@media (min-width: 768px) {
+  .offset-md-1 {
+    margin-left: 2.5vw;
+    margin-top: 2vh;
+  }
+
+}
+
+.offset_2-md-1 {
+  margin-top: 2vh;
+}
+
+.container_simple {
+
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
 }
