@@ -23,6 +23,7 @@ footer:
   show_source_code: true
   show_rss_url: true
   show_license_url: false
+  show_appleworm: true
 
 collections:
   posts:
