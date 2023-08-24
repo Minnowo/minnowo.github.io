@@ -20,7 +20,7 @@ $accent-color: #f7ce6e;
 $link-highlight-color: #EE4864;
 $selection-color: #ee486484;
 $font-color: #ffffff;
-$background-color: #1f1f1f;
+$background-color: #0d0d0d;
 $post-panel-color: #1f1f1f;
 $footer-background-color: #292c2f00;
 $note-color: #87CEFA;
@@ -32,7 +32,7 @@ $warning-color: #ffff00;
 //********************************************************
 body {
   color: $font-color;
-  background: $background-color url(/assets/background.png);
+  background: $background-color // url(/assets/background.png);
 }
 .card {
   background-color: $post-panel-color;
