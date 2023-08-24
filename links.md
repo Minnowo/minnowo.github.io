@@ -17,7 +17,7 @@ title: Links
 
 {% for link in site.links %}
   <div class="link-item">
-    <h2>
+    <h2 id="{{ link.title | slugify }}">
       <a href="#{{ link.title | slugify }}">#</a>
       {{ link.title }}
 
