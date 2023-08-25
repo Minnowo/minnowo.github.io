@@ -1,0 +1,231 @@
+.itch_body {
+    color:#222;
+    background:#161616;
+    margin:0;
+    font-size:13px;
+    font-family:sans-serif;
+    margin: auto
+}
+.itch_a{
+    color:#da2c49;
+    color:var(--itchio_link_color, #da2c49);
+    border:0;
+    text-decoration: none;
+}
+.itch_a:hover {
+    text-decoration:underline;
+}
+.itch_h1 {
+    font-size: 20px;
+}
+.itch_h2{
+    margin:15px 0
+}
+.button{
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;
+    box-sizing:border-box;
+    display:inline-block;
+    background:#FF2449;
+    color:white;
+    text-decoration:none;
+    padding:0 10px;
+    font-size:14px;
+    text-shadow:0 1px 0 #c3223e;
+    background:var(--itchio_button_color, #FF2449);
+    color:var(--itchio_button_fg_color, white);
+    text-shadow:0 1px 0 var(--itchio_button_shadow_color, #c3223e);
+    cursor:pointer;
+    border-radius:3px;
+    border:none;
+    border:1px solid rgba(0,0,0,0.1);
+    box-shadow:inset 0 0 1px rgba(255,255,255,0.21);
+    text-align:center;
+    line-height:33px;
+    font-weight:bold;
+    height:35px
+}
+
+.widget_container {
+    width: 100%;
+    height: 100%;
+    font-family:Lato, sans-serif;
+    font-family:var(--itchio_default_font, Lato),sans-serif;
+    display:flex;
+    position:relative;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    justify-content:center;
+    align-items:center
+}
+.game_widget_page{
+    box-sizing:border-box;
+    border:1px solid #dadada;
+    max-width:1104px;
+    max-height:177px;
+    height:100%;
+    width:100%;
+    position:relative;
+    font-size:13px;
+    overflow:hidden;
+    -webkit-perspective:600px;
+    -moz-perspective:600px
+}
+.game_widget_page .first_page,.game_widget_page .second_page{
+    box-shadow:0 0 0 1px #dadada;
+    position:absolute;
+    background:white;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    -webkit-transform-origin:50% 50% -80px;
+    -webkit-backface-visibility:hidden;
+    -moz-transform-origin:50% 50% -80px;
+    -moz-backface-visibility:hidden;
+    z-index:0
+}
+.first_page{
+    z-index:1;
+    display:flex;
+}
+.game_widget_page .first_page .itch_h1, .itch_h2 {
+    margin:0;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+}
+.game_widget_page .first_page .itch_h1 .itch_a{
+    color:inherit
+}
+.game_widget_page .first_page .itch_h2{
+    font-size:13px;
+    margin-bottom:5px;
+    font-weight:normal
+}
+.itch_h2 .itch_a{
+    color:inherit;
+    opacity:0.84;
+    font-weight:bold
+}
+.itch_h3{
+    font-size:13px;
+    margin:0;
+    margin-bottom:5px;
+    font-weight:normal;
+    opacity:0.84;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis
+}
+.game_widget_page .first_page .mini_logo{
+    position:absolute;
+    bottom:4px;
+    right:4px;
+    border:0;
+    width:65px;
+    height:20px;
+    opacity:0.2
+}
+@media (max-width: 350px){
+    .game_widget_page .first_page .mini_logo{
+        display:none !important
+    }
+}
+.game_widget_page .first_page .thumb_wrapper{
+    width:205px;
+    display:flex;
+    justify-content:center;
+    align-items:center
+}
+
+@media (max-width: 320px){
+    .game_widget_page .first_page .thumb_wrapper{
+        width:100%
+    }
+}
+.game_widget_page .first_page .thumb{
+    box-shadow:0 10px 10px -10px rgba(0,0,0,0.3);
+    border-radius:2px;
+    border-width:1px;
+    border-style:solid;
+    width:180px;
+    height:143px;
+    object-fit:cover;
+    border-color: #ffbde1
+}
+.game_summary {
+    text-align: left;
+    border-color: #ffbde1
+}
+.game_widget_page .first_page.has_cover .game_summary{
+    padding-right:5px;
+    border-left-width:1px;
+    border-left-style:solid
+}
+@media (min-width: 320px) and (max-width: 500px){
+    .game_widget_page .first_page.has_cover .game_summary{
+        border-left:0
+    }
+}
+.game_widget_page .first_page .game_summary{
+    padding:0 12px;
+    flex:1;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    min-width:0
+}
+.platforms_inline{
+    opacity:0.54;
+    font-size:13px;
+    vertical-align:bottom;
+    margin-left:8px
+}
+.game_widget_page .first_page .price_row{
+    margin-bottom:5px
+}
+.icon {
+    line-height: 0;
+    margin: 0;
+    padding: 2px;
+    vertical-align:bottom;
+}
+.icon_svg {
+    vertical-align:bottom;
+    position: relative;
+}
+.game_widget_page .first_page,
+.game_widget_page .second_page {
+    background-color: #fff
+}
+
+.itch_a {
+    color: #bb5599
+}
+
+.game_widget_page {
+    border-width: 5px
+}
+
+.game_widget_page,
+.game_widget_page {
+    border-color: #ffbde1
+}
+
+.button,
+.button:hover,
+.button:active {
+    background-color: #bb5599;
+    color: #ffffff;
+    text-shadow: 0 1px 0px #ce68ac;
+    border-color: rgb(0, 0, 0, 0.2)
+}
+
+
+.game_widget_page .mini_logo {
+    fill: #000
+}
