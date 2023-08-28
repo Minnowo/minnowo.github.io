@@ -4,6 +4,7 @@
     --accent-color: #f7ce6e;
 
     --all-link-highlight-color: #ee4864;
+    --tap-highlight-color: rgba(238, 72, 100, 0);
 
     --nav-link-color: rgba(255, 255, 255, 0.5);
     --nav-link-highlight-color: #fff;
@@ -63,6 +64,8 @@
 html {
     font-family: var(--font-family-sans-serif-b);
     line-height: 1.15;
+    -webkit-tap-highlight-color: var(--tap-highlight-color);
+    tap-highlight-color: var(--tap-highlight-color);
 }
 
 body {
