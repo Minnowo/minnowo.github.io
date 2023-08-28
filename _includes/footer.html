@@ -2,22 +2,22 @@
     <footer class="footer-distributed">
   
       {% if site.footer.show_source_code %}
-          <a href={{ site.source_code }} class="footer-link">Source Code</a>
+          <a href={{ site.source_code }} class="footer-link link-fade">Source Code</a>
       {% endif %}
 
       {% if site.footer.show_rss_url %}
-          <a href="{{ 'feed.xml' | relative_url }}" class="footer-link">RSS Feed</a>
+          <a href="{{ 'feed.xml' | relative_url }}" class="footer-link link-fade">RSS Feed</a>
       {% endif %}
 
       {% if site.footer.show_license_url %}
-          <a href="{{ 'LICENSE' | relative_url }}" class="footer-link">License</a>
+          <a href="{{ 'LICENSE' | relative_url }}" class="footer-link link-fade">License</a>
       {% endif %}
 
     </footer>
 
 
     {% if site.footer.show_appleworm %}
-        <a href="{{ 'assets/AppleWorm' | relative_url }}" class="float-right footer-link apple_worm_special">Apple Worm</a>
+        <a href="{{ 'assets/AppleWorm' | relative_url }}" class="footer-link link-fade apple_worm_special">Apple Worm</a>
     {% endif %}
 
           
