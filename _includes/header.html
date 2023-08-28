@@ -11,26 +11,27 @@
     <meta name="theme-color" content="#222222"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ '/assets/css/fa-svg.css' | relative_url }}" rel="stylesheet">
-    <link href="{{ '/assets/css/bootstrap4.min.css' | relative_url }}" rel="stylesheet">
+    <!-- <link href="{{ '/assets/css/bootstrap4.min.css' | relative_url }}" rel="stylesheet"> -->
+    <link href="{{ '/assets/css/main.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/theme.css' | relative_url }}" rel="stylesheet">
     <link href="{{ '/assets/css/code_highlight.css' | relative_url }}" rel="stylesheet">
  </head>
 
 <body>
 
-<nav class="navbar navbar-expand-sm navbar-dark">
-    <div class="navbar-collapse nav_pad" style="display: block;">
+<nav class="navbar">
+    <div class="navbar-collapse nav_pad">
         <a class="navbar-brand " href="{{ '' | relative_url }}/">
             <img src="{{ '/favicon.png' | prepend: site.baseurl }}">
             {{ site.name }}
         </a>
 
-        <div class="navbar-nav" style="flex-wrap: wrap;">
-            <a class="nav-item nav-link" href="{{ '' | relative_url }}/">/home</a>
-            <a class="nav-item nav-link" href="{{ 'notes' | relative_url }}/">/notes</a>
-            <a class="nav-item nav-link" href="{{ 'archive' | relative_url }}">/archive</a>
-            <a class="nav-item nav-link" href="{{ 'tags' | relative_url }}">/tags</a>
-            <a class="nav-item nav-link" href="{{ 'links' | relative_url }}">/links</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link link-fade" href="{{ '' | relative_url }}/">/home</a>
+            <a class="nav-item nav-link link-fade" href="{{ 'notes' | relative_url }}/">/notes</a>
+            <a class="nav-item nav-link link-fade" href="{{ 'archive' | relative_url }}">/archive</a>
+            <a class="nav-item nav-link link-fade" href="{{ 'tags' | relative_url }}">/tags</a>
+            <a class="nav-item nav-link link-fade" href="{{ 'links' | relative_url }}">/links</a>
         </div>
     </div>
 </nav>
