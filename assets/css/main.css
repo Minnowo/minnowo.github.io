@@ -41,7 +41,11 @@
     box-sizing: border-box
 }
 
-::selection, ::-moz-selection {
+::-moz-selection {
+  background: var(--selection-color);
+}
+
+::selection {
   background: var(--selection-color);
 }
 
