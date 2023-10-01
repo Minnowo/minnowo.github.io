@@ -16,6 +16,9 @@ title: Links
 </style>
 
 {% for link in site.links %}
+
+  {% if link.hidden == null or link.hidden == false %}
+
   <div class="link-item">
     <h2 id="{{ link.title | slugify }}">
       <a href="#{{ link.title | slugify }}">#</a>
@@ -50,4 +53,7 @@ title: Links
 
     <hr style="background-color: rgba(255, 255, 255, 0.5)">
   </div>
+
+  {% endif %}
+
 {% endfor %}
