@@ -15,9 +15,52 @@ title: Links
   }
 </style>
 
+{% assign current_alph = "" %}
+{% assign is_first = true %}
+
+<ul>
 {% for link in site.links %}
 
   {% if link.hidden == null or link.hidden == false %}
+
+    {% assign alph_group = link.title | strip | slice: 0, 1 | upcase %}
+
+    {% if alph_group != current_alph %}
+      {% assign current_alph = alph_group %}
+
+<li style="display: inline">
+  <a href="#{{current_alph}}"> {{current_alph}} </a>
+&nbsp; &nbsp;
+</li>
+
+    {% endif %}
+  {% endif %}
+{% endfor %}
+    
+</ul>
+
+    
+{% for link in site.links %}
+
+  {% if link.hidden == null or link.hidden == false %}
+
+    {% assign alph_group = link.title | strip | slice: 0, 1 | upcase %}
+
+    {% if alph_group != current_alph %}
+      {% assign current_alph = alph_group %}
+      
+      {% if is_first == true %}
+        {% assign is_first = false %}
+        
+      {% else %}
+<br>
+      {% endif %}
+
+<h4 id="{{current_alph}}" style="float:middle">[{{current_alph}}]</h4>
+<br>
+
+    {% endif %}
+    
 
   <div class="link-item">
     <h2 id="{{ link.title | slugify }}">
