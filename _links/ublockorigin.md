@@ -8,8 +8,8 @@ urls: [
     https://microsoftedge.microsoft.com/addons/detail/ublock-origin/odfafepnkmbhccpbejgmiehpchacaeak
     ]
 url_prefix: [
-    "Github:", 
-    "Github Org:", 
+    "GitHub:", 
+    "GitHub Org:", 
     "Firefox:", 
     "Chrome Web Store:",
     "Edge Addons:",

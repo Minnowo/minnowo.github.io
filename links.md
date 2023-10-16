@@ -81,7 +81,7 @@ title: Links
 
         <li class="truncate">
           <strong>{{ prefix }}</strong>  
-          <a  href="{{ url }}">{{ url }}</a>
+          <a href="{{ url }}" target="_blank" rel="noopener noreferrer">{{ url }}</a>
           
           {% if desc %}
 

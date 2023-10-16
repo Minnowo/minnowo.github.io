@@ -7,10 +7,10 @@ urls: [
     https://github.com/CuddleBear92/Hydrus-Presets-and-Scripts,
     ]
 url_prefix: [
-    "Github:", 
+    "GitHub:", 
     "Discord:",
     "Patreon:",
-    "User-run Github Extras:",
+    "User-run GitHub Extras:",
     ]
 description: A personal booru-style media tagger for desktops.
 ---

@@ -6,7 +6,7 @@ urls: [
     ]
 url_prefix: [
     "Website:", 
-    "Gitlab:",
+    "GitLab:",
     ]
 description: The Voice Input app for Android that respects your privacy. Open source, offline, no drm voice to text for android.
 ---

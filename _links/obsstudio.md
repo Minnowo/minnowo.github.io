@@ -7,7 +7,7 @@ urls: [
     https://opencollective.com/obsproject,
     ]
 url_prefix: [
-    "Github:", 
+    "GitHub:", 
     "Website:",
     "Patreon:",
     "Open Collective:",

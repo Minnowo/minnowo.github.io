@@ -4,7 +4,7 @@ urls: [
     https://github.com/Minnowo/WinkingCatFace
     ]
 url_prefix: [
-    "Github:", 
+    "GitHub:", 
     ]
 description: Useful screenshot program for Windows (written by me).
 ---

@@ -6,7 +6,7 @@ urls: [
     ]
 url_prefix: [
     "Website:", 
-    "Github:", 
+    "GitHub:", 
     ]
 desc: [
 

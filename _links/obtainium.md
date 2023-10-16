@@ -4,7 +4,7 @@ urls: [
     https://github.com/ImranR98/Obtainium,
     ]
 url_prefix: [
-    "Github:", 
+    "GitHub:", 
     ]
 desc: [
 

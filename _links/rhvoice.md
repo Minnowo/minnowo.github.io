@@ -2,14 +2,14 @@
 title: RHVoice
 urls: [
     https://rhvoice.org/,
-    https://github.com/RHVoice/RHVoice,
+    https://github.com/rhvoice/rhvoice,
     ]
 url_prefix: [
     "Website:", 
-    "Github:", 
+    "GitHub:", 
     ]
 desc: [
 
 ]
-description: RHVoice is a free and open-source multilingual speech synthesizer.
+description: rhvoice is a free and open-source multilingual speech synthesizer.
 ---

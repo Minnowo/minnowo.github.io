@@ -6,7 +6,7 @@ urls: [
     "https://www.paypal.com/donate/?hosted_button_id=WZSG4MCTJZHJW",
     ]
 url_prefix: [
-    "Github:", 
+    "GitHub:", 
     "Ko-fi:",
     "PayPal:",
     ]
