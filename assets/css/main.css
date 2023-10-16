@@ -9,13 +9,13 @@
     --nav-link-color: rgba(255, 255, 255, 0.5);
     --nav-link-highlight-color: #fff;
 
-    --selection-color: #ee486484;
+    --selection-color: #ee48645b;
     --font-color: #ffffff;
     --background-color: #0d0d0d;
     --post-panel-color: #1f1f1f;
     --note-color: #87cefa;
     --warning-color: #ffff00;
-    --top-line-strip-color: #3CA2A2;
+    --top-line-strip-color: #e37fcd;
 
     --footer-background-color: #00000000;
     --footer-link-color: #777;
@@ -229,18 +229,18 @@ a:hover {
     flex-direction:column;
 }
 
-.container-left, .container-right { 
+.container-content-left, .container-sidebar-right { 
     position: relative;
     max-width: 100%;
     flex: 0 0 100%;
     -webkit-box-flex: 0;
 }
 
-.container-left {
+.container-content-left {
     margin: 0;
 }
 
-.container-right {
+.container-sidebar-right {
     margin-top: 2vh;
     margin-left: 2vw;
 }
@@ -433,7 +433,32 @@ more info: http://pavelmakhov.com/2015/12/images-in-jekyll */
     color: var(--all-link-highlight-color) !important;
 }
 
+.auto-margin {
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.container-hidden {
+  visibility: hidden;
+  position: absolute;
+  height: 0;
+  width: 0;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition:  none !important;
+}
+
+.container-sidebar-left {
+  margin-top: 1vh;
+  margin-left: 1vw;
+}
+
+.container-sidebar-right {
+  margin-top: 2vh;
+  margin-left: 2vw;
+}
 
 @media (min-width: 576px) { 
 
@@ -472,11 +497,11 @@ more info: http://pavelmakhov.com/2015/12/images-in-jekyll */
         margin-right: 0;
     }
 
-    .container-left {
+    .container-content-left, .container-content-right {
         margin-top: 0;
     }
 
-    .container-right {
+    .container-sidebar-right {
         margin-top: 2vh;
         margin-left: 2vw;
     }
@@ -504,13 +529,14 @@ more info: http://pavelmakhov.com/2015/12/images-in-jekyll */
         margin-right: 1vw;
     }
 
-    .container-left {
+    .container-content-left, .container-content-right {
         margin-top: 1vh;
     }
 
-    .container-right {
+    .container-sidebar-right, .container-sidebar-left {
         margin-top: 1vh;
     }
+
 }
 
 @media (min-width: 1200px) {
@@ -532,19 +558,41 @@ more info: http://pavelmakhov.com/2015/12/images-in-jekyll */
         flex-direction: row;
     }
 
-    .container-left {
+    .container-content-left {
         max-width: 66.6666%;
         flex: 0 0 66.6666%;
     }
 
-    .container-right {
+    .container-content-right {
+        max-width: 66.6666%;
+        width: 66.6666%;
+        flex: 0 0 66.6666%;
+        margin-left: 0 !important;
+        margin-right: 2vw !important;
+    }
+
+    .container-sidebar-right {
         max-width: 25%;
+        width: 25%;
         flex: 0 0 25%;
         margin-left: 0 !important;
+    }
+
+    .container-sidebar-left {
+        max-width: 22%;
+        width: 22%;
+        flex: 0 0 22%;
     }
 
     .dynamic-margin {
         margin-left: 2.5vw;
         margin-right: 2.5vw;
+    }
+
+    .container-hidden {
+        visibility: visible;
+        position: relative;
+        height: inherit;
+        width: inherit;
     }
 }

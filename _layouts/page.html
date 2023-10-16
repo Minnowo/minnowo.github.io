@@ -2,14 +2,56 @@
 
     <div class="wrapper">
         <div class="content container container-center">
-            <div class="container-left container-transition dynamic-margin" style="padding: 0;">
-              <div class="card">
-                {{ content }}
+          
+            {% assign margin_ = "auto-margin" %}
+            {% assign hidden_ = "" %}
+
+            {% if site.sidebar.visible %}
+
+              {% assign margin_ = "dynamic-margin" %}
+
+            {% endif %}
+
+            {% if site.sidebar.hide_when_moved %}
+
+              {% assign hidden_ = "container-hidden" %}
+
+            {% endif %}
+            
+            {% if site.sidebar.show_on_right %}
+          
+              <div class="container-content-left container-transition {{ margin_ }}" style="padding: 0;">
+                <div class="card">
+                  {{ content }}
+                </div>
               </div>
-            </div>
-            <div class="container-right container-transition dynamic-margin hidden-xs">
-              {% include sidebar.html %}
-            </div>
+
+              {% if site.sidebar.visible %}
+
+                <div class="container-sidebar-right container-transition dynamic-margin {{ hidden_ }}">
+                  {% include sidebar.html %}
+                </div>
+
+              {% endif %}
+            
+            {% else %}
+
+              {% if site.sidebar.visible %}
+
+                <div class="container-sidebar-left container-transition dynamic-margin {{ hidden_ }}">
+                  {% include sidebar.html %}
+                </div>
+
+              {% endif %}
+
+              <div class="container-content-right container-transition {{ margin_ }}" style="padding: 0;">
+                <div class="card">
+                  {{ content }}
+                </div>
+              </div>
+
+            {% endif %}
+
         </div>
       {% include footer.html %}
     </div>

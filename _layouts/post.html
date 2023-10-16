@@ -1,13 +1,74 @@
 {% include header.html %}
     <div class="wrapper">
         <div class="content container container-center">
-            <div class="container-left container-transition dynamic-margin" style="padding: 0;">
+          
+            {% assign margin_ = "auto-margin" %}
+            {% assign hidden_ = "" %}
+
+            {% if site.sidebar.visible %}
+
+              {% assign margin_ = "dynamic-margin" %}
+
+            {% endif %}
+
+            {% if site.sidebar.hide_when_moved %}
+
+              {% assign hidden_ = "container-hidden" %}
+
+            {% endif %}
+
+            {% if site.sidebar.show_on_right %}
+
+              <div class="container-content-left container-transition {{ margin_ }}" style="padding: 0;">
+                <div class="article">
+                  <div class="card">
+                    <h1><a href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
+                    <div class="post-meta">
+                      <div class="post-time">
+                        {% include svg_cal.html %}
+                        <time>{{ page.date | date_to_string }}</time>
+                      </div>
+                      <ul>
+                        {% for tag in page.tags %}
+                          <li>
+                            <a href="{{ '/tag/' | append: tag | relative_url }}">{{ tag }}</a></li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="post-content">
+                      {% if page.toc %}
+                        {% include toc.html html=content class='toc' %}
+                      {% endif %}
+                      {{ content }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {% if site.sidebar.visible %}
+
+                <div class="container-sidebar-right container-transition dynamic-margin {{ hidden_ }}">
+                  {% include sidebar.html %}
+                </div>
+
+              {% endif %}
+
+            {% else %}
+
+              {% if site.sidebar.visible %}
+
+                <div class="container-sidebar-left container-transition dynamic-margin {{ hidden_ }}">
+                  {% include sidebar.html %}
+                </div>
+
+              {% endif %}
+                
+              <div class="container-content-right container-transition {{ margin_ }}" style="padding: 0;">
               <div class="article">
                 <div class="card">
                   <h1><a href="{{ page.url | relative_url }}">{{ page.title }}</a></h1>
                   <div class="post-meta">
                     <div class="post-time">
-                      <!-- <i class="fa fa-calendar-alt"></i> -->
                       {% include svg_cal.html %}
                       <time>{{ page.date | date_to_string }}</time>
                     </div>
@@ -27,9 +88,9 @@
                 </div>
               </div>
             </div>
-            <div class="container-right container-transition dynamic-margin hidden-xs">
-              {% include sidebar.html %}
-            </div>
+
+            {% endif %}
+
       </div>
       {% include footer.html %}
     </div>

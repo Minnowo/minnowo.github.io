@@ -1,6 +1,6 @@
 ---
 layout: post
-title: GitLab in Docker for testing
+title: GitLab in Docker for Testing
 date:   2023-10-06 05:35
 description: Running GitLab in Docker for testing
 toc: true

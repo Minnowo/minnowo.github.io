@@ -2,7 +2,7 @@
 
 title: catfish
 name: catfish
-description: Shon?
+description: A no Javascript static site
 
 permalink: /:year/:title/
 
@@ -24,6 +24,11 @@ footer:
   show_rss_url: true
   show_license_url: false
   show_appleworm: true
+    
+sidebar:
+  visible: true
+  show_on_right: false
+  hide_when_moved: true
 
 collections:
   posts:

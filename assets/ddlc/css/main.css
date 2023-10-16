@@ -107,30 +107,30 @@ body {
 	color: #bb5599;
 }
 
-.description-container-left {
+.description-container-content-left {
 	display: inline-block;
 	vertical-align: top;
 	width: 552px;
 	margin-right: 20px;
 }
 
-.description-container-left h2 {
+.description-container-content-left h2 {
 	margin: 0.5em 0;
 	font-family: 'Lato', sans-serif;
 }
 
-.description-container-left h3 {
+.description-container-content-left h3 {
 	margin: 0.5em 0;
 	font-family: 'Lato', sans-serif;
 	font-size: 1.17em;
 }
 
-.description-container-right {
+.description-container-sidebar-right {
 	float: right;
 	width: 347px;
 }
 
-.description-container-right img {
+.description-container-sidebar-right img {
 	display: block;
 	margin-bottom: 10px;
 	max-width: 100%;

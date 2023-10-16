@@ -69,7 +69,8 @@ $selectionBackground: #264f7888;
 }
 
 .highlight, img, p > nobr > code, li > code, h5 > code, p > pre, p > code, .note > code {
-  color                : tomato;
+  color                : rgb(253, 178, 178);
+  // color                : rgb(221, 221, 221);
   background-color     : #333;
   -webkit-border-radius: 5px;
   -moz-border-radius   : 5px;
