@@ -17,7 +17,7 @@ I'm a strong advocate for open-source, and I like to contribute whenever possibl
 - Leading as the backend developer, devops engineer, and data engineer at [EZCampus](https://github.com/EZCampusDevs).
 - Collaborating with friends on diverse projects under [Gank-Squad](https://github.com/Gank-Squad).
 
-I'm not particularly active on social media, so if you'd like to contact me, you can email me at [minnobrine@gmail.com](mailto:minnobrine@gmail.com), you can also find me on [Linkedin](https://www.linkedin.com/in/minno-587471288/) under my username. Alternatively, if you've been given my contact information from a business card or someone else, you should use that instead.
+I'm not particularly active on social media, so if you'd like to contact me, you can email me at [minnobrine@gmail.com](mailto:minnobrine@gmail.com). Alternatively, if you've been given my contact information from a business card or someone else, you should use that instead.
 
 <br>
 
