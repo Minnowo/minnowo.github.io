@@ -2,7 +2,7 @@
 title: The Big Blocklist Collection (Pi-Hole filters)
 urls: [
     https://firebog.net/,
-    wally3k.github.io/,
+    https://wally3k.github.io/,
     ]
 url_prefix: [
     "Website:", 
