@@ -6,7 +6,7 @@ const posts = (await getVisiblePosts()).filter((post) => post.data.tags.includes
 ---
 
 <PageLayout title="Notes">
-    <h1 class="mb-2 border-b border-c-surface1 pb-2 text-[1.8em] font-bold">Notes</h1>
+    <h1 class="border-b border-c-surface1 pb-2">Notes</h1>
     <ul class="m-0 mb-4 list-none p-0">
         {posts.map((post) => (
             <li class="border-b border-dashed border-c-surface0 py-1.5">

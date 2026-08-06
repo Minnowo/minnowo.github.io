@@ -9,11 +9,11 @@ const posts = (await getVisiblePosts()).slice(0, 10);
     <ul class="m-0 list-none divide-y divide-dashed divide-c-surface0 p-0">
         {posts.map((post) => (
             <li class="py-3 first:pt-0 last:pb-0">
-                <h2 class="mb-1 text-[1.05em] font-bold">
+                <h2 class="mb-1">
                     <a class="text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
                 </h2>
                 <time class="mb-1.5 block text-[0.8em] text-c-subtext0">{post.data.date.toISOString().slice(0, 10)}</time>
-                <p class="mb-2 text-[0.88em] text-c-subtext1">{post.data.description}</p>
+                <p class="mb-2 text-c-subtext1">{post.data.description}</p>
                 {post.data.tags.length > 0 && (
                     <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0">
                         {post.data.tags.map((tag) => (
@@ -26,6 +26,6 @@ const posts = (await getVisiblePosts()).slice(0, 10);
     </ul>
 
     <div class="mt-8 text-center">
-        <h3 class="text-[1.15em] font-bold"><a class="text-c-peach hover:text-c-flamingo hover:underline" href="/archive/">Archive</a></h3>
+        <h3><a class="text-c-peach hover:text-c-flamingo hover:underline" href="/archive/">Archive</a></h3>
     </div>
 </PageLayout>

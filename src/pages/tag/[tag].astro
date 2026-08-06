@@ -19,7 +19,7 @@ const { posts } = Astro.props;
 ---
 
 <PageLayout>
-    <h2 class="mb-2 text-[1.4em] font-bold">All posts with tag: {tag}</h2>
+    <h2>All posts with tag: {tag}</h2>
 
     <ul class="m-0 mb-4 list-none p-0">
         {posts.map((post) => (

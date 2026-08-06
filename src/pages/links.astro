@@ -23,7 +23,7 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
 
     {letters.map((letter) => (
         <>
-            <h4 id={letter} class="mt-6 mb-2 text-[1.05em] font-bold text-c-maroon">[{letter}]</h4>
+            <h4 id={letter} class="mt-6 text-c-maroon">[{letter}]</h4>
 
             <ul class="m-0 mb-4 list-none divide-y divide-dashed divide-c-surface0 p-0">
                 {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
@@ -34,7 +34,7 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
                       .replace(/^-+|-+$/g, '');
                     return (
                         <li class="py-3 first:pt-0 last:pb-0">
-                            <h2 id={slug} class="mb-1 text-[1.05em] font-bold">
+                            <h2 id={slug}>
                                 <a class="mr-1 text-c-overlay1 hover:text-c-flamingo" href={`#${slug}`}>#</a>
                                 {link.data.title}
                             </h2>
@@ -43,7 +43,7 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
 
                             <ul class="m-0 list-none p-0">
                                 {link.data.urls.map((url, i) => (
-                                    <li class="py-0.5 text-[0.85em]">
+                                    <li class="py-0.5 text-sm">
                                         <strong class="mr-1 text-c-peach">{link.data.url_prefix[i]}</strong>
                                         <a class="inline-block max-w-full truncate align-bottom text-c-text hover:text-c-flamingo" href={url} target="_blank" rel="noopener noreferrer">{url}</a>
 
