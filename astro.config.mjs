@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 import catfishRedTheme from './shiki-theme.mjs';
 
 // This is a user/organization page (minnowo.github.io), so it is served
@@ -7,6 +8,9 @@ import catfishRedTheme from './shiki-theme.mjs';
 export default defineConfig({
   site: 'https://minnowo.github.io',
   trailingSlash: 'always',
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     shikiConfig: {
       // Custom theme built from the site's own red palette (see

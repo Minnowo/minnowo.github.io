@@ -39,10 +39,12 @@ const isRoot = nodes === undefined;
 ---
 
 {items.length > 0 && (
-  <ul class={isRoot ? 'toc' : undefined}>
+  <ul class={isRoot
+    ? "mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"
+    : 'list-none border-l border-dashed border-c-surface1 pl-4'}>
     {items.map((node) => (
       <li>
-        <a href={`#${node.slug}`}>{node.text}</a>
+        <a class="text-c-subtext1 hover:text-c-flamingo" href={`#${node.slug}`}>{node.text}</a>
         {node.children.length > 0 && <Astro.self nodes={node.children} />}
       </li>
     ))}

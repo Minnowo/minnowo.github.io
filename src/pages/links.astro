@@ -13,33 +13,19 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
 ---
 
 <PageLayout title="Links">
-    <style>
-      .truncate {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 100%;
-      }
-      .dont_truncate {
-        white-space: normal;
-      }
-    </style>
-
-    <ul>
+    <ul class="m-0 mb-4 flex list-none flex-wrap gap-x-3 p-0">
         {letters.map((letter) => (
-            <li style="display: inline">
-                <a href={`#${letter}`}> {letter} </a>
-                &nbsp; &nbsp;
+            <li>
+                <a class="text-c-peach hover:text-c-flamingo" href={`#${letter}`}>{letter}</a>
             </li>
         ))}
     </ul>
 
     {letters.map((letter) => (
         <>
-            <h4 id={letter} style="float:middle">[{letter}]</h4>
-            <br />
+            <h4 id={letter} class="mt-6 mb-2 text-[1.05em] font-bold text-c-maroon">[{letter}]</h4>
 
-            <div class="board-grid">
+            <ul class="m-0 mb-4 list-none divide-y divide-dashed divide-c-surface0 p-0">
                 {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
                     const slug = link.data.title
                       .toLowerCase()
@@ -47,31 +33,30 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
                       .replace(/[^a-z0-9]+/g, '-')
                       .replace(/^-+|-+$/g, '');
                     return (
-                        <div class="link-item board-tile">
-                            <span class="board-pin" aria-hidden="true"></span>
-                            <h2 id={slug}>
-                                <a href={`#${slug}`}>#</a>
-                                {' '}{link.data.title}
+                        <li class="py-3 first:pt-0 last:pb-0">
+                            <h2 id={slug} class="mb-1 text-[1.05em] font-bold">
+                                <a class="mr-1 text-c-overlay1 hover:text-c-flamingo" href={`#${slug}`}>#</a>
+                                {link.data.title}
                             </h2>
 
-                            <p>{link.data.description}</p>
+                            <p class="mb-2 text-c-subtext1">{link.data.description}</p>
 
-                            <ul>
+                            <ul class="m-0 list-none p-0">
                                 {link.data.urls.map((url, i) => (
-                                    <li class="truncate">
-                                        <strong>{link.data.url_prefix[i]}</strong>{' '}
-                                        <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                                    <li class="py-0.5 text-[0.85em]">
+                                        <strong class="mr-1 text-c-peach">{link.data.url_prefix[i]}</strong>
+                                        <a class="inline-block max-w-full truncate align-bottom text-c-text hover:text-c-flamingo" href={url} target="_blank" rel="noopener noreferrer">{url}</a>
 
                                         {link.data.desc[i] && (
-                                            <p class="dont_truncate">{link.data.desc[i]}</p>
+                                            <p class="text-c-subtext0">{link.data.desc[i]}</p>
                                         )}
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </li>
                     );
                 })}
-            </div>
+            </ul>
         </>
     ))}
 </PageLayout>

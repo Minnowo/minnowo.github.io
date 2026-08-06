@@ -17,14 +17,14 @@ const { title, url, date, tags, toc, headings } = Astro.props;
 ---
 
 <Shell title={title}>
-    <div class="article">
-        <div class="card">
-            <h1><a href={url}>{title}</a></h1>
-            <PostMeta date={date} tags={tags} />
-            <div class="post-content">
-                {toc && <TableOfContents headings={headings} />}
-                <slot />
-            </div>
+    <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5">
+        <h1 class="mb-2 text-[1.8em] leading-[1.25] font-bold">
+            <a href={url} class="text-c-peach hover:text-c-flamingo hover:underline">{title}</a>
+        </h1>
+        <PostMeta date={date} tags={tags} />
+        <div class="post-content prose">
+            {toc && <TableOfContents headings={headings} />}
+            <slot />
         </div>
     </div>
 </Shell>

@@ -6,27 +6,26 @@ const posts = (await getVisiblePosts()).slice(0, 10);
 ---
 
 <PageLayout>
-    <div class="board-grid">
+    <ul class="m-0 list-none divide-y divide-dashed divide-c-surface0 p-0">
         {posts.map((post) => (
-            <div class="board-tile">
-                <span class="board-pin" aria-hidden="true"></span>
-                <h2 class="post-title"><a href={postUrl(post.id)}>{post.data.title}</a></h2>
-                <time class="board-tile-date">{post.data.date.toISOString().slice(0, 10)}</time>
-                <p class="post-descr">{post.data.description}</p>
+            <li class="py-3 first:pt-0 last:pb-0">
+                <h2 class="mb-1 text-[1.05em] font-bold">
+                    <a class="text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
+                </h2>
+                <time class="mb-1.5 block text-[0.8em] text-c-subtext0">{post.data.date.toISOString().slice(0, 10)}</time>
+                <p class="mb-2 text-[0.88em] text-c-subtext1">{post.data.description}</p>
                 {post.data.tags.length > 0 && (
-                    <ul class="board-tile-tags">
+                    <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0">
                         {post.data.tags.map((tag) => (
-                            <li><a class="tag-link" href={`/tag/${tag}/`}>{tag}</a></li>
+                            <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href={`/tag/${tag}/`}>{tag}</a></li>
                         ))}
                     </ul>
                 )}
-            </div>
+            </li>
         ))}
-    </div>
+    </ul>
 
-    <div class="post-footer">
-        <div class="column-full">
-            <h3><a href="/archive/">Archive</a></h3>
-        </div>
+    <div class="mt-8 text-center">
+        <h3 class="text-[1.15em] font-bold"><a class="text-c-peach hover:text-c-flamingo hover:underline" href="/archive/">Archive</a></h3>
     </div>
 </PageLayout>

@@ -5,5 +5,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <PageLayout title={frontmatter.title}>
-    <slot />
+    <div class="post-content prose">
+        <slot />
+    </div>
 </PageLayout>

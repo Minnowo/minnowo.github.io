@@ -2,17 +2,15 @@
 import { SITE, NAV } from '../site.config';
 ---
 
-<nav class="navbar">
-    <div class="navbar-collapse">
-        <a class="navbar-brand" href="/">
-            <img src="/favicon.png" alt="">
-            {SITE.name}
-        </a>
+<nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg">
+    <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/">
+        <img src="/favicon.png" alt="" class="hidden">
+        {SITE.name}
+    </a>
 
-        <div class="navbar-nav">
-            {NAV.map((item) => (
-                <a class="nav-link link-fade" href={item.href}>{item.label}</a>
-            ))}
-        </div>
+    <div class="flex flex-wrap items-center gap-1">
+        {NAV.map((item) => (
+            <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href={item.href}>{item.label}</a>
+        ))}
     </div>
 </nav>

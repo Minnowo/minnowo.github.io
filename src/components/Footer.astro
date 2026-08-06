@@ -2,20 +2,20 @@
 import { SITE, FOOTER } from '../site.config';
 ---
 
-<footer class="footer-distributed">
+<footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]">
     {FOOTER.showSourceCode && (
-        <a href={SITE.sourceCode} class="footer-link link-fade">Source Code</a>
+        <a href={SITE.sourceCode} class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a>
     )}
 
     {FOOTER.showRssUrl && (
-        <a href="/feed.xml" class="footer-link link-fade">RSS Feed</a>
+        <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>
     )}
 
     {FOOTER.showLicenseUrl && (
-        <a href="/LICENSE" class="footer-link link-fade">License</a>
+        <a href="/LICENSE" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">License</a>
     )}
 </footer>
 
 {FOOTER.showAppleWorm && (
-    <a href="/assets/AppleWorm/" class="footer-link link-fade apple_worm_special">Apple Worm</a>
+    <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a>
 )}

@@ -15,13 +15,13 @@ const displayDate = date.toLocaleDateString('en-US', {
 });
 ---
 
-<div class="post-meta">
-    <div class="post-time">
+<div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2">
+    <div class="text-[0.9em] text-c-subtext0">
         <time datetime={isoDate}>{displayDate}</time>
     </div>
-    <ul>
+    <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0">
         {tags.map((tag) => (
-            <li><a class="tag-link" href={`/tag/${tag}/`}>{tag}</a></li>
+            <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href={`/tag/${tag}/`}>{tag}</a></li>
         ))}
     </ul>
 </div>

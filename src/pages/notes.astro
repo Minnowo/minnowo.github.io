@@ -6,19 +6,16 @@ const posts = (await getVisiblePosts()).filter((post) => post.data.tags.includes
 ---
 
 <PageLayout title="Notes">
-    <div class="page-content wc-container">
-        <div class="post">
-            <h1>Notes</h1>
-            <ul>
-                {posts.map((post) => (
-                    <li>
-                        <div class="post-time">
-                            <time>{post.data.date.toISOString().slice(0, 10)}</time>
-                            <a href={postUrl(post.id)}>{post.data.title}</a>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    </div>
+    <h1 class="mb-2 border-b border-c-surface1 pb-2 text-[1.8em] font-bold">Notes</h1>
+    <ul class="m-0 mb-4 list-none p-0">
+        {posts.map((post) => (
+            <li class="border-b border-dashed border-c-surface0 py-1.5">
+                <div class="text-[0.9em] text-c-subtext0">
+                    <time>{post.data.date.toISOString().slice(0, 10)}</time>
+                    {' '}
+                    <a class="text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
+                </div>
+            </li>
+        ))}
+    </ul>
 </PageLayout>

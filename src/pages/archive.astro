@@ -14,17 +14,17 @@ const years = [...byYear.keys()].sort((a, b) => Number(b) - Number(a));
 ---
 
 <PageLayout title="Blog archive">
-    <div class="post">
-        <h1>Blog Archive</h1>
-        {years.map((year) => (
-            <>
-                <h5>{year}</h5>
-                <ul class="posts">
-                    {byYear.get(year)!.map((post) => (
-                        <li><a href={postUrl(post.id)}>{post.data.title}</a></li>
-                    ))}
-                </ul>
-            </>
-        ))}
-    </div>
+    <h1 class="mb-2 border-b border-c-surface1 pb-2 text-[1.8em] font-bold">Blog Archive</h1>
+    {years.map((year) => (
+        <>
+            <h5 class="mt-6 mb-2 text-[0.9em] font-bold text-c-maroon">{year}</h5>
+            <ul class="m-0 mb-4 list-none p-0">
+                {byYear.get(year)!.map((post) => (
+                    <li class="border-b border-dashed border-c-surface0 py-1.5">
+                        <a class="text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
+                    </li>
+                ))}
+            </ul>
+        </>
+    ))}
 </PageLayout>
