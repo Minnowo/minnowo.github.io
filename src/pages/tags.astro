@@ -1,0 +1,20 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getAllPosts } from '../lib/posts';
+
+const posts = await getAllPosts();
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) => a.localeCompare(b));
+---
+
+<PageLayout title="Tags">
+    <div class="page-content wc-container">
+        <div class="post">
+            <h1>Tags</h1>
+            <ul>
+                {tags.map((tag) => (
+                    <li><a href={`/tag/${tag}/`}>{tag}</a></li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</PageLayout>

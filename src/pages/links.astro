@@ -1,0 +1,76 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allLinks = (await getCollection('links', ({ data }) => !data.hidden))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+function firstLetter(title: string) {
+  return title.trim().slice(0, 1).toUpperCase();
+}
+
+const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title)))];
+---
+
+<PageLayout title="Links">
+    <style>
+      .truncate {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+      .dont_truncate {
+        white-space: normal;
+      }
+    </style>
+
+    <ul>
+        {letters.map((letter) => (
+            <li style="display: inline">
+                <a href={`#${letter}`}> {letter} </a>
+                &nbsp; &nbsp;
+            </li>
+        ))}
+    </ul>
+
+    {letters.map((letter) => (
+        <>
+            <h4 id={letter} style="float:middle">[{letter}]</h4>
+            <br />
+
+            {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
+                const slug = link.data.title
+                  .toLowerCase()
+                  .trim()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+                return (
+                    <div class="link-item">
+                        <h2 id={slug}>
+                            <a href={`#${slug}`}>#</a>
+                            {' '}{link.data.title}
+                        </h2>
+
+                        <p>{link.data.description}</p>
+
+                        <ul>
+                            {link.data.urls.map((url, i) => (
+                                <li class="truncate">
+                                    <strong>{link.data.url_prefix[i]}</strong>{' '}
+                                    <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+
+                                    {link.data.desc[i] && (
+                                        <p class="dont_truncate">{link.data.desc[i]}</p>
+                                    )}
+                                </li>
+                            ))}
+                        </ul>
+
+                        <hr style="background-color: rgba(255, 255, 255, 0.5)" />
+                    </div>
+                );
+            })}
+        </>
+    ))}
+</PageLayout>

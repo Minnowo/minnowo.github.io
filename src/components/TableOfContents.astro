@@ -1,0 +1,50 @@
+---
+import type { Heading } from '../types';
+
+interface Node extends Heading {
+  children: Node[];
+}
+
+export interface Props {
+  headings?: Heading[];
+  nodes?: Node[];
+}
+
+function buildTree(items: Heading[]): Node[] {
+  const root: Node[] = [];
+  const stack: Node[] = [];
+
+  for (const item of items) {
+    const node: Node = { ...item, children: [] };
+
+    while (stack.length && stack[stack.length - 1].depth >= node.depth) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      root.push(node);
+    } else {
+      stack[stack.length - 1].children.push(node);
+    }
+
+    stack.push(node);
+  }
+
+  return root;
+}
+
+const { headings, nodes } = Astro.props;
+const items = nodes ?? buildTree(headings ?? []);
+const isRoot = nodes === undefined;
+---
+
+{items.length > 0 && (
+  <ul class={isRoot ? 'toc' : undefined}>
+    {items.map((node) => (
+      <li>
+        <a href={`#${node.slug}`}>{node.text}</a>
+        {node.children.length > 0 && <Astro.self nodes={node.children} />}
+      </li>
+    ))}
+  </ul>
+)}

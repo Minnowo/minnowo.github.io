@@ -1,0 +1,30 @@
+---
+import Shell from './Shell.astro';
+import PostMeta from '../components/PostMeta.astro';
+import TableOfContents from '../components/TableOfContents.astro';
+import type { Heading } from '../types';
+
+export interface Props {
+  title: string;
+  url: string;
+  date: Date;
+  tags: string[];
+  toc?: boolean;
+  headings?: Heading[];
+}
+
+const { title, url, date, tags, toc, headings } = Astro.props;
+---
+
+<Shell title={title}>
+    <div class="article">
+        <div class="card">
+            <h1><a href={url}>{title}</a></h1>
+            <PostMeta date={date} tags={tags} />
+            <div class="post-content">
+                {toc && <TableOfContents headings={headings} />}
+                <slot />
+            </div>
+        </div>
+    </div>
+</Shell>

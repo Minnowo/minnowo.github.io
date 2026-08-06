@@ -1,0 +1,21 @@
+---
+import { SITE, FOOTER } from '../site.config';
+---
+
+<footer class="footer-distributed">
+    {FOOTER.showSourceCode && (
+        <a href={SITE.sourceCode} class="footer-link link-fade">Source Code</a>
+    )}
+
+    {FOOTER.showRssUrl && (
+        <a href="/feed.xml" class="footer-link link-fade">RSS Feed</a>
+    )}
+
+    {FOOTER.showLicenseUrl && (
+        <a href="/LICENSE" class="footer-link link-fade">License</a>
+    )}
+</footer>
+
+{FOOTER.showAppleWorm && (
+    <a href="/assets/AppleWorm/" class="footer-link link-fade apple_worm_special">Apple Worm</a>
+)}

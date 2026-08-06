@@ -1,0 +1,30 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getVisiblePosts, postUrl } from '../lib/posts';
+
+const posts = await getVisiblePosts();
+
+const byYear = new Map<string, typeof posts>();
+for (const post of posts) {
+  const year = String(post.data.date.getFullYear());
+  if (!byYear.has(year)) byYear.set(year, []);
+  byYear.get(year)!.push(post);
+}
+const years = [...byYear.keys()].sort((a, b) => Number(b) - Number(a));
+---
+
+<PageLayout title="Blog archive">
+    <div class="post">
+        <h1>Blog Archive</h1>
+        {years.map((year) => (
+            <>
+                <h5>{year}</h5>
+                <ul class="posts">
+                    {byYear.get(year)!.map((post) => (
+                        <li><a href={postUrl(post.id)}>{post.data.title}</a></li>
+                    ))}
+                </ul>
+            </>
+        ))}
+    </div>
+</PageLayout>

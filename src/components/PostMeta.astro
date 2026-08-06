@@ -1,0 +1,30 @@
+---
+import IconCalendar from './IconCalendar.astro';
+
+export interface Props {
+  date: Date;
+  tags: string[];
+}
+
+const { date, tags } = Astro.props;
+
+const isoDate = date.toISOString().slice(0, 10);
+const displayDate = date.toLocaleDateString('en-US', {
+  weekday: 'short',
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+});
+---
+
+<div class="post-meta">
+    <div class="post-time">
+        <IconCalendar />
+        <time datetime={isoDate}>{displayDate}</time>
+    </div>
+    <ul>
+        {tags.map((tag) => (
+            <li><a href={`/tag/${tag}/`}>{tag}</a></li>
+        ))}
+    </ul>
+</div>

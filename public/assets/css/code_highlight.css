@@ -1,0 +1,60 @@
+/*
+ * Code block styling for Astro's built-in Shiki syntax highlighter
+ * (theme: material-theme-darker, configured in astro.config.mjs).
+ * Token colors come from Shiki's inline styles; this file only adds the
+ * container chrome (rounded corners, shadow, scrollbar) that the old
+ * Jekyll/Rouge setup had, plus styling for inline `code` spans.
+ */
+
+pre.astro-code {
+  position: relative;
+  margin-bottom: 1.5em;
+  padding: 1em;
+  overflow-x: auto;
+  word-wrap: normal;
+  border: none;
+  border-radius: 4px;
+  white-space: pre;
+
+  box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3),
+              0 1px 0 rgba(255, 255, 255, 0.1),
+              0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+pre.astro-code code {
+  white-space: pre;
+}
+
+pre.astro-code::-webkit-scrollbar {
+  height: 10px;
+  background-color: #34362e;
+  border-radius: 0 0 4px 4px;
+}
+
+pre.astro-code::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+pre.astro-code ::selection {
+  background-color: #264f7888;
+}
+
+/* Inline code (not inside a fenced code block) */
+p > code, li > code, h5 > code, .note > code {
+  color: rgb(253, 178, 178);
+  background-color: #333;
+  border-radius: 5px;
+  padding: 1px 4px;
+
+  box-shadow: inset 0 1px 10px rgba(0, 0, 0, 0.3),
+              0 1px 0 rgba(255, 255, 255, 0.1),
+              0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* line numbers, if ever enabled via shikiConfig */
+.line-number {
+  border-right: dashed 1px #A9B7C6;
+  color: #A9B7C6;
+  padding-right: 5px;
+}
