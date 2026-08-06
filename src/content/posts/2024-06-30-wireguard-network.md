@@ -1,5 +1,4 @@
 ---
-layout: post
 title: WireGuard Network Setup
 date:   2024-06-30 00:00
 description: Setting up a WireGuard network using Docker
