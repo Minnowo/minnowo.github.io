@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | Docker TLDR</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/docker/" class="text-c-peach hover:text-c-flamingo hover:underline">Docker TLDR</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-05-27">Sat, May 27, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/docker/">docker</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#docker-without-sudo">Docker without sudo</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#docker-run">Docker run</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#networks">Networks</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#quick-usage">Quick usage</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#listing-containers">Listing containers</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#removing-containers">Removing containers</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#listing-images">Listing images</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#removing-images">Removing images</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#removing-none-images">Removing none images</a></li></ul></li></ul></li></ul>  <br>
+<p>For extensive information see the <a href="https://docs.docker.com/reference/">docker reference</a>. It has all of the information here and is more in-depth.</p>
+<p>This is more of highlight / quick useful things you to remember.</p>
+<br>
+<h2 id="docker-without-sudo">Docker without sudo</h2>
+<p>You need to add your user to the <code>docker</code> group:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> gpasswd</span><span style="color:#C97E6D"> -a</span><span style="color:#C8C8C8"> $USER</span><span style="color:#C97E6D"> docker</span></span></code></pre>
+<p>You probably need to restart terminal or logout for this to take effect.</p>
+<br>
+<h2 id="docker-run">Docker run</h2>
+<p><a href="https://docs.docker.com/engine/reference/commandline/run/">Docker run</a> is what lets you spin up containers from images.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> run</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">imag</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Useful flags:</p>
+<ul>
+<li>
+<p><code>--name &#x3C;name></code>: sets the container name</p>
+</li>
+<li>
+<p><code>--rm</code>: delete the container as soon as it stop</p>
+</li>
+<li>
+<p><code>--publish</code> or <code>-p</code>: maps a containers ports to host ports</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> run</span><span style="color:#C97E6D"> -p</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">hos</span><span style="color:#E6E6E6">t</span><span style="color:#C75A5A">></span><span style="color:#C97E6D">:</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">containe</span><span style="color:#E6E6E6">r</span><span style="color:#C75A5A">></span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">imag</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>if you want to restrict them to a certain subnet:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> run</span><span style="color:#C97E6D"> -p</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">subne</span><span style="color:#E6E6E6">t</span><span style="color:#C75A5A">></span><span style="color:#C97E6D">:</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">hos</span><span style="color:#E6E6E6">t</span><span style="color:#C75A5A">></span><span style="color:#C97E6D">:</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">containe</span><span style="color:#E6E6E6">r</span><span style="color:#C75A5A">></span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">imag</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>for example, to map port 8080 to 8080 and have it only accessible over localhost:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> run</span><span style="color:#C97E6D"> -p</span><span style="color:#C97E6D"> 127.0.0.1:8080:8080</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">imag</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+</li>
+<li>
+<p><code>--interactive</code> or <code>-i</code>: connect to the STDIN of the command inside the container</p>
+</li>
+<li>
+<p><code>--tty</code> or <code>-t</code>: gives a tty (usually not useful without <code>-i</code> option)</p>
+</li>
+<li>
+<p><code>--detach</code> or <code>-d</code>: runs container in the background</p>
+</li>
+<li>
+<p><code>--network &#x3C;network></code>: connect the container to a network (useful for containers which need to communicate)</p>
+</li>
+</ul>
+<br>
+<h2 id="networks">Networks</h2>
+<p><a href="https://docs.docker.com/network/">Networks</a> let you connect containers to other containers or workloads.</p>
+<p>Lets say for example you are running a <a href="https://en.wikipedia.org/wiki/MySQL">MySQL</a> database in a docker container and an app which connects to the database in a different container. Normally you would just connect over <code>localhost</code>, but since your app is in a container, <code>localhost</code> in your app’s container is not the same as inside the MySQL container.</p>
+<p>You can create a network to connect your app to the database.</p>
+<p>First create the network:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> network</span><span style="color:#C97E6D"> create</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">network-nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Once you have a network, you need to connect both your containers to it.</p>
+<p>For existing containers:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> network</span><span style="color:#C97E6D"> connect</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">network-nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">container-i</span><span style="color:#E6E6E6">d</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Or when making a container using <a href="#docker-run">docker run</a>:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> run</span><span style="color:#C97E6D"> --network</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">network-nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">imag</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Now that both the containers are on the same network, instead of using <code>localhost</code> for your apps connection, you can use the name of the MySQL container. This will automatically resolve to the ip of the MySQL container.</p>
+<br>
+<h2 id="quick-usage">Quick usage</h2>
+<br>
+<h3 id="listing-containers">Listing containers</h3>
+<p>You can running containers:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> ps</span></span></code></pre>
+<p>Or the long way:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> container</span><span style="color:#C97E6D"> ls</span></span></code></pre>
+<p>To see all containers add the <code>-a</code> flag to either command.</p>
+<br>
+<h3 id="removing-containers">Removing containers</h3>
+<p>You can remove a container using:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> rm</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">container-i</span><span style="color:#E6E6E6">d</span><span style="color:#C75A5A">></span><span style="color:#E6E6E6"> </span></span></code></pre>
+<br>
+<h3 id="listing-images">Listing images</h3>
+<p>You can show all images using:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> image</span><span style="color:#C97E6D"> ls</span></span></code></pre>
+<br>
+<h3 id="removing-images">Removing images</h3>
+<p>You can remove an image like so:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> image</span><span style="color:#C97E6D"> rm</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">image-nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<br>
+<h4 id="removing-none-images">Removing none images</h4>
+<p>When <a href="#listing-images">listing images</a> there is usually a bunch called <code>&#x3C;none></code>.</p>
+<p>To properly remove them without breaking stuff run:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> docker</span><span style="color:#C97E6D"> rmi</span><span style="color:#9A9A9A"> $(</span><span style="color:#D9A3A3">docker</span><span style="color:#C97E6D"> images</span><span style="color:#C97E6D"> -f</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">dangling=true</span><span style="color:#9A9A9A">"</span><span style="color:#C97E6D"> -q</span><span style="color:#9A9A9A">)</span><span style="color:#E6E6E6"> </span></span></code></pre>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

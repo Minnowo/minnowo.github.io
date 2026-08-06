@@ -1,0 +1,2 @@
+Disallow: /warning.html
+Noindex: /warning.html

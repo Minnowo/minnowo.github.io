@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | GrapheneOS Wifi Debugging</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/graphenewifi-debugging/" class="text-c-peach hover:text-c-flamingo hover:underline">GrapheneOS Wifi Debugging</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-10-28">Sat, Oct 28, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/grapheneos/">grapheneos</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#prerequisites">Prerequisites</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#steps">Steps</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#enable-wireless-debugging">Enable Wireless Debugging</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#pair-your-device">Pair Your Device</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#connect-your-device">Connect Your Device</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#troubleshooting">Troubleshooting</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#does-not-stay-connected">Does Not Stay Connected</a></li></ul></li></ul>  <br>
+<p>Recently have been working on a Flutter app for one of my classes. Using the emulator works fine, but it is also pretty convenient to run the app on your actual phone. Since I am running <a href="https://grapheneos.org/">GrapheneOS</a> on my phone, it took me a bit to figure out how to actually get this working.</p>
+<p><em>I think this mostly just applies to most Android OS, but it works here so it is basically a Graphene guide</em></p>
+<br>
+<h1 id="prerequisites">Prerequisites</h1>
+<ul>
+<li>
+<p>You will need the <a href="https://developer.android.com/tools/adb">Android Debug Bridge (abd)</a> tool. For ArchLinux, this can be installed from the <a href="https://archlinux.org/packages/extra/x86_64/android-tools/">android-tools</a> package.</p>
+</li>
+<li>
+<p>You will need access to the developer options on your phone, you can usually do this by going into <code>Settings</code> > <code>About phone</code>, then click the build number 10+ times.</p>
+</li>
+</ul>
+<br>
+<h1 id="steps">Steps</h1>
+<h2 id="enable-wireless-debugging">Enable Wireless Debugging</h2>
+<p>Under developer settings, which for me was under, <code>Settings</code> > <code>System</code> > <code>Developer Options</code>.</p>
+<p>Look for <code>Wireless debugging</code>, enable it, and then click on it.</p>
+<br>
+<h2 id="pair-your-device">Pair Your Device</h2>
+<p>In the wireless debugging options, there is a <code>Pair device with pairing code</code> button. Click this to get a code and ip / port.</p>
+<p>Once you’ve been given the code, in your terminal you can pair the device using <code>adb pair &#x3C;ip>:&#x3C;port> &#x3C;code></code>.</p>
+<p>An example looks something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ adb pair 192.168.1.61:42009 302457</span></span>
+<span class="line"><span>Successfully paired to 192.168.1.32:44091 [guid=adb-43122FDF6104FU-hvguED]</span></span></code></pre>
+<p>You will get a message like the above, and you should see a device appear on your phone.</p>
+<br>
+<h2 id="connect-your-device">Connect Your Device</h2>
+<p>Once you have paired the device, you need to actually connect to it.</p>
+<p>In the wireless debugging options, it will say <code>IP address &#x26; Port</code> and list off these values.</p>
+<p>In your terminal, you can connect to the device using <code>adb connect &#x3C;ip>:&#x3C;port></code>.</p>
+<p>An example looks something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>$ adb connect 192.168.1.32:42359</span></span>
+<span class="line"><span>connected to 192.168.1.32:42359</span></span></code></pre>
+<p>You should see a notification appear on your phone.</p>
+<br>
+<h1 id="troubleshooting">Troubleshooting</h1>
+<h2 id="does-not-stay-connected">Does Not Stay Connected</h2>
+<p>For some reason, at least for me, closing the Wireless debugging settings also disconnects my device. If you have this problem, just leave it open in the background on your phone.</p>
+<p>You can also try enabling <code>USB debugging</code> which for some reason makes this problem not happen for me.</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

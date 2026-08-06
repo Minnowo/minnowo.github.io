@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | TrueNAS Core Stripe To Mirror</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/truenas-stripe-to-mirror/" class="text-c-peach hover:text-c-flamingo hover:underline">TrueNAS Core Stripe To Mirror</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-07-17">Mon, Jul 17, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/truenas_core/">truenas_core</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose">   <br>
+<p>I recently got a new disk for my NAS, so It’s time to convert my stripe pool into a mirror.</p>
+<p>Since it is relatively cheeky to do in the webui I’m writing a note.</p>
+<ol>
+<li>
+<p>Find the pool, go to <code>Storage</code> > <code>Pools</code>, then identify the pool which only has 1 drive</p>
+</li>
+<li>
+<p>Hit the gear icon on the far right side</p>
+</li>
+<li>
+<p>Click <code>Status</code> in the drop down menu</p>
+</li>
+<li>
+<p>Then click the 3 dots on the far right side of the vdev you want to extend</p>
+</li>
+<li>
+<p>Click <code>Extend</code> in the drop down menu</p>
+</li>
+<li>
+<p>Choose the drive you want to add</p>
+</li>
+<li>
+<p>Hit <code>EXTEND</code></p>
+</li>
+</ol>
+<p>That’s it, super easy, just kind of hard to find in the webui</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

@@ -1,0 +1,656 @@
+﻿<!DOCTYPE html>
+<html>
+<head><meta name='robots' content='noindex'><link rel='canonical' href='https://www.coolmathgames.com/0-apple-worm' />
+    <style>
+        #animation_container {
+            position: absolute;
+            margin: auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Snake_HTML5 Canvas</title>
+    <script src=" ./src/createjs.min.js"></script>
+    <script src="./src/Preloader.js"></script>
+
+          <style type="text/css">
+            .no-select {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+            }
+          </style>
+        
+          <script type="text/javascript">
+            setTimeout(function(){
+              if(document.getElementsByTagName("canvas").length) {
+                document.getElementsByTagName("body")[0].classList.add("no-select")
+              }
+            }, 2000);
+          </script>
+        <script type="text/javascript">
+          function setUserAgent(window, userAgent) {
+           // Works on Firefox, Chrome, Opera and IE9+
+            if (navigator.__defineGetter__) {
+                navigator.__defineGetter__("userAgent", function () {
+                    return userAgent;
+                });
+            } else if (Object.defineProperty) {
+                Object.defineProperty(navigator, "userAgent", {
+                    get: function () {
+                        return userAgent;
+                    }
+                });
+            }
+            // Works on Safari
+            if (window.navigator.userAgent !== userAgent) {
+                var userAgentProp = {
+                    get: function () {
+                        return userAgent;
+                    }
+                };
+                try {
+                    Object.defineProperty(window.navigator, "userAgent", userAgentProp);
+                } catch (e) {
+                    window.navigator = Object.create(navigator, {
+                        userAgent: userAgentProp
+                    });
+                }
+            }
+          }
+          if(window.navigator.userAgent.indexOf("Safari")>=0 && "ontouchstart" in window && !/iPhone|Android/.test(window.navigator.userAgent)) {
+            //var userAgent = window.navigator.userAgent.replace("Macintosh", "iPad");
+            var userAgent = "Mozilla/5.0 (iPad; CPU OS 13_1_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1";
+            setUserAgent(window,userAgent);
+          }
+
+          //GA event helper functions
+          function getCookie(key) {
+            var keyValue = document.cookie.match("(^|;) ?" + key + "=([^;]*)(;|$)");
+            return keyValue ? keyValue[2] : null;
+          }
+          function setCookie2(key, value, exptime, domain) {
+            //document.cookie = key + "=" + value + ";";
+            var d = new Date();
+            d.setTime(d.getTime() + exptime);
+            var expires = "expires=" + d.toUTCString();
+            document.cookie = key + "=" + value + "; " + expires + "; path=/; domain=" +domain;
+          }
+          function cmg_is_mobile_device() {
+            var sUsrAg = navigator.userAgent;
+            //if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(sUsrAg)){
+            if(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(sUsrAg)){
+              return true;
+            } else {
+              if(navigator.maxTouchPoints == 5) {
+                return true;
+              } else if(sUsrAg.indexOf("Safari")>=0 && "ontouchstart" in window && sUsrAg.indexOf("iPhone")== -1) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          }
+          var enableDebug=false;
+          function debugOut(msg){
+            if (typeof getParameterByName === "function" && getParameterByName("debug") !== "") { enableDebug = getParameterByName("debug");}
+            if(enableDebug){console.log(msg);}
+          }
+          function getParameterByName(name) {
+            var regexS = "[\?&]" + name + "=([^&#]*)";
+            var regex = new RegExp(regexS);
+            var results = regex.exec(location.href);
+            if (results !== null) {
+              return decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            //Check the parent window
+            var results = regex.exec(window.top.location.href);
+            if (results === null) {
+              return "";
+            }
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+          }
+          function getBrowserNameVer() {
+            var sBrowser, sUsrAg = navigator.userAgent;
+            // The order matters here, and this may report false positives for unlisted browsers.
+            if (sUsrAg.indexOf("Firefox") > -1) {
+              sBrowser = "Mozilla Firefox";
+              // "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0"
+            } else if (sUsrAg.indexOf("SamsungBrowser") > -1) {
+              sBrowser = "Samsung Internet";
+              // "Mozilla/5.0 (Linux; Android 9; SAMSUNG SM-G955F Build/PPR1.180610.011) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/9.4 Chrome/67.0.3396.87 Mobile Safari/537.36
+            } else if (sUsrAg.indexOf("Opera") > -1 || sUsrAg.indexOf("OPR") > -1) {
+              sBrowser = "Opera";
+              // "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 OPR/57.0.3098.106"
+            } else if (sUsrAg.indexOf("Trident") > -1) {
+              sBrowser = "Microsoft Internet Explorer";
+              // "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; Zoom 3.6.0; wbx 1.0.0; rv:11.0) like Gecko"
+            } else if (sUsrAg.indexOf("Edge") > -1) {
+              sBrowser = "Microsoft Edge (Legacy)";
+              // "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299"
+            } else if (sUsrAg.indexOf("Edg") > -1) {
+              sBrowser = "Microsoft Edge (Chromium)";
+              // Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.64
+            } else if (sUsrAg.indexOf("Chrome") > -1) {
+              sBrowser = "Google Chrome or Chromium";
+              // "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/66.0.3359.181 Chrome/66.0.3359.181 Safari/537.36"
+            } else if (sUsrAg.indexOf("Safari") > -1) {
+              sBrowser = "Apple Safari";
+              // "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1 980x1306"
+            } else if (!/Safari|CriOS/.test(sUsrAg) && /iPhone|iPad\iPod/.test(sUsrAg) ) {
+              //( /iPhone|iPad\iPod/.test(sUsrAg) &&  /Safari/.test(sUsrAg) )
+              sBrowser = "iPhone Safari WebView";
+            } else {
+              sBrowser = "unknown";
+            }
+            sUsrAgArr = navigator.userAgent.split(" ")
+            sBrowser = sBrowser + " " + sUsrAgArr[0] + " " + sUsrAgArr[sUsrAgArr.length -1]
+            debugOut("You are using: " + sBrowser);
+            return sBrowser;
+          }
+          
+          function trackEvent(category, action, label, value) {
+            if(typeof value === "undefined" || value === null) { value = 0; }
+            if(typeof __gaTracker !== "undefined") {
+              __gaTracker("send", {hitType: "event", eventCategory: category, eventAction: action, eventLabel: label, eventValue: value});
+            }
+          }
+          //Category: GamePlayPage, Action: DesktopiFrame / DesktopToplevel / DesktopImmersive / MobileToplevel / MobileImmersive, Label: Game title
+          var pCategory = "GamePlayPageRedirect";
+          var pAction = "Mobile "+ getBrowserNameVer();
+          var pLabel = location.pathname;
+          if(pLabel.startsWith("/")) {
+            pLabel = pLabel.substr(1);
+          }
+
+          debugOut("cmgplaypage: debug redirect check - pCategory="+pCategory +", pAction="+pAction + " " +new Date());
+
+          if(cmg_is_mobile_device() && window.top == window.self && document.referrer == "" ) {
+            //GA Trackevent and then Redirect the user to game landing page
+            //Check if we can use GA
+            var cmg_gdpr_check = getCookie("GDPR");
+            var cmg_gdpr_all_check = getCookie("GDPR_All");
+            var cmg_gdpr_first_check = getCookie("GDPR_First");
+            var cmg_gdpr_reject_check = getCookie("GDPR_Reject");
+            if(cmg_gdpr_check != null && ( ( cmg_gdpr_reject_check == null && cmg_gdpr_all_check == null && cmg_gdpr_first_check == null) || (cmg_gdpr_reject_check !== null ) ) )  {
+              //Delete ga cookies, if they were set elsewhere
+              var cookies = document.cookie.split(";");
+              for (var i = 0; i < cookies.length; i++) {
+                if(/_ga|_gid|usprivacy/.test(cookies[i].split("=")[0])) {
+                  setCookie2(cookies[i].split("=")[0], "", -1, ".coolmathgames.com");
+                  setCookie2(cookies[i].split("=")[0], "", -1, location.host);
+                }
+              }
+            }
+            //GA Loading
+            if (cmg_gdpr_check == null || (cmg_gdpr_check != null && cmg_gdpr_reject_check === null) ) {
+              (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,"script","//www.google-analytics.com/analytics.js","__gaTracker");
+                var ga_dev_host = /(stage|stage2|dev|dev2|dev3|d9\-test)(\-edit)?\.coolmathgames\.(com|local)/.test(window.location.host);
+                if(ga_dev_host || window.location.host == "d9-test-coolmathgames.local") {
+                 __gaTracker("create", "UA-1192998-21", "auto");
+               } else {
+                __gaTracker("create", "UA-1192998-2", "auto");
+               }
+            }
+            //End of GA loading
+            setTimeout(function () {
+              debugOut("cmgplaypage: debug trackEvent and redirect - pCategory="+pCategory +", pAction="+pAction + ". Redirect: " +document.querySelector("link[rel='canonical']").href +" " +new Date());
+              //Load and fire GA event
+              trackEvent(pCategory, pAction, pLabel);
+              var sUsrAg = navigator.userAgent;
+              //Exclude iPads, iphone/iPod App and Android App
+              if(document.querySelector("link[rel='canonical']").href && !/iPad/.test(sUsrAg) && ( (/iPhone|iPod/.test(sUsrAg) && /Safari/.test(sUsrAg) ) || ( /Android/.test(sUsrAg) && !/wv/.test(sUsrAg) ) ) ) {
+                window.location.href = document.querySelector("link[rel='canonical']").href;
+              }
+            }, 100);
+          }
+          </script>
+        </head>
+<body onload="init();" style="margin:0px;">
+  
+
+  <style>
+
+    button {
+      cursor: pointer;
+    }
+
+    .toggle-button {
+      padding: 10px 20px;
+      border: 1px solid #ccc;
+      background-color: #950d0d;
+    }
+  
+    .toggle-button.active {
+      background-color: #159522;
+      color: #fff;
+    }
+  
+    .fillxy {
+      width: 100%;
+      height: 100%;
+    }
+
+  </style>
+  
+  
+  <script>
+
+    function dragElement(elmnt) {
+      const DRAG_FIX = "_dragheader";
+      var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      if (document.getElementById(elmnt.id + DRAG_FIX)) {
+        document.getElementById(elmnt.id + DRAG_FIX).onmousedown = dragMouseDown;
+      } else {
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        if((elmnt.offsetTop - pos2) >= 0) {
+          elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        }
+        if((elmnt.offsetLeft - pos1) >= 0){
+          elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+    }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+      }
+    }
+
+      function toggle_worm_can_move(){
+        const btn = document.getElementById("no_movement_button");
+        if(Preferences.lvlLink.blockActions) {
+          
+          Preferences.lvlLink.blockActions = false;
+          if(btn) {
+            btn.classList.add("active");
+          }
+          console.log("Worm movement enabled");
+        }
+        else {
+
+          Preferences.lvlLink.blockActions = true;
+          if(btn) {
+            btn.classList.remove("active");
+          }
+          console.log("Worm movement disabled");
+        }
+      }
+      
+      function toggle_fly(){
+
+        const btn = document.getElementById("fly_button");
+
+        if(Snake.prototype.NO_GRAVITY)
+        {
+            console.log("Cannot use FLY NO_GRAVITY");
+            return;
+        }
+
+        if(Snake.prototype.FLY_ENABLED)
+        {
+            Snake.prototype.startFall = Snake.prototype.old_startFall;
+            Snake.prototype.move = Snake.prototype.old_move;
+            Snake.prototype.FLY_ENABLED = false;
+            Snake.prototype.NO_GRAVITY = false;
+            if(btn) {
+              btn.classList.remove('active');
+            }
+            console.log("Fly disabled");
+            return;
+        }
+
+        if (typeof Snake.prototype.old_startFall === 'undefined')
+        {
+            Snake.prototype.old_startFall = Snake.prototype.startFall;
+        }
+
+        if (typeof Snake.prototype.old_move === 'undefined')
+        {
+            Snake.prototype.old_move = Snake.prototype.move;
+        }
+
+        Snake.prototype.FLY_ENABLED = true;
+
+        // no gravity
+        Snake.prototype.startFall = function(){};
+
+        Snake.prototype.move = function(a, c) 
+        {
+            // the second param being false disables the 'jump' on tail check
+            this.old_move(a, false);
+        }
+
+        if(btn) {
+          btn.classList.add('active');
+        }
+        console.log("Fly enabled");
+      }
+
+      function toggle_nofall() {
+        // do nothing if fly script is enabled
+        if(Snake.prototype.FLY_ENABLED)
+        {
+            console.log("Cannot use NO_GRAVITY with FLY");
+            return;
+        }
+
+        const btn = document.getElementById("no_fall_button");
+
+        // if no gravity is enabled, disable it 
+        if(Snake.prototype.NO_GRAVITY)
+        {
+            Snake.prototype.startFall = Snake.prototype.old_startFall;
+            Snake.prototype.NO_GRAVITY = false;
+            if(btn) {
+              btn.classList.remove("active");
+            }
+            console.log("No fall disabled");
+            return;
+        }
+
+        if (typeof Snake.prototype.old_startFall === 'undefined')
+        {
+            Snake.prototype.old_startFall = Snake.prototype.startFall;
+        }
+
+        Snake.prototype.NO_GRAVITY = true;
+
+        Snake.prototype.startFall = function(){};
+        
+        if(btn) {
+          btn.classList.add("active");
+        }
+        console.log("No fall enabled");
+        
+      }
+
+      function unlockAllLevels() {
+        var dropdown = document.getElementById("levelStatus");
+        var selectedValue = dropdown.value;
+        var newvalue = 0;
+        
+        Preferences.curLevel = 1;
+        Preferences.gameMenuChanger.showGame();
+        if(selectedValue==="locked") {
+
+          Preferences.levelsCompleted = 0;
+          newvalue = 0;
+          console.log("Locking levels");
+        }
+        else {
+          Preferences.levelsCompleted = 31;
+          newvalue = 2;
+          console.log("Unlocking levels");
+        }
+
+        for(var i = 0; i <= 31; i += 1)
+        {
+            Preferences.levelResults[i] = newvalue;
+            Preferences.saveResults();
+            Preferences.updateResults();
+            Preferences.gameMenuChanger.showMenu();
+        }
+      }
+      
+      function win_current_level(){
+        Snake.bWin = true;
+        Preferences.gameMenuChanger.showNextMenu(false);
+        Preferences.nextMenu.inProgress = true
+      }
+
+      function restart_level(){
+        Game.prototype.restartLevel();
+      }
+      
+      function sound() {
+
+        const btn = document.getElementById("sound_button");
+
+        Preferences.bSoundOff = !Preferences.bSoundOff;
+
+        a = Preferences.inGameMenu.butSound.inner;
+
+        Preferences.inGameMenu.butSound.uncache();
+
+        if (Preferences.bSoundOff)
+        {
+            a.gotoAndStop(1)
+            if(btn) {
+              btn.classList.remove('active');
+            }
+            console.log("Sound disabled");
+        }
+        else 
+        {
+            a.gotoAndStop(0); 
+            if(btn) {
+              btn.classList.add('active');
+            }
+            console.log("Sound enabled");
+        }
+        Preferences.inGameMenu.butSound.cache(-48,-48,95,95)
+      }
+
+      function music(){
+        const btn = document.getElementById("music_button");
+        Preferences.bMusicOff = !Preferences.bMusicOff;
+
+        a = Preferences.inGameMenu.butMusic.inner;
+        
+        Preferences.inGameMenu.butMusic.uncache();
+        
+        if(Preferences.bMusicOff)
+        {
+            a.gotoAndStop(1),SoundController.musicStop();
+            if(btn) {
+              btn.classList.remove('active');
+            }
+            console.log("Music disabled");
+        }
+        else 
+        {
+            a.gotoAndStop(0),SoundController.musicPlay();
+            if(btn) {
+              btn.classList.add('active');
+            }
+            console.log("Music enabled");
+        }
+        
+        Preferences.inGameMenu.butMusic.cache(-48,-48,95,95);       
+      }
+      
+      function set_map_to_value(match, new_value){
+        for(var m = 0; m < Preferences.lvlLink.lvlParts.length; m += 1)
+        {
+            if(Preferences.lvlLink.lvlParts[m].type == match)
+            {
+                Preferences.lvlLink.lvlParts[m].type = new_value;
+            }
+        } 
+      }
+      
+      function set_a_to_b(){
+        
+        const a = document.getElementById("map_match");
+        const b = document.getElementById("map_replace");
+        
+        if(!a || !b) {
+          console.log("Could not find A or B");
+          return;
+        }
+        
+        const map = {
+              "rock": LevelPart.BLOCK_MOVABLE,
+              "apple" : LevelPart.BLOCK_GOAL,
+              "block": LevelPart.BLOCK_NORMAL,
+              "portal": LevelPart.BLOCK_END,
+              "spikes": LevelPart.BLOCK_SPIKES,
+        }
+        
+        console.log(`Setting ${a.value} to ${b.value}`);
+        console.log(`Setting ${map[a.value]} to ${map[b.value]}`);
+        if(map[a.value] === undefined || map[b.value] === undefined) {
+          console.log("Could not find value a or b");
+          return;
+        }
+
+        set_map_to_value(map[a.value], map[b.value]);
+
+      }
+      
+      function make_game_unplayable(){
+        LevelPart.SNAKE_BODY_END = 10000000;
+        
+        Preferences.gameMenuChanger.showGame(true);
+        
+        Preferences.inGameMenu.restartEffect.play();
+      }
+      
+      function set_fps(){
+        const fps = document.getElementById("fps_input");
+        const fps_display = document.getElementById("fps_value");
+        if(!fps) {
+          console.log("Could not get fps_input");
+          return;
+        }
+        
+        if(fps.value <= 0) {
+          console.log("Cannot set negative or zero fps");
+          return;
+        }
+        
+        createjs.Ticker.framerate = fps.value;
+        console.log("Set fps");
+        
+        if(fps_display) {
+          fps_display.innerText = `FPS: ${createjs.Ticker.framerate}`;
+        }
+      }
+  </script>
+
+  <div id="cheat_box" style="position: absolute; z-index: 100000;">
+    
+    <details>
+      <summary>Cheat Menu</summary>
+    
+      <div style="background-color: white;">
+        <table style="width: 100%; height: 100%;">
+          <tr>
+            <td><button id="no_fall_button" class="toggle-button fillxy" onclick="toggle_nofall()">No Fall</button></td>
+            <td><button id="fly_button" class="toggle-button fillxy" onclick="toggle_fly()">Fly</button></td>
+            <td><div id="cheat_box_dragheader">Click here to move</div></td>
+          </tr>
+          <tr>
+            <td><button id="no_movement_button" class="fillxy toggle-button active" onclick="toggle_worm_can_move()">Worm Can Move</button></td>
+            <td><button id="sound_button" class="toggle-button active fillxy" onclick="sound()">Sound</button></td>
+            <td><button id="music_button" class="toggle-button active fillxy" onclick="music()">Music</button></td>
+          </tr>
+            <tr>
+              <td><button id="win_level_button" class="fillxy" onclick="win_current_level()">Win Level</button></td>
+              <td><button id="restart_level_button" class="fillxy" onclick="restart_level()">Restart Level</button></td>
+              <td><button id="game_death_button" class="fillxy" onclick="make_game_unplayable()">Crash Game</button></td>
+            </tr>
+          <tr>
+            <td> <button class="fillxy" onclick="unlockAllLevels()">Set Levels</button> </td>
+            <td>
+              <select class="fillxy" id="levelStatus">
+                <option value="unlocked">Unlocked</option>
+                <option value="locked">Locked</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><button title="Sets the value of the first dropdown to the value in the second dropdown for the current level." class="fillxy" onclick="set_a_to_b()">Set A to B</button></td>
+            <td>
+              <select id="map_match" class="fillxy">
+                <option value="apple">Apple</option>
+                <option value="rock">Rock</option>
+                <option value="portal">Portal</option>
+                <option value="block">Block</option>
+                <option value="spikes">Spikes</option>
+              </select>
+            </td>
+            <td>
+              <select id="map_replace" class="fillxy">
+                <option value="apple">Apple</option>
+                <option value="rock">Rock</option>
+                <option value="portal">Portal</option>
+                <option value="block">Block</option>
+                <option value="spikes">Spikes</option>
+              </select>
+            </td>
+            </tr>
+            <tr>
+              <td><button class="fillxy" onclick="set_fps()">Set FPS</button></td>
+              <td><input id='fps_input' class="fillxy" type="number" value="60" min="1"max='99999999999999999'></td>
+              <td><p id="fps_value">FPS: 60</p></td>
+            </tr>
+            </table>
+
+
+          </div>
+    
+    </details>
+
+  </div>
+  
+  <script>
+
+    const cheatbox = document.getElementById("cheat_box");
+
+    dragElement(cheatbox);
+
+  </script>
+  
+    <div id="animation_container" style="background-color:rgba(0, 0, 0, 1.00); width:640px; height:480px">
+        <canvas id="canvas2" width="800" height="600" style="position: fixed; left: 0; top: 0; display: block; background-color:rgba(0, 0, 0, 1.00);"></canvas>
+	    <canvas id="canvas" width="800" height="600" style="position: absolute; display: block; background-color:rgba(0, 0, 0, 0);"></canvas>
+		 <canvas id="canvas3" width="800" height="600" style="position: fixed; left: 0; top: 0; display: block; background-color:rgba(0, 0, 0, 0.00);"></canvas>
+        <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:800px; height:600px; position: absolute; left: 0px; top: 0px; display: block;">
+        </div>
+    </div>
+<script>function fnSendMsg(evt){
+        	window.parent.postMessage('keypress-from-game', '*');
+        }
+        document.body.addEventListener('click', function(event) {
+          fnSendMsg(event);
+        });
+        document.addEventListener('keypress', function(event) {
+        	 fnSendMsg(event);
+        });
+        document.addEventListener('keydown', function (e) {
+        	 fnSendMsg(event);
+        });
+        document.addEventListener('keyup', function (e) {
+        	  fnSendMsg(event);
+        });
+        </script></body>
+</html>

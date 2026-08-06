@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | TrueNAS Core In QEMU/VirtManager</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/truenas-in-qemu/" class="text-c-peach hover:text-c-flamingo hover:underline">TrueNAS Core In QEMU/VirtManager</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-07-16">Sun, Jul 16, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/virt_manager/">virt_manager</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/truenas_core/">truenas_core</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#truenas-iso">TrueNAS ISO</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#creating-the-vm">Creating the VM</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#step-1--5-connection--install-media">Step 1 / 5, Connection &amp; Install media</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#step-2--5-iso-selection--vm-type">Step 2 / 5, Iso selection &amp; VM type</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#step-3--5-ram--cpu">Step 3 / 5, Ram &amp; CPU</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#step-4--5-disk">Step 4 / 5, Disk</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#step-5--5-finishing-up">Step 5 / 5, Finishing up</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#installing-the-vm">Installing the VM</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#boot-menu">Boot menu</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#install-screen">Install screen</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#disk-selection-screen">Disk selection screen</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#root-password">Root password</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#boot-mode">Boot mode</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#finishing-installation">Finishing installation</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#after-installation">After installation</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#adding-disks">Adding disks</a></li></ul></li></ul>  <br>
+<p>This will be a guide on how to create a <a href="https://www.truenas.com/truenas-core/">TrueNAS Core</a> virtual machine using <a href="https://virt-manager.org/">Virtual Machine Manager</a> and <a href="https://www.qemu.org/">QEMU/KVM</a>.</p>
+<p>This guide assumes you already have Virt-Manager and QEMU working and will focus on the VM itself.</p>
+<h1 id="truenas-iso">TrueNAS ISO</h1>
+<p>First you need to get the iso.</p>
+<p>You can download it from <a href="https://www.truenas.com/download-truenas-core/">this page</a>.</p>
+<p>It’s kind of hard to see, but at the bottom of the page it will say <code>No Thank you, I have already signed up.</code> if you want to skip giving up an email.</p>
+<p>Then click the big green download button, to get your iso.</p>
+<p>For this guide I’m using <a href="https://download.freenas.org/13.0/STABLE/U5.2/x64/TrueNAS-13.0-U5.2.iso">TrueNAS-13.0-U5.2.iso</a>. It is important to note the version number <code>13.0</code>, as we will need this later.</p>
+<br>
+<h1 id="creating-the-vm">Creating the VM</h1>
+<ol>
+<li>Start by hitting <code>Create a new virtual machine</code></li>
+</ol>
+<br>
+<h2 id="step-1--5-connection--install-media">Step 1 / 5, Connection &#x26; Install media</h2>
+<ol>
+<li>
+<p>Choose <code>QEMU/KVM</code> for the connection</p>
+</li>
+<li>
+<p>Choose <code>local install media (ISO image or CDROM)</code></p>
+</li>
+<li>
+<p>Hit <code>Forward</code></p>
+</li>
+</ol>
+<br>
+<h2 id="step-2--5-iso-selection--vm-type">Step 2 / 5, Iso selection &#x26; VM type</h2>
+<ol>
+<li>
+<p>Hit <code>Browse</code> > <code>Browse Local</code> and choose the iso you downloaded</p>
+</li>
+<li>
+<p>Uncheck <code>Automatically detect...</code></p>
+</li>
+<li>
+<p>For the type, you want to choose <code>FreeBSD xx.x</code> where <code>xx.x</code> is the version number in the name of the iso you downloaded. My iso was called <code>TrueNAS-13.0-U5.2.iso</code> so I’m choosing <code>FreeBSD 13.0</code>.</p>
+</li>
+<li>
+<p>Hit <code>Forward</code></p>
+</li>
+</ol>
+<br>
+<h2 id="step-3--5-ram--cpu">Step 3 / 5, Ram &#x26; CPU</h2>
+<ol>
+<li>
+<p>You’re supposed to have <em>at least</em> 8gb of ram. But I’m using 4 becauses I’m a little bit short right now, (you can change this later anyway)</p>
+</li>
+<li>
+<p>Choose 1 or more cpu, I’m sticking with just 1</p>
+</li>
+<li>
+<p>Hit <code>Forward</code></p>
+</li>
+</ol>
+<br>
+<h2 id="step-4--5-disk">Step 4 / 5, Disk</h2>
+<ol>
+<li>
+<p>I like to choose where and what to do for storage, so I’m checking <code>Select or create custom storage</code></p>
+</li>
+<li>
+<p>Then hit <code>Manage</code></p>
+</li>
+<li>
+<p>Then the plus button next to <strong>Volumes</strong>: <code>Create new volume</code></p>
+</li>
+<li>
+<p>Choose a name for you disk, I’m using <code>TrueNASCore_Boot</code></p>
+</li>
+<li>
+<p>Choose <code>qcow2</code> for the type</p>
+</li>
+<li>
+<p>You want at least 16gb of disk space</p>
+</li>
+<li>
+<p>Hit <code>Finish</code></p>
+</li>
+<li>
+<p>Choose your new disk and then hit <code>Choose Volume</code></p>
+</li>
+</ol>
+<br>
+<h2 id="step-5--5-finishing-up">Step 5 / 5, Finishing up</h2>
+<ol>
+<li>
+<p>Set the name, I’m calling mine <code>TrueNASCore</code></p>
+</li>
+<li>
+<p>Hit <code>Finish</code></p>
+</li>
+</ol>
+<br>
+<h1 id="installing-the-vm">Installing the VM</h1>
+<p>Now that you’ve made the VM, we gotta set it up.</p>
+<p>Right click the VM and hit <code>Run</code></p>
+<br>
+<h2 id="boot-menu">Boot menu</h2>
+<p>You will get a boot menu like so:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-bootmenu.png" alt="TrueNAS Core Boot Menu"></p>
+<p>Choose option 1, <code>Boot TrueNAS Installer</code></p>
+<br>
+<h2 id="install-screen">Install screen</h2>
+<p>You will be given 4 different options:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install1.png" alt="TrueNAS Core Install Screen 1, Install/Shell/Reboot/Shutdown prompt"></p>
+<p>Choose option 1, <code>Install/Upgrade</code></p>
+<p>If you’re using less than 8gb of ram, you will get a warning:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install1.5.png" alt="TrueNAS Core Install Screen 1.5, Continue with less than 8gb of ram prompt"></p>
+<p>Hit <code>Yes</code> and continue despite the warning.</p>
+<br>
+<h2 id="disk-selection-screen">Disk selection screen</h2>
+<p>Now you can choose the disk you want to install TrueNAS on:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install2.png" alt="TrueNAS Core Install Screen 2, Choose installation disk prompt"></p>
+<p>Choose your disk and then hit <code>OK</code> to continue.</p>
+<p>You will get a warning about deleting the disks data:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install3.png" alt="TrueNAS Core Install Screen 3, Confirm overwrite disk prompt"></p>
+<p>Hit <code>Yes</code> to proceed.</p>
+<br>
+<h2 id="root-password">Root password</h2>
+<p>After choosing a disk it will ask you to choose a root password:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install4.png" alt="TrueNAS Core Install Screen 4, Choose root password prompt"></p>
+<p>Enter in a root password and click <code>OK</code> to continue.</p>
+<br>
+<h2 id="boot-mode">Boot mode</h2>
+<p>Now you need to choose the boot mode:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install5.png" alt="TrueNAS Core Install Screen 5, Boot mode UEFI or BIOS prompt"></p>
+<p>Choose <code>Boot via BIOS</code>, I’ve never had UEFI work for this.</p>
+<br>
+<h2 id="finishing-installation">Finishing installation</h2>
+<p>Wait for the install to finish, when it’s done you will get a prompt to remove the media:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-install6.png" alt="TrueNAS Core Install Screen 6, Eject media prompt"></p>
+<p>Hit <code>OK</code> and it will take you back to the first installation screen.</p>
+<p>Choose option 3, <code>Reboot System</code> and wait for it to boot the disk, if all goes well, after booting and choosing option 1, you will land in a tty:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-tty.png" alt="TrueNAS Core tty"></p>
+<p>You’ve now installed TrueNAS in a VM!</p>
+<br>
+<h1 id="after-installation">After installation</h1>
+<p>Once you’ve installed and have the tty, you probably want to actually test it out.</p>
+<p>In the tty it will tell you the ip address of the webui, in my case it says <code>192.168.122.83</code>.</p>
+<p>Open the address in your browser to access the webui:</p>
+<p><img src="/assets/custom/pictures/2023-07-16_truenascore-webui.png" alt="TrueNAS Core Install Screen 4"></p>
+<p>Login using the root password you set and you’re all done!</p>
+<br>
+<h2 id="adding-disks">Adding disks</h2>
+<p>The whole purpose of installing TrueNAS in a VM is to mess around without breaking your disks. So lets add some disks!</p>
+<p>Note: these steps should work while the VM is running.</p>
+<ol>
+<li>
+<p>If the VM window is not open, right click the VM and hit <code>Open</code></p>
+</li>
+<li>
+<p>In the VM window hit <code>Show virtual hardware details</code> in the top left corner</p>
+</li>
+<li>
+<p>Hit <code>Add Hardware</code> at the bottom</p>
+</li>
+<li>
+<p>Choose <code>Storage</code>, it should already be selected</p>
+</li>
+<li>
+<p>Check <code>Select or create custom storage</code> the <code>Manage</code> and just like before, we’re gonna make some disks</p>
+</li>
+<li>
+<p>Then the plus button next to <strong>Volumes</strong>: <code>Create new volume</code></p>
+</li>
+<li>
+<p>Choose a name and size, then hit <code>Finish</code></p>
+</li>
+<li>
+<p>Click your new disk and hit <code>Choose Volume</code></p>
+</li>
+<li>
+<p>Drop down advanced and in <code>Serial</code> give it a unique value, doesn’t matter what, you will want this</p>
+</li>
+<li>
+<p>Hit <code>Finish</code></p>
+</li>
+<li>
+<p>Repeat steps 4 - 10 to create as many disks as you want</p>
+</li>
+</ol>
+<p>Once you’ve added more disks, you should see them appear in under <code>Storage</code> > <code>Disks</code> in the webui</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

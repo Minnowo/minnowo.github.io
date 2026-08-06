@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | SSH Keys</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/ssh-keys/" class="text-c-peach hover:text-c-flamingo hover:underline">SSH Keys</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-05-21">Sun, May 21, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#about-ssh-keys">About SSH keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#creating-ssh-keys">Creating SSH keys</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#generating-other-types-of-keys">Generating other types of keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#other-options">Other options</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#adding-keys-to-a-server">Adding keys to a server</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#using-ssh-keys">Using SSH keys</a></li></ul>  <br>
+<p><strong>NOTE</strong>: if you’re using windows, you likely need to use <a href="https://git-scm.com/downloads">git-bash</a> or <a href="https://learn.microsoft.com/en-us/windows/wsl/install">wsl</a> for most of these commands to work.</p>
+<br>
+<h2 id="about-ssh-keys">About SSH keys</h2>
+<p>SSH keys are credentials used with SSH. SSH uses a pair of keys to unitiate a secure handshake between remote parties.</p>
+<p>There are two types of keys:</p>
+<ul>
+<li>
+<p>public</p>
+</li>
+<li>
+<p>private</p>
+</li>
+</ul>
+<p>The public key is given out to remote parties which is then used to encrypt data. This data can then only be opened and understood with the use of the private key.</p>
+<p>The private key should <strong>never</strong> be shared with anyone.</p>
+<br>
+<h2 id="creating-ssh-keys">Creating SSH keys</h2>
+<p>You can generate SSH keys using the <code>ssh-keygen</code> command.</p>
+<p>An example of creating a default (rsa) key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> ssh-keygen</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D9A3A3">Generating</span><span style="color:#C97E6D"> public/private</span><span style="color:#C97E6D"> rsa</span><span style="color:#C97E6D"> key</span><span style="color:#C97E6D"> pair.</span></span>
+<span class="line"><span style="color:#D9A3A3">Enter</span><span style="color:#C97E6D"> file</span><span style="color:#C97E6D"> in</span><span style="color:#C97E6D"> which</span><span style="color:#C97E6D"> to</span><span style="color:#C97E6D"> save</span><span style="color:#C97E6D"> the</span><span style="color:#C97E6D"> key</span><span style="color:#E6E6E6"> (/home/minno/.ssh/id_rsa):</span></span>
+<span class="line"><span style="color:#D9A3A3">Enter</span><span style="color:#C97E6D"> passphrase</span><span style="color:#E6E6E6"> (empty </span><span style="color:#C97E6D">for</span><span style="color:#C97E6D"> no</span><span style="color:#C97E6D"> passphrase</span><span style="color:#E6E6E6">):</span></span>
+<span class="line"><span style="color:#D9A3A3">Enter</span><span style="color:#C97E6D"> same</span><span style="color:#C97E6D"> passphrase</span><span style="color:#C97E6D"> again:</span></span>
+<span class="line"><span style="color:#D9A3A3">Your</span><span style="color:#C97E6D"> identification</span><span style="color:#C97E6D"> has</span><span style="color:#C97E6D"> been</span><span style="color:#C97E6D"> saved</span><span style="color:#C97E6D"> in</span><span style="color:#C97E6D"> /home/minno/.ssh/id_rsa</span></span>
+<span class="line"><span style="color:#D9A3A3">Your</span><span style="color:#C97E6D"> public</span><span style="color:#C97E6D"> key</span><span style="color:#C97E6D"> has</span><span style="color:#C97E6D"> been</span><span style="color:#C97E6D"> saved</span><span style="color:#C97E6D"> in</span><span style="color:#C97E6D"> /home/minno/.ssh/id_rsa.pub</span></span>
+<span class="line"><span style="color:#D9A3A3">The</span><span style="color:#C97E6D"> key</span><span style="color:#C97E6D"> fingerprint</span><span style="color:#C97E6D"> is:</span></span>
+<span class="line"><span style="color:#D9A3A3">SHA256:VO41k1QLdaoPnmUxv8u2omWeD1eVjrbiMJ3k2yBlAEE</span><span style="color:#C97E6D"> minno@shondOS</span></span>
+<span class="line"><span style="color:#D9A3A3">The</span><span style="color:#C97E6D"> key</span><span style="color:#9A9A9A">'</span><span style="color:#C97E6D">s randomart image is:</span></span>
+<span class="line"><span style="color:#C97E6D">+---[RSA 3072]----+</span></span>
+<span class="line"><span style="color:#C97E6D">|      .E. . ooo .|</span></span>
+<span class="line"><span style="color:#C97E6D">|        .o . o +.|</span></span>
+<span class="line"><span style="color:#C97E6D">|        ... = =..|</span></span>
+<span class="line"><span style="color:#C97E6D">|       . ... +o+.|</span></span>
+<span class="line"><span style="color:#C97E6D">|        S .+ooo.o|</span></span>
+<span class="line"><span style="color:#C97E6D">|          *.o*. o|</span></span>
+<span class="line"><span style="color:#C97E6D">|         + *o=.o |</span></span>
+<span class="line"><span style="color:#C97E6D">|          = O.=..|</span></span>
+<span class="line"><span style="color:#C97E6D">|           +.++=.|</span></span>
+<span class="line"><span style="color:#C97E6D">+----[SHA256]-----+</span></span></code></pre>
+<p>This will create a public key <code>~/.ssh/id_rsa.pub</code> and a private key <code>~/.ssh/id_rsa</code> (unless you specify another path).</p>
+<p><strong>NOTE</strong>: if the paths to the public and private key already exist, they will be deleted.</p>
+<p><strong>Do not share</strong> the private key with anyone. It is <strong>recommended</strong> you put a passphrase on the key, this will prevent the use of the private key unless the passphrase is also known.</p>
+<p>Your public key will look something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">ssh-rsa</span><span style="color:#C97E6D"> AAAAB3NzaC1yc2EAAAADAQABAAABgQCw0qTs5TjtY8OII8BRUJ9CktahS57TYV9TsqEJmMhjvW2FAvweHQdFkmYylwOL6npTWzASKvUPtjcxzqbfPRPAINB9FpuxrcnvYwKZ2pf9XKGjUt0T2TLGeJy+yTOvldrEw3zPaZ/qIJpiX9ZXG4wdqevZXBoKuiiuIi7iysxJD9SJR6WX4lgw7S9AGjawDILjuTze/nELN84jKG95ZC3pV6RhEiWoxs5Tk+4pF2Be+QTOdF4ivBnMo55SYQwEvkgJQuX671QRE57yftCjcOf/PtJ4N4rInuOPKTnNvrjcLacXeGYEhQjT7tvDHYikbHCG9kS/LT0siyyuD4XJJ/P6A/sKeO9mo8+dVhqm78y39lwPmphbO81Om/YU40nTAUyTpj8G/IwtRaayUQSk1UBtdrhG7exnd26+sfgjerPGWl1mb8txpBES3flbVcEHiJcRPJ6CEqurIDnuVhBnELBNBHo4zbB53QMa1fPGlzbBZatZQ49EETS2I+SCtFtxalU=</span><span style="color:#C97E6D"> minno@shondOS</span></span></code></pre>
+<br>
+<h3 id="generating-other-types-of-keys">Generating other types of keys</h3>
+<p>You can use the <code>-t</code> argument to specify the type of key to create.</p>
+<p>The available options are:</p>
+<ul>
+<li>rsa</li>
+<li>ecdsa</li>
+<li>ecdsa-sk</li>
+<li>ed25519</li>
+<li>ed25519-sk</li>
+</ul>
+<p>Different types of keys have different advantages. A popular choice and my preference is <a href="http://ed25519.cr.yp.to/">ed25519</a>. It is considered faster and a better choice than default rsa keys. If you don’t have legacy concerns this is recommended.</p>
+<p>Example:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> ssh-keygen</span><span style="color:#C97E6D"> -t</span><span style="color:#C97E6D"> ed25519</span></span></code></pre>
+<br>
+<h3 id="other-options">Other options</h3>
+<p>You can use <code>-C</code> to put a comment on the key, this will help you identify where and what the key is used for.</p>
+<br>
+<h2 id="adding-keys-to-a-server">Adding keys to a server</h2>
+<p>To make use of SSH keys, you must first give your <strong>public key</strong> to the server you are trying to authenticate with. There are 2 methods of adding keys to a server.</p>
+<p>The easiest way is to use the <code>ssh-copy-id</code> command:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> ssh-copy-id</span><span style="color:#C97E6D"> -i</span><span style="color:#C97E6D"> ~/.ssh/id_rsa.pub</span><span style="color:#C97E6D"> root@172.105.2.26</span></span></code></pre>
+<p>You will then be prompted to enter the password for the server and your key will be added to the list of authorized keys.</p>
+<p>The alternative method to using <code>ssh-copy-id</code> is by manually adding the public key to the server’s <code>authorized_keys</code> file. This is usually located in <code>~/.ssh/authorized_keys</code>.</p>
+<p>Just <code>cat</code> out the public key, and paste the contents on a new line in the file to add your key. You can also remove other keys from this file to unauthorize them.</p>
+<p>The file should have 1 key per line, and looks something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cat</span><span style="color:#C97E6D"> authorized_keys</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D9A3A3">ssh-ed25519</span><span style="color:#C97E6D"> AAAAC3NzaC1lZDIlNTE5AAAAIJpnjYPeBwpptVU48oMqdYNr1NZUXUzRN4dDTzYNr1N</span><span style="color:#C97E6D"> ubuntu</span></span>
+<span class="line"><span style="color:#D9A3A3">ssh-ed25519</span><span style="color:#C97E6D"> AABBC5NzaC1lZDIOlNTE5AAbaIJpnjYPeBwMqdZUXUtVU48ozRN4dD5YxwKC9Tz5Yxw</span><span style="color:#C97E6D"> somename</span></span>
+<span class="line"><span style="color:#D9A3A3">ssh-rsa</span><span style="color:#C97E6D"> AAAAB3NzaC1yc2EAAAADAQABAAABgQCw0qTs5TjtY8OII8BRUJ9CktahS57TYV9TsqEJmMhjvW2FAvweHQdFkmYylwOL6npTWzASKvUPtjcxzqbfPRPAINB9FpuxrcnvYwKZ2pf9XKGjUt0T2TLGeJy+yTOvldrEw3zPaZ/qIJpiX9ZXG4wdqevZXBoKuiiuIi7iysxJD9SJR6WX4lgw7S9AGjawDILjuTze/nELN84jKG95ZC3pV6RhEiWoxs5Tk+4pF2Be+QTOdF4ivBnMo55SYQwEvkgJQuX671QRE57yftCjcOf/PtJ4N4rInuOPKTnNvrjcLacXeGYEhQjT7tvDHYikbHCG9kS/LT0siyyuD4XJJ/P6A/sKeO9mo8+dVhqm78y39lwPmphbO81Om/YU40nTAUyTpj8G/IwtRaayUQSk1UBtdrhG7exnd26+sfgjerPGWl1mb8txpBES3flbVcEHiJcRPJ6CEqurIDnuVhBnELBNBHo4zbB53QMa1fPGlzbBZatZQ49EETS2I+SCtFtxalU=</span><span style="color:#C97E6D"> minno@shondOS</span></span></code></pre>
+<br>
+<h2 id="using-ssh-keys">Using SSH keys</h2>
+<p>When connecting to the server, you just need to specify the <strong>private key</strong>:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> ssh</span><span style="color:#C97E6D"> -i</span><span style="color:#C97E6D"> ~/.ssh/id_rsa</span><span style="color:#C97E6D"> root@172.105.2.26</span></span></code></pre>
+<p>And you will be signed in automatically.</p>
+<p>More information about using SSH can be found in the [SSH Client]({% post_url 2023-05-19-ssh-client %}) post.</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

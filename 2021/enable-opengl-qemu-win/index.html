@@ -1,0 +1,28 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | Enabling OpenGL in Windows 10 Guest VM in QEMU</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2021/enable-opengl-qemu-win/" class="text-c-peach hover:text-c-flamingo hover:underline">Enabling OpenGL in Windows 10 Guest VM in QEMU</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2021-06-06">Sun, Jun 6, 2021</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0">  </ul> </div> <div class="post-content prose">   <br>
+<p>A backup of answer for <a href="https://askubuntu.com/questions/1238523/enabling-opengl-in-windows-10-guest-vm-in-qemu">https://askubuntu.com/questions/1238523/enabling-opengl-in-windows-10-guest-vm-in-qemu</a></p>
+<p>Full credit to this <a href="https://thomas.inf3.ch/2019-06-12-opengl-kvm-mesa3d/index.html">post</a> by Thomas Schwery. You could just follow the instructions there but I will summarize below. This should get you a more recent version of OpenGL (for me that was 3.1) running on a Windows 10 Guest VM. OpenGL 1.1 was actually already running but since it was so old the application I was trying to run didn’t recognize it.</p>
+<p>For my setup I was running a Windows 10 guest with a Gentoo Linux Host using libvirt/KMV/QEMU. Here are the steps I took to get it to work:</p>
+<ul>
+<li>
+<p>download an already compiled distribution of the Mesa3D sources at <a href="https://github.com/pal1000/mesa-dist-win/releases">https://github.com/pal1000/mesa-dist-win/releases</a></p>
+</li>
+<li>
+<p>Extract and run <code>systemwidedeploy.cmd</code> in a command prompt.</p>
+</li>
+</ul>
+<p>You should see something like this:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-------------------------------------</span></span>
+<span class="line"><span>Mesa3D system-wide deployment utility</span></span>
+<span class="line"><span>-------------------------------------</span></span>
+<span class="line"><span>Please make a deployment choice:</span></span>
+<span class="line"><span>1. Core desktop OpenGL drivers</span></span>
+<span class="line"><span>2. Core desktop OpenGL drivers + Intel swr</span></span>
+<span class="line"><span>3. Install DirectX IL for redistribution only</span></span>
+<span class="line"><span>4. Microsoft OpenGL over D3D12 driver only (replaces Mesa core desktop OpenGL drivers)</span></span>
+<span class="line"><span>5. Mesa3D off-screen render driver gallium version (osmesa gallium)</span></span>
+<span class="line"><span>7. Mesa3D graw test framework</span></span>
+<span class="line"><span>8. Update system-wide deployment</span></span>
+<span class="line"><span>9. Remove system-wide deployments (uninstall)</span></span>
+<span class="line"><span>10. Exit</span></span>
+<span class="line"><span>Enter choice:</span></span></code></pre>
+<p>Select the first option <code>1. Core desktop OpenGL drivers</code></p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

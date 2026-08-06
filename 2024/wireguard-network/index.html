@@ -1,0 +1,116 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | WireGuard Network Setup</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2024/wireguard-network/" class="text-c-peach hover:text-c-flamingo hover:underline">WireGuard Network Setup</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2024-06-30">Sun, Jun 30, 2024</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/docker/">docker</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#wireguard-server-setup">WireGuard Server Setup</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#docker-compose">Docker Compose</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#port-forwarding">Port Forwarding</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#updating-the-docker-compose-file">Updating the Docker Compose File</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#edit-the-wireguard-server-config">Edit the WireGuard Server Config</a></li></ul></li></ul></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#wireguard-client-setup">WireGuard Client Setup</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#mobile">Mobile</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#qr-code">QR Code</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#config-file">Config File</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#debian12-commandline">Debian12 Commandline</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#stuff-to-install">Stuff to Install</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#wireguard-config">WireGuard Config</a></li></ul></li></ul></li></ul>  <br>
+<h1 id="wireguard-server-setup">WireGuard Server Setup</h1>
+<p>We will be using <a href="https://github.com/linuxserver/docker-wireguard">https://github.com/linuxserver/docker-wireguard</a></p>
+<br>
+<h2 id="docker-compose">Docker Compose</h2>
+<p>Create a new file <code>wireguard-server.compose</code> and put the following:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#C75A5A">services</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#C75A5A">  wireguard</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#C75A5A">    image</span><span style="color:#9A9A9A">:</span><span style="color:#C97E6D"> lscr.io/linuxserver/wireguard:latest</span></span>
+<span class="line"><span style="color:#C75A5A">    container_name</span><span style="color:#9A9A9A">:</span><span style="color:#C97E6D"> wireguard</span></span>
+<span class="line"><span style="color:#C75A5A">    cap_add</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> NET_ADMIN</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> SYS_MODULE</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#C75A5A">    environment</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> PUID=1000</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> PGID=1000</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> TZ=Etc/UTC</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> SERVERURL=auto</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> SERVERPORT=51820</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> PEERS=1</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> PEERDNS=auto</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> INTERNAL_SUBNET=10.13.13.0</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> ALLOWEDIPS=0.0.0.0/0</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> PERSISTENTKEEPALIVE_PEERS=</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> LOG_CONFS=true</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#C75A5A">    volumes</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> /path/to/wireguard/config:/config</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> /lib/modules:/lib/modules</span><span style="color:#9A9A9A;font-style:italic"> #</span><span style="color:#545454;font-style:italic">optional</span></span>
+<span class="line"><span style="color:#C75A5A">    ports</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> 51820:51820/udp</span></span>
+<span class="line"><span style="color:#C75A5A">    sysctls</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> net.ipv4.conf.all.src_valid_mark=1</span></span>
+<span class="line"><span style="color:#C75A5A">    restart</span><span style="color:#9A9A9A">:</span><span style="color:#C97E6D"> unless-stopped</span></span></code></pre>
+<p>Now you just need to change <code>/path/to/wireguard/config</code> to a path on your host machine where you want all the WireGuard configuration to be saved.</p>
+<p>Also set the <code>PEERS=N</code> where <code>N</code> is the number of peers you want to connect.</p>
+<p>Then start the server:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">docker</span><span style="color:#C97E6D"> compose</span><span style="color:#C97E6D"> -f</span><span style="color:#C97E6D"> wireguard-server.compose</span><span style="color:#C97E6D"> up</span><span style="color:#C97E6D"> -d</span></span></code></pre>
+<br>
+<h3 id="port-forwarding">Port Forwarding</h3>
+<p>If you want to port forward a server which is on the WireGuard network to the world.</p>
+<p>This is my guide for the Docker version, but I followed <a href="https://www.procustodibus.com/blog/2022/09/wireguard-port-forward-from-internet/">This guide</a>.
+It may be helpful.</p>
+<br>
+<h4 id="updating-the-docker-compose-file">Updating the Docker Compose File</h4>
+<p>You need to add two things:</p>
+<ol>
+<li>
+<p>The port mapping into your container:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#C75A5A">    ports</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> 51820:51820/udp</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> 2000:3000/tcp</span><span style="color:#9A9A9A;font-style:italic">    #</span><span style="color:#545454;font-style:italic"> newly added port</span></span></code></pre>
+<p>In this case the world will access port 2000, and the server on our WireGuard network will host on port 3000.</p>
+</li>
+<li>
+<p>Set a sysctls, (this may be optional):</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#C75A5A">    sysctls</span><span style="color:#9A9A9A">:</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> net.ipv4.conf.all.src_valid_mark=1</span></span>
+<span class="line"><span style="color:#9A9A9A">      -</span><span style="color:#C97E6D"> net.ipv4.ip_forward=1</span><span style="color:#9A9A9A;font-style:italic">    #</span><span style="color:#545454;font-style:italic"> newly added sysctls</span></span></code></pre>
+<p>I believe this should already be implied, but it can’t hurt to add it.</p>
+</li>
+</ol>
+<br>
+<h4 id="edit-the-wireguard-server-config">Edit the WireGuard Server Config</h4>
+<p>You then need to enable the forwarding in the WireGuard configuration.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="toml"><code><span class="line"></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> port forwarding</span></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> forward traffic from eth network to 10.13.13.5:2000</span></span>
+<span class="line"><span style="color:#C8C8C8">PreUp</span><span style="color:#9A9A9A">    =</span><span style="color:#E6E6E6"> iptables -t nat -A PREROUTING -i eth+ -p tcp --dport 2000 -j DNAT --to-destination 10.13.13.5</span></span>
+<span class="line"><span style="color:#C8C8C8">PostDown</span><span style="color:#9A9A9A"> =</span><span style="color:#E6E6E6"> iptables -t nat -D PREROUTING -i eth+ -p tcp --dport 2000 -j DNAT --to-destination 10.13.13.5</span></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> add any the above 2 lines for any other server:port mappings you want</span></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> ...</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> packet masquerading</span></span>
+<span class="line"><span style="color:#9A9A9A;font-style:italic">#</span><span style="color:#545454;font-style:italic"> allow traffic back from the private server</span></span>
+<span class="line"><span style="color:#C8C8C8">PreUp</span><span style="color:#9A9A9A">    =</span><span style="color:#E6E6E6"> iptables -t nat -A POSTROUTING -o %i -j MASQUERADE</span></span>
+<span class="line"><span style="color:#C8C8C8">PostDown</span><span style="color:#9A9A9A"> =</span><span style="color:#E6E6E6"> iptables -t nat -D POSTROUTING -o %i -j MASQUERADE</span></span></code></pre>
+<br>
+<h1 id="wireguard-client-setup">WireGuard Client Setup</h1>
+<p>For desktop and mobile clients, see the <a href="https://www.wireguard.com/install/">WireGuard Install Page</a>.
+Install the client for your device and you just need to import the config.</p>
+<p>You can find client configurations in the config location you set in the compose file under <code>.../config/peerN/</code>.
+<code>peerN.conf</code> holds the text based configuration. <code>peerN.png</code> holds the QR Code.</p>
+<br>
+<h2 id="mobile">Mobile</h2>
+<br>
+<h3 id="qr-code">QR Code</h3>
+<p>If you view the container logs you will see the QR Code in the console:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">docker</span><span style="color:#C97E6D"> logs</span><span style="color:#C97E6D"> wireguard</span></span></code></pre>
+<p>You can scan this with your mobile app to add the configuration.
+It is possible to edit the configuration in the app, so this is probably the most practical method.</p>
+<br>
+<h3 id="config-file">Config File</h3>
+<p>Download the config file to your mobile device and make sure the filename is like less than 10 characters long.
+For some reason long filenames do not work. So if you get an error regarding invalid name, this is probably your issue.</p>
+<br>
+<h2 id="debian12-commandline">Debian12 Commandline</h2>
+<br>
+<h3 id="stuff-to-install">Stuff to Install</h3>
+<p>You will need to install <code>resolvconf</code> and <code>wireguard</code>:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">sudo</span><span style="color:#C97E6D"> apt</span><span style="color:#C97E6D"> install</span><span style="color:#C97E6D"> resolvconf</span><span style="color:#C97E6D"> wireguard</span></span></code></pre>
+<hr>
+<p><strong>NOTE</strong></p>
+<p>If you don’t have internet after installing <code>resolvconf</code> try:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">sudo</span><span style="color:#C97E6D"> systemctl</span><span style="color:#C97E6D"> restart</span><span style="color:#C97E6D"> networking.service</span></span></code></pre>
+<hr>
+<br>
+<h3 id="wireguard-config">WireGuard Config</h3>
+<p>You will be using the <code>wg-quick</code> tool mainly.</p>
+<p>Put your configuration file into <code>/etc/wireguard/wg0.conf</code>, where <code>0</code> can be any number you want.</p>
+<p>Start the connection:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">wg-quick</span><span style="color:#C97E6D"> up</span><span style="color:#C97E6D"> wg0</span></span></code></pre>
+<hr>
+<p><strong>NOTE</strong></p>
+<p>If you use <code>wg-quick up &#x3C;name></code>, where <code>&#x3C;name></code> is not a file path, it refers to a configuration file in <code>/etc/wireguard/</code></p>
+<p>You can also do <code>wg-quick up &#x3C;file></code>, where <code>&#x3C;file></code> is the path to a WireGuard configuration file.</p>
+<hr>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

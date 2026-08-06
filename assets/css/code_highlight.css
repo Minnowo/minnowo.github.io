@@ -1,0 +1,62 @@
+/*
+ * Code block styling for Astro's built-in Shiki syntax highlighter
+ * (theme: rose-pine, configured in astro.config.mjs - a muted rose/red
+ * palette that matches the linkboard theme in main.css). Token colors
+ * come from Shiki's inline styles; this file only adds the index-card
+ * chrome around it, plus inline `code` spans.
+ */
+
+pre.astro-code {
+  position: relative;
+  margin: 0 0 1.5em;
+  padding: 1em;
+  overflow-x: auto;
+  word-wrap: normal;
+  white-space: pre;
+  border: 1px solid var(--border-color, #383838);
+  border-radius: var(--radius, 12px);
+}
+
+.filename + pre.astro-code {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+pre.astro-code code {
+  white-space: pre;
+  font-family: var(--font-mono, monospace);
+}
+
+pre.astro-code::-webkit-scrollbar {
+  height: 10px;
+  background-color: var(--color-c-crust, #161616);
+  border-radius: 0 0 var(--radius, 12px) var(--radius, 12px);
+}
+
+pre.astro-code::-webkit-scrollbar-thumb {
+  background-color: var(--color-c-maroon, #c97e6d);
+  border-radius: 8px;
+}
+
+pre.astro-code ::selection {
+  background-color: rgba(199, 152, 122, 0.35);
+}
+
+/* Inline code (not inside a fenced code block) */
+p > code, li > code, h5 > code, .note > code {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.9em;
+  color: var(--color-c-peach, #c7987a);
+  background-color: var(--color-c-crust, #161616);
+  border: 1px solid var(--border-color, #383838);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* line numbers, if ever enabled via shikiConfig */
+.line-number {
+  border-right: dashed 1px var(--color-c-overlay1, #545454);
+  color: var(--color-c-overlay1, #545454);
+  padding-right: 5px;
+}

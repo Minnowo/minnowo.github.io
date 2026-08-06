@@ -1,0 +1,52 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | Virt Manager Shared Folder</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/virt-manager-shared-folder/" class="text-c-peach hover:text-c-flamingo hover:underline">Virt Manager Shared Folder</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-06-08">Thu, Jun 8, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/virt_manager/">virt_manager</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#enabling-the-filesystem">Enabling the filesystem</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#mounting-the-filesystem">Mounting the filesystem</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#manually">Manually</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#using-fstab">Using fstab</a></li></ul></li></ul>  <br>
+<blockquote>
+<p>Since I continue to forget how to actually do this I’m making a note</p>
+</blockquote>
+<br>
+<h2 id="enabling-the-filesystem">Enabling the filesystem</h2>
+<ol>
+<li>
+<p>Open Virtual Machine Manager</p>
+</li>
+<li>
+<p>Right click your vm, hit <code>open</code> (make sure it’s shutdown)</p>
+</li>
+<li>
+<p>Under <code>Memory</code>, check the <code>Enable shared memory</code> box</p>
+</li>
+<li>
+<p>Click <code>Add Hardware</code> > <code>Filesystem</code></p>
+</li>
+<li>
+<p>For <code>Driver</code> choose <code>virtiofs</code></p>
+</li>
+<li>
+<p>For <code>Source path</code> put the path to the folder to mount</p>
+</li>
+<li>
+<p>For <code>Target path</code> put a mount name</p>
+</li>
+</ol>
+<br>
+<h2 id="mounting-the-filesystem">Mounting the filesystem</h2>
+<br>
+<h3 id="manually">Manually</h3>
+<p>Once you’ve created the filesystem, now you just need to mount it in the vm.</p>
+<p>In your vm, create a directory to mount into:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> mkdir</span><span style="color:#C97E6D"> /mnt/pictures</span></span></code></pre>
+<p>Then mount the filesystem:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> mount</span><span style="color:#C97E6D"> -t</span><span style="color:#C97E6D"> virtiofs</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">your-target-path-valu</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span><span style="color:#C97E6D"> /mnt/pictures</span></span></code></pre>
+<p>Where <code>&#x3C;your-target-path-value></code> is the value you put for <code>Target path</code> in step <strong>7</strong> above.</p>
+<br>
+<h3 id="using-fstab">Using fstab</h3>
+<p>You probably want to auto mount the filesystem when the vm starts. This can be done using <a href="https://wiki.archlinux.org/title/fstab">Fstab</a>.</p>
+<p>Open <code>/etc/fstab</code> with your editor of choice.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> vim</span><span style="color:#C97E6D"> /etc/fstab</span></span></code></pre>
+<p>Add a new line and use the following format:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>&#x3C;your-target-path-value> /mnt/location virtiofs defaults 0 0</span></span></code></pre>
+<p>Where <code>&#x3C;your-target-path-value></code> is the value you put for <code>Target path</code> in step <strong>7</strong> above.</p>
+<p>You might need to reload systemd:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> systemctl</span><span style="color:#C97E6D"> daemon-reload</span></span></code></pre>
+<p>Then you can mount simply using:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sudo</span><span style="color:#C97E6D"> mount</span><span style="color:#C97E6D"> /mnt/location</span></span></code></pre>
+<p>Where <code>/mnt/location</code> is the path you put in Fstab</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

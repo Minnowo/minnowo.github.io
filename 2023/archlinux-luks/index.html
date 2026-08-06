@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | Arch Linux Luks Installation</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/archlinux-luks/" class="text-c-peach hover:text-c-flamingo hover:underline">Arch Linux Luks Installation</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-08-06">Sun, Aug 6, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#note">Note</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#luks-on-a-partition">Luks on a partition</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#formatting-with-luks">Formatting with Luks</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#opening-partitions">Opening partitions</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#closing-partitions">Closing partitions</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#formatting-partitions">Formatting partitions</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#formatting-swap-partition">Formatting swap partition</a></li></ul></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#system-configuration">System configuration</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#encrypt-hook">encrypt hook</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#sd-encrypt-hook">sd-encrypt hook</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#rebuild-init-system">Rebuild init system</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#mkinitcpio">mkinitcpio</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#dracut">dracut</a></li></ul></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#bootloader">Bootloader</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#grub">GRUB</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#encrypt">encrypt</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#sd-encrypt">sd-encrypt</a></li></ul></li></ul></li></ul>  <br>
+<h1 id="note">Note</h1>
+<p>This guide is incomplete, and only properly works with just the root partition, swap is not handled yet</p>
+<br>
+<p>Since there is a few steps when setting up drives with luks during the insallation, I’m going to be highlighting the steps here.</p>
+<p>As always, start with the <a href="https://wiki.archlinux.org/title/Installation_guide">installtion guide</a></p>
+<p>This is assuming you’re booting with GPT and EFI and have already partitioned the disks.</p>
+<p>The disk layout I’m using for this guide is as follows:</p>
+<ul>
+<li>
+<p><code>/dev/vda1</code>, 550MB, this will be the boot partition</p>
+</li>
+<li>
+<p><code>/dev/vda2</code>, 2GB, this will be the swap partition</p>
+</li>
+<li>
+<p><code>/dev/vda3</code>, 20GB, this will be the root partition</p>
+</li>
+</ul>
+<p>Create the boot partition as nomral</p>
+<br>
+<h1 id="luks-on-a-partition">Luks on a partition</h1>
+<p>[<a href="https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition">Luks on a partition Arch Wiki</a>]</p>
+<br>
+<h2 id="formatting-with-luks">Formatting with Luks</h2>
+<p>[<a href="https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#Preparing_non-boot_partitions">Preparing non-boot partitions</a>]</p>
+<p>First we need to format the partitions.</p>
+<p>This can be done as follows:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cryptsetup</span><span style="color:#C97E6D"> -y</span><span style="color:#C97E6D"> -v</span><span style="color:#C97E6D"> luksFormat</span><span style="color:#C97E6D"> /dev/sdax</span></span></code></pre>
+<p>Where:</p>
+<ul>
+<li><code>/dev/sdax</code> is the partition you wish to format</li>
+</ul>
+<p>Since I’m doing swap and root, I’m running this on <code>/dev/vda2</code> and <code>/dev/vda3</code>.</p>
+<p>Once the partitions have been luks formatted, we need to put a file system on them.</p>
+<br>
+<h2 id="opening-partitions">Opening partitions</h2>
+<p>First we need to unlock the partitions.</p>
+<p>This can be done as follows:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cryptsetup</span><span style="color:#C97E6D"> open</span><span style="color:#C97E6D"> /dev/sdax</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Where:</p>
+<ul>
+<li>
+<p><code>/dev/sdax</code> is the luks formatted partition you want to open</p>
+</li>
+<li>
+<p><code>&#x3C;name></code> is the name you wish to call the unlocked partition</p>
+</li>
+</ul>
+<p>Once opened you will find them in <code>/dev/mapper/&#x3C;name></code>.</p>
+<br>
+<h2 id="closing-partitions">Closing partitions</h2>
+<p>You should close and re-open newly made partitions to make sure everything is working properly.</p>
+<p>This can close the luks partitions like so:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cryptsetup</span><span style="color:#C97E6D"> close</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Where:</p>
+<ul>
+<li><code>&#x3C;name></code> is the name you called the unlocked partition</li>
+</ul>
+<p>Once opened you will find them in <code>/dev/mapper/&#x3C;name></code>.</p>
+<br>
+<h2 id="formatting-partitions">Formatting partitions</h2>
+<p>[<a href="https://wiki.archlinux.org/title/Installation_guide#Format_the_partitions">Formatting partitions</a>]</p>
+<p>For the root partition, you get your pick of <a href="https://wiki.archlinux.org/title/File_systems">file systems</a>.</p>
+<p>I’m going to be using <a href="https://wiki.archlinux.org/title/Btrfs">btrfs</a>, but <a href="https://wiki.archlinux.org/title/Ext4">ext4</a> is probably the most common.</p>
+<p>For most filesystem you can make the like so:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> mkfs.</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">f</span><span style="color:#E6E6E6">s</span><span style="color:#C75A5A">></span><span style="color:#C97E6D"> /dev/mapper/</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Where:</p>
+<ul>
+<li>
+<p><code>&#x3C;fs></code> is the filesystem to create (in this case <code>btrfs</code> or <code>ext4</code>)</p>
+</li>
+<li>
+<p><code>/dev/mapper/&#x3C;name></code> is the path to the opened luks partition</p>
+</li>
+</ul>
+<br>
+<h3 id="formatting-swap-partition">Formatting swap partition</h3>
+<p>Once you’ve formatted and opened the swap partition you need to make it actually a swap partion.</p>
+<p>This can be done as follows:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> mkswap</span><span style="color:#C97E6D"> /dev/mapper/</span><span style="color:#C75A5A">&#x3C;</span><span style="color:#C97E6D">nam</span><span style="color:#E6E6E6">e</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Where:</p>
+<ul>
+<li><code>/dev/mapper/&#x3C;name></code> is the path to the opened luks partition</li>
+</ul>
+<p>This will create a swap filesystem.</p>
+<br>
+<h1 id="system-configuration">System configuration</h1>
+<p><a href="https://wiki.archlinux.org/title/Dm-crypt/System_configuration#Examples">mkinitcpio example hooks</a></p>
+<p>You will need to enable some hooks in <code>/etc/mkinitcpio.conf</code>.</p>
+<p>Looks for the line which looks like <code>HOOKS=(base...)</code>.</p>
+<br>
+<h2 id="encrypt-hook">encrypt hook</h2>
+<p>If you’re not using systemd-based initramfs you need to add the <code>encrypt</code> hook.</p>
+<p><strong>make sure this comes <em>before</em></strong>: <code>filesystems</code></p>
+<p>It will looks something like <code>HOOKS=(base udev ... encrypt ... filesystems ... )</code></p>
+<p>Where <code>...</code> is any number of hooks between the listed hooks.</p>
+<br>
+<h2 id="sd-encrypt-hook">sd-encrypt hook</h2>
+<p>If you’re using systemd-based initramfs you need to add the <code>sd-encrypt</code> hook.</p>
+<p><strong>make sure this comes <em>before</em></strong>: <code>filesystems</code></p>
+<p>It will looks something like <code>HOOKS=(base systemd ... sd-encrypt ... filesystems ... )</code></p>
+<p>Where <code>...</code> is any number of hooks between the listed hooks.</p>
+<br>
+<h2 id="rebuild-init-system">Rebuild init system</h2>
+<p>Once you’ve updated <code>/etc/mkinitcpio.conf</code>, rebuild the init system.</p>
+<br>
+<h3 id="mkinitcpio">mkinitcpio</h3>
+<p>If you’re using <a href="https://wiki.archlinux.org/title/Mkinitcpio">mkinitcpio</a> run:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> mkinitcpio</span><span style="color:#C97E6D"> -P</span></span></code></pre>
+<br>
+<h3 id="dracut">dracut</h3>
+<p>If you’re using <a href="https://wiki.archlinux.org/title/Dracut">dracut</a> run:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> dracut-rebuild</span></span></code></pre>
+<br>
+<h1 id="bootloader">Bootloader</h1>
+<p><a href="https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#Configuring_the_boot_loader">Configuring the boot loader</a></p>
+<p>Lastly, you will need to set some <a href="https://wiki.archlinux.org/title/Kernel_parameters">kernel parameters</a> to unlock the disk at boot.</p>
+<br>
+<h2 id="grub">GRUB</h2>
+<p>If you’re using <a href="https://wiki.archlinux.org/title/GRUB">GRUB</a>.</p>
+<p>Edit <code>/etc/default/grub</code> and find the line starting with <code>GRUB_CMDLINE_LINUX=""</code>.</p>
+<br>
+<h3 id="encrypt">encrypt</h3>
+<p>If you are using the <code>encrypt</code> hook.</p>
+<p>You will need to add <code>cryptdevice=UUID=&#x3C;device-UUID>:root root=/dev/mapper/root</code></p>
+<p>Where:</p>
+<ul>
+<li><code>&#x3C;device-UUID></code>, is the <a href="https://wiki.archlinux.org/title/Persistent_block_device_naming#by-uuid">UUID</a> of the partition (the UUID of <code>/dev/sdax</code> not <code>/dev/mapper/&#x3C;name></code>)</li>
+</ul>
+<br>
+<h3 id="sd-encrypt">sd-encrypt</h3>
+<p>If you are using the <code>sd-encrypt</code> hook.</p>
+<p>You will need to add <code>rd.luks.name=&#x3C;device-UUID>=root root=/dev/mapper/root</code></p>
+<p>Where:</p>
+<ul>
+<li><code>&#x3C;device-UUID></code>, is the <a href="https://wiki.archlinux.org/title/Persistent_block_device_naming#by-uuid">UUID</a> of the disk</li>
+</ul>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

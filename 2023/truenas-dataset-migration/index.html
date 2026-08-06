@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | Migrating Dataset TrueNAS</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/truenas-dataset-migration/" class="text-c-peach hover:text-c-flamingo hover:underline">Migrating Dataset TrueNAS</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-06-08">Thu, Jun 8, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/truenas_core/">truenas_core</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#backing-up-encryption-key">Backing up encryption key</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#replication-task">Replication task</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#after-replication">After replication</a></li></ul>  <br>
+<p>The other day I got a critical alert from my TrueNAS system that a drive failed a <a href="https://en.wikipedia.org/wiki/Self-Monitoring,_Analysis_and_Reporting_Technology">SMART</a> test. So I’ve had to start preparations in case the drive dies on me. Thus the need to migrate all of the content to another pool.</p>
+<p>For the context of this post, this is the pool I will be migrating from:</p>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-onetbmirror.png" alt="Source Pool"></p>
+<p>And this is the pool I am going to put the new dataset in:</p>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-twotbmirror.jpg" alt="Destination Pool"></p>
+<br>
+<h2 id="backing-up-encryption-key">Backing up encryption key</h2>
+<p>First things first, since the source pool is encrypted, make sure to export the key and back it up somewhere safe. You will need this to unlock the new dataset after replication.</p>
+<p>Click on the three dots menu on the far right side of the pool, and at the bottom of the menu click <code>Export Key</code>.</p>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-onetbmirror-settings.png" alt="Menu To Click For Key Export"></p>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-onetbmirror-export-key.png" alt="Key Export Button"></p>
+<br>
+<h2 id="replication-task">Replication task</h2>
+<p>You can find the docs for this <a href="https://www.truenas.com/docs/core/uireference/tasks/replicationtasks/">here</a>.</p>
+<p>We then need to begin replicating the dataset, in this case I only have one dataset on the source pool, so I will be migrating only that.</p>
+<p>Head into <code>Tasks</code> > <code>Replication Tasks</code>:
+<img src="/assets/custom/pictures/2023-06-08_truenas-replication-tasks.jpg" alt="Replication Task Location"></p>
+<p>Then click <code>ADD</code>:
+<img src="/assets/custom/pictures/2023-06-08_truenas-replication-tasks-page.png" alt="Replication Task Page"></p>
+<p>You will then be given a bunch of options for replication, I have labeled from 1 - 6 the options that I’m applying:
+<img src="/assets/custom/pictures/2023-06-08_truenas-replication-tasks-wizard1.jpg" alt="Replication Task Wizard Page 1"></p>
+<ol>
+<li>
+<p>Source Location: This system. Since I only have one system and am just copying between pools, I want to choose this system.</p>
+</li>
+<li>
+<p>The source path of the dataset you want to replicate. In this case <code>OneTBMirror/Personal</code> is my source.</p>
+</li>
+<li>
+<p>Destination Location: This system. Since I want the new data to be on the same system.</p>
+</li>
+<li>
+<p>The destination path for the dataset. In this case <code>TwoTBMirror/Personal</code> is my desktination.</p>
+</li>
+<li>
+<p>Check recursive mode. The docs say this all snapshots contained in the source dataset snapshots. I want to take everything and I know I have snapshots in child data sets, so I’m checking this.</p>
+</li>
+<li>
+<p>Next page of the wizard.</p>
+</li>
+</ol>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-replication-tasks-wizard2.jpg" alt="Replication Task Wizard Page 2"></p>
+<ol>
+<li>
+<p>Run Once. Since this is a one-time job, I only want to run it once.</p>
+</li>
+<li>
+<p>Uncheck Destination Dataset Read-only. I am going to be using this new dataset actively, I don’t want read only.</p>
+</li>
+<li>
+<p>Destination Snapshot Lifetime Same as Source. Keep snapshot lifetime the same.</p>
+</li>
+<li>
+<p>Start replication.</p>
+</li>
+</ol>
+<p>Once you hit start you will be able to monitor the progress of the replication by clicking the <code>Task Manager</code> in the top right:</p>
+<p><img src="/assets/custom/pictures/2023-06-08_truenas-tasks.jpg" alt="Task Manager"></p>
+<br>
+<h2 id="after-replication">After replication</h2>
+<p>Once the replication task is done, you should check that all the files were copied over and they both match.</p>
+<p>The easiest way of doing this is using <a href="https://wiki.archlinux.org/title/rsync">rsync</a>.</p>
+<p>In the bottom left of the webui click the <code>Shell</code> button to get a new terminal.</p>
+<p>From here we can run rsync on the datasets:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> rsync</span><span style="color:#C97E6D"> -rvn</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">sr</span><span style="color:#E6E6E6">c</span><span style="color:#C75A5A">></span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">ds</span><span style="color:#E6E6E6">t</span><span style="color:#C75A5A">></span></span></code></pre>
+<p>Where <code>&#x3C;src></code> is <code>/mnt/OneTBMirror/Personal/</code> and <code>&#x3C;dst></code> is <code>/mnt/TwoTBMirror/Personal</code></p>
+<p><strong>NOTE</strong>: the first argument ending with a <code>/</code> is important! it tells rsync that you mean the contents in the directory rather than the directory itself. For example, without it, it might think to copy <code>/mnt/OneTBMirror/Personal</code> to <code>/mnt/TwoTBMirror/Personal/Personal</code> instead of the contents of the src into the destination.</p>
+<p>The flags meaning:</p>
+<ul>
+<li>
+<p><code>-r</code> Means recursive, search all subfolders</p>
+</li>
+<li>
+<p><code>-v</code> Means verbose, show lots of information</p>
+</li>
+<li>
+<p><code>-n</code> Means dry run, do NOT actually do any copying / moving we just want the output</p>
+</li>
+</ul>
+<p>This command will print off all the files which are missing, from the new dataset and once you have confirmed this is correct, you can remove the <code>-n</code> flag to actually copy these files over.</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

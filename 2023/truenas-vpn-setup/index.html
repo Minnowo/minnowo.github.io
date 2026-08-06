@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | TrueNAS Core VPN Setup</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/truenas-vpn-setup/" class="text-c-peach hover:text-c-flamingo hover:underline">TrueNAS Core VPN Setup</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-07-09">Sun, Jul 9, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/truenas_core/">truenas_core</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#creating-the-jail">Creating the jail</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#basic-properties">Basic Properties</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#jail-properties">Jail Properties</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#custom-properties">Custom Properties</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#setup-inside-the-jail">Setup inside the jail</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#wireguard">Wireguard</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#installation">Installation</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#postdown-script">Postdown script</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#mullvad-wireguard-configuration">Mullvad Wireguard configuration</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#getting-wireguard-config-into-jail">Getting Wireguard config into jail</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#finalize-wireguard-config">Finalize Wireguard config</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#enable-wireguard">Enable Wireguard</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#start-stop-restart-wireguard">Start, Stop, Restart Wireguard</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#connection-check">Connection check</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#mullvad-connection-check">Mullvad connection check</a></li></ul></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#using-a-single-jail-as-a-vpn-for-other-jails">Using a single jail as a vpn for other jails</a></li></ul></li></ul>  <br>
+<p>I will be setting up a jail with a working vpn. Once the vpn is setup you can install whatever you want inside.</p>
+<p>I will be using Wireguard, and I will be connecting to Mullvad in this guide.</p>
+<br>
+<h1 id="creating-the-jail">Creating the jail</h1>
+<p>(Make sure to check advanced jail creation)</p>
+<h2 id="basic-properties">Basic Properties</h2>
+<ul>
+<li>
+<p>Set the jail name, I’m calling mine <code>VPN</code></p>
+</li>
+<li>
+<p>Jail type, I’m using <code>Basejail</code></p>
+</li>
+<li>
+<p>Release, I’m using <code>13.2-RELEASE</code></p>
+</li>
+<li>
+<p>Check both <code>NAT</code> and <code>VNET</code></p>
+</li>
+</ul>
+<h2 id="jail-properties">Jail Properties</h2>
+<ul>
+<li>Check <code>allow_raw_sockets</code></li>
+</ul>
+<h2 id="custom-properties">Custom Properties</h2>
+<ul>
+<li>Check <code>allow_tun</code></li>
+</ul>
+<p>Save and create the jail.</p>
+<br>
+<h1 id="setup-inside-the-jail">Setup inside the jail</h1>
+<p>Start the jail and open a shell.</p>
+<p>Setup package management:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> pkg</span></span></code></pre>
+<p>Then tell it yes to install and setup the package manager.</p>
+<p>After this is setup install a text editor of your choice. I’m going to be using vim:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> pkg</span><span style="color:#C97E6D"> install</span><span style="color:#C97E6D"> vim</span></span></code></pre>
+<br>
+<h2 id="wireguard">Wireguard</h2>
+<br>
+<h3 id="installation">Installation</h3>
+<p>Install Wireguard</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> pkg</span><span style="color:#C97E6D"> install</span><span style="color:#C97E6D"> wireguard</span></span></code></pre>
+<p>Then say yes and let it install.</p>
+<br>
+<h3 id="postdown-script">Postdown script</h3>
+<p>First we’re gonna make a postdown script which will restore <code>/etc/resolv.conf</code>. Otherwise when Wireguard disconnects the jail will likely be left without internet.</p>
+<p>Create the file:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> touch</span><span style="color:#C97E6D"> /usr/local/etc/wireguard/postdown.sh</span></span></code></pre>
+<p>Make it executable:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> chmod</span><span style="color:#C97E6D"> +x</span><span style="color:#C97E6D"> /usr/local/etc/wireguard/postdown.sh</span></span></code></pre>
+<p>Get contents of resolv.conf we will need this to restore it later:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cat</span><span style="color:#C97E6D"> /etc/resolv.conf</span></span></code></pre>
+<p>You will get an output like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span># Generated by resolvconf</span></span>
+<span class="line"><span>search lan</span></span>
+<span class="line"><span>nameserver 192.168.1.1</span></span>
+<span class="line"><span></span></span></code></pre>
+<p>Now open the postdown script and add the following:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#9A9A9A;font-style:italic">#!</span><span style="color:#545454;font-style:italic">/usr/local/bin/bash</span></span>
+<span class="line"><span style="color:#D9A3A3">echo</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D"># Generated by resolvconf</span></span>
+<span class="line"><span style="color:#C97E6D">search lan</span></span>
+<span class="line"><span style="color:#C97E6D">nameserver 192.168.1.1</span></span>
+<span class="line"><span style="color:#9A9A9A">"</span><span style="color:#C75A5A"> ></span><span style="color:#C97E6D"> /etc/resolv.conf</span></span></code></pre>
+<p>Where the contents inside the quotes is the content from your resolv.conf file.</p>
+<p>Now create a backup of resolv.conf just in case:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cp</span><span style="color:#C97E6D"> /etc/resolv.conf</span><span style="color:#C97E6D"> /etc/resolv.conf.bak</span></span></code></pre>
+<p>And run the postdown script to test that it works:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> /usr/local/etc/wireguard/postdown.sh</span><span style="color:#9A9A9A"> &#x26;&#x26;</span><span style="color:#D9A3A3"> ping</span><span style="color:#C97E6D"> truenas.com</span></span></code></pre>
+<p>If your ping command doesn’t work restore from the backup and try again.</p>
+<br>
+<h3 id="mullvad-wireguard-configuration">Mullvad Wireguard configuration</h3>
+<p>Since this guide is for Mullvad, login and head to <a href="https://mullvad.net/en/account/wireguard-config">their Wireguard config generator</a>.</p>
+<ul>
+<li>
+<p>Platform, <code>Linux</code>, since we’re using TrueNAS Core, which is openBSD, choose Linux for the platform, because that is the closest option and shouldn’t matter.</p>
+</li>
+<li>
+<p>Generate a Wireguard key</p>
+</li>
+<li>
+<p>Select one or multiple exit locations, I’m going to choose <code>All countries</code> and cities and servers.</p>
+</li>
+<li>
+<p>Under advanced, I’m checking <code>IPv4 only</code></p>
+</li>
+<li>
+<p>Click <code>Download zip archive</code> to get the configurations.</p>
+</li>
+</ul>
+<br>
+<h3 id="getting-wireguard-config-into-jail">Getting Wireguard config into jail</h3>
+<p>Now we need to actually get the configuration into the jail, since I already have a bunch of shared datasets, I’m going to temporarily mount one into the jail so I can copy the files over. You can do this however.</p>
+<ul>
+<li>
+<p>Copy the Wireguard zip downloaded from Mullvad into the dataset you want to mount.</p>
+</li>
+<li>
+<p><code>STOP</code> the jail</p>
+</li>
+<li>
+<p>Click <code>MOUNT POINTS</code> > <code>ACTIONS</code> > <code>Add</code></p>
+</li>
+<li>
+<p>Choose the source as the dataset you copied the file into</p>
+</li>
+<li>
+<p>Choose the destination as <code>/mnt</code> (which actually has the full path of <code>/mnt/&#x3C;poolname>/iocage/jails/VPN/root/mnt</code>)</p>
+</li>
+<li>
+<p>Make it read-only if you want</p>
+</li>
+<li>
+<p><code>START</code> the jail, open up a <code>SHELL</code>, and cd into the mount point:</p>
+</li>
+</ul>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cd</span><span style="color:#C97E6D"> /mnt</span></span></code></pre>
+<ul>
+<li>Copy the zip file into the Wireguard config directory:</li>
+</ul>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cp</span><span style="color:#C97E6D"> mullvad_wireguard_linux_all_all.zip</span><span style="color:#C97E6D"> /usr/local/etc/wireguard/wireguard_configs.zip</span></span></code></pre>
+<ul>
+<li>Unzip the file into a directory of your choice:</li>
+</ul>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> unzip</span><span style="color:#C97E6D"> wireguard_configs.zip</span><span style="color:#C97E6D"> -d</span><span style="color:#C97E6D"> wgconfigs</span></span></code></pre>
+<ul>
+<li>Now cd into the Wireguard directory and copy the config you want to use into it and open it:</li>
+</ul>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cd</span><span style="color:#C97E6D"> /usr/local/etc/wireguard/</span></span>
+<span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> cp</span><span style="color:#C97E6D"> ./wgconfigs/ca-tor-wg-002.conf</span><span style="color:#C97E6D"> wg0.conf</span></span>
+<span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> vim</span><span style="color:#C97E6D"> wg0.conf</span></span></code></pre>
+<br>
+<h3 id="finalize-wireguard-config">Finalize Wireguard config</h3>
+<p>Under the <code>[Interface]</code> section, add the line postdown script:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>PostDown = /usr/local/etc/wireguard/postdown.sh</span></span></code></pre>
+<p>Your config should look something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>[Interface]</span></span>
+<span class="line"><span>PrivateKey = &#x3C;private_key></span></span>
+<span class="line"><span>Address = 10.xxx.xxx.xxx/32</span></span>
+<span class="line"><span>DNS = 193.xxx.xxx.xxx</span></span>
+<span class="line"><span>PostDown = /usr/local/etc/wireguard/postdown.sh</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>[Peer]</span></span>
+<span class="line"><span>PublicKey = &#x3C;public_key></span></span>
+<span class="line"><span>AllowedIPs = 0.0.0.0/0</span></span>
+<span class="line"><span>Endpoint = 193.xxx.xxx.xxx:xxxx</span></span></code></pre>
+<br>
+<h3 id="enable-wireguard">Enable Wireguard</h3>
+<p>Now we’re ready to actually use Wireguard, lets enable it.</p>
+<p>Set the configuration file we just made:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sysrc</span><span style="color:#C97E6D"> wireguard_interfaces=</span><span style="color:#9A9A9A">"</span><span style="color:#C97E6D">wg0</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<p>Enable the Wireguard service on startup:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> sysrc</span><span style="color:#C97E6D"> wireguard_enable=</span><span style="color:#9A9A9A">"</span><span style="color:#C97E6D">YES</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<br>
+<h3 id="start-stop-restart-wireguard">Start, Stop, Restart Wireguard</h3>
+<p>Now Wireguard will auto connect when the jail starts, but you can also control it using <code>service</code>.</p>
+<p>To start Wireguard:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> service</span><span style="color:#C97E6D"> wireguard</span><span style="color:#C97E6D"> start</span></span></code></pre>
+<p>To stop Wireguard:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> service</span><span style="color:#C97E6D"> wireguard</span><span style="color:#C97E6D"> stop</span></span></code></pre>
+<p>To restart Wireguard:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> service</span><span style="color:#C97E6D"> wireguard</span><span style="color:#C97E6D"> restart</span></span></code></pre>
+<br>
+<h2 id="connection-check">Connection check</h2>
+<p>I’m going to use <code>curl</code> to check my connection, this will need to be installed:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> pkg</span><span style="color:#C97E6D"> install</span><span style="color:#C97E6D"> curl</span></span></code></pre>
+<br>
+<h3 id="mullvad-connection-check">Mullvad connection check</h3>
+<p>Mullvad provides an endpoint for checking your connection.</p>
+<p>Simply run:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> curl</span><span style="color:#C97E6D"> https://am.i.mullvad.net/connected</span></span></code></pre>
+<p>You should see something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>You are connected to Mullvad (server ca-tor-wg-002). Your IP address is xxx.xxx.xxx.xxx</span></span></code></pre>
+<p>Congrats, you’re jail is now connected to the vpn.</p>
+<br>
+<h2 id="using-a-single-jail-as-a-vpn-for-other-jails">Using a single jail as a vpn for other jails</h2>
+<p>I have not figured out how to get this working. So if you read this and know how, please let me know.</p>
+<p>So far my solution to this is just install any and all apps which need a vpn inside the vpn jail.</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>

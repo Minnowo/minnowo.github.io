@@ -1,0 +1,210 @@
+<!DOCTYPE html><html lang="en" class="font-mono"> <head><meta charset="UTF-8"><title>catfish | GPG TLDR</title><link rel="shortcut icon" type="image/png" href="/favicon.png"><meta name="theme-color" content="#222222"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="/assets/css/code_highlight.css" rel="stylesheet"><link rel="stylesheet" href="/_astro/archive.BxUqJEOS.css"></head> <body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text"> <nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg"> <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/"> <img src="/favicon.png" alt="" class="hidden"> catfish </a> <div class="flex flex-wrap items-center gap-1"> <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/">/home</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/notes/">/notes</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/archive/">/archive</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/tags/">/tags</a><a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href="/links/">/links</a> </div> </nav> <div class="relative min-h-full"> <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">  <div class="rounded-[10px] border border-c-surface1 bg-c-surface0 p-5"> <h1> <a href="/2023/gpg/" class="text-c-peach hover:text-c-flamingo hover:underline">GPG TLDR</a> </h1> <div class="mb-5 flex flex-wrap items-center justify-between gap-2 border-t border-b border-dashed border-c-surface1 py-2"> <div class="text-[0.9em] text-c-subtext0"> <time datetime="2023-05-21">Sun, May 21, 2023</time> </div> <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0"> <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/note/">note</a></li><li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href="/tag/guide/">guide</a></li> </ul> </div> <div class="post-content prose"> <ul class="mb-6 list-none rounded-r-[10px] border border-l-[3px] border-c-surface1 border-l-c-maroon bg-c-crust p-3 px-4 text-[0.9em] before:mb-1.5 before:block before:text-c-overlay2 before:content-['contents']"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#what-is-gpg">What is GPG</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#checking-version">Checking version</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#generating-a-key">Generating a key</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#quick-usage">Quick usage</a><ul class="list-none border-l border-dashed border-c-surface1 pl-4"><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#listing-keys">Listing keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#exporting-keys">Exporting keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#importing-keys">Importing keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#signing--trusting-keys">Signing / trusting keys</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#encrypting-data">Encrypting data</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#signing-data">Signing data</a></li><li><a class="text-c-subtext1 hover:text-c-flamingo" href="#verifying-signed-data">Verifying signed data</a></li></ul></li></ul>  <br>
+<p><strong>NOTE</strong>: if you’re on Windows, you should install <a href="https://www.gpg4win.org/">Gpg4win</a>. <a href="https://git-scm.com/downloads">git-bash</a> may also provide the gpg utility.</p>
+<br>
+<h2 id="what-is-gpg">What is GPG</h2>
+<p>GPG (<a href="https://gnupg.org/">GnuPG</a>) or GNU Privacy Guard is a versatile key management system allowing you to encrypt and sign data and communications.</p>
+<br>
+<h2 id="checking-version">Checking version</h2>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --version</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D9A3A3">gpg</span><span style="color:#E6E6E6"> (GnuPG) 2.2.41</span></span>
+<span class="line"><span style="color:#D9A3A3">libgcrypt</span><span style="color:#C97E6D"> 1.10.2-unknown</span></span>
+<span class="line"><span style="color:#D9A3A3">Copyright</span><span style="color:#E6E6E6"> (C) 2022 g10 Code GmbH</span></span>
+<span class="line"><span style="color:#D9A3A3">License</span><span style="color:#C97E6D"> GNU</span><span style="color:#C97E6D"> GPL-3.0-or-later</span><span style="color:#C75A5A"> &#x3C;</span><span style="color:#C97E6D">https://gnu.org/licenses/gpl.htm</span><span style="color:#E6E6E6">l</span><span style="color:#C75A5A">></span></span>
+<span class="line"><span style="color:#D9A3A3">This</span><span style="color:#C97E6D"> is</span><span style="color:#C97E6D"> free</span><span style="color:#C97E6D"> software:</span><span style="color:#C97E6D"> you</span><span style="color:#C97E6D"> are</span><span style="color:#C97E6D"> free</span><span style="color:#C97E6D"> to</span><span style="color:#C97E6D"> change</span><span style="color:#C97E6D"> and</span><span style="color:#C97E6D"> redistribute</span><span style="color:#C97E6D"> it.</span></span>
+<span class="line"><span style="color:#D9A3A3">There</span><span style="color:#C97E6D"> is</span><span style="color:#C97E6D"> NO</span><span style="color:#C97E6D"> WARRANTY,</span><span style="color:#C97E6D"> to</span><span style="color:#C97E6D"> the</span><span style="color:#C97E6D"> extent</span><span style="color:#C97E6D"> permitted</span><span style="color:#C97E6D"> by</span><span style="color:#C97E6D"> law.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#D9A3A3">Home:</span><span style="color:#C97E6D"> /home/minno/.gnupg</span></span>
+<span class="line"><span style="color:#D9A3A3">Supported</span><span style="color:#C97E6D"> algorithms:</span></span>
+<span class="line"><span style="color:#D9A3A3">Pubkey:</span><span style="color:#C97E6D"> RSA,</span><span style="color:#C97E6D"> ELG,</span><span style="color:#C97E6D"> DSA,</span><span style="color:#C97E6D"> ECDH,</span><span style="color:#C97E6D"> ECDSA,</span><span style="color:#C97E6D"> EDDSA</span></span>
+<span class="line"><span style="color:#D9A3A3">Cipher:</span><span style="color:#C97E6D"> IDEA,</span><span style="color:#C97E6D"> 3DES,</span><span style="color:#C97E6D"> CAST5,</span><span style="color:#C97E6D"> BLOWFISH,</span><span style="color:#C97E6D"> AES,</span><span style="color:#C97E6D"> AES192,</span><span style="color:#C97E6D"> AES256,</span><span style="color:#C97E6D"> TWOFISH,</span></span>
+<span class="line"><span style="color:#D9A3A3">        CAMELLIA128,</span><span style="color:#C97E6D"> CAMELLIA192,</span><span style="color:#C97E6D"> CAMELLIA256</span></span>
+<span class="line"><span style="color:#D9A3A3">Hash:</span><span style="color:#C97E6D"> SHA1,</span><span style="color:#C97E6D"> RIPEMD160,</span><span style="color:#C97E6D"> SHA256,</span><span style="color:#C97E6D"> SHA384,</span><span style="color:#C97E6D"> SHA512,</span><span style="color:#C97E6D"> SHA224</span></span>
+<span class="line"><span style="color:#D9A3A3">Compression:</span><span style="color:#C97E6D"> Uncompressed,</span><span style="color:#C97E6D"> ZIP,</span><span style="color:#C97E6D"> ZLIB,</span><span style="color:#C97E6D"> BZIP2</span></span></code></pre>
+<br>
+<h2 id="generating-a-key">Generating a key</h2>
+<p>To generate a default key you can use <code>gpg --gen-key</code>, to get more options you can use <code>gpg --full-generate-key</code>.</p>
+<p>For a guide on the first command see <a href="https://www.gnupg.org/gph/en/manual/c14.html">here</a>.</p>
+<p>Lets generate a key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --full-generate-key</span></span></code></pre>
+<p>The first option is to pick the type of key, for this I am going to go with the default <code>RSA and RSA</code> (1), you can pick whichever based off preference and use case.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gpg (GnuPG) 2.2.40; Copyright (C) 2022 g10 Code GmbH</span></span>
+<span class="line"><span>This is free software: you are free to change and redistribute it.</span></span>
+<span class="line"><span>There is NO WARRANTY, to the extent permitted by law.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Please select what kind of key you want:</span></span>
+<span class="line"><span>   (1) RSA and RSA (default)</span></span>
+<span class="line"><span>   (2) DSA and Elgamal</span></span>
+<span class="line"><span>   (3) DSA (sign only)</span></span>
+<span class="line"><span>   (4) RSA (sign only)</span></span>
+<span class="line"><span>  (14) Existing key from card</span></span>
+<span class="line"><span>Your selection? 1</span></span></code></pre>
+<p>Next we need to choose how many bits we want, personally I like to pick something 3072 or more, but you can read more about large RSA keys <a href="https://wiki.gnupg.org/LargeKeys">here</a>.</p>
+<p>For this key, I’m going to stick again with the default of 3072.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>RSA keys may be between 1024 and 4096 bits long.</span></span>
+<span class="line"><span>What keysize do you want? (3072) 3072</span></span></code></pre>
+<p>Once we’ve chosen a key and bit length, we need to choose when it should expire. It is good practice to have keys expire every few years ([though frequent expirey doesn’t mean security]({% post_url 2015-01-15-gpg-expirey-security %})). For personal use I like to make my keys expire every 2 years, so for this key I’m going to choose that.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Requested keysize is 3072 bits</span></span>
+<span class="line"><span>Please specify how long the key should be valid.</span></span>
+<span class="line"><span>         0 = key does not expire</span></span>
+<span class="line"><span>      &#x3C;n>  = key expires in n days</span></span>
+<span class="line"><span>      &#x3C;n>w = key expires in n weeks</span></span>
+<span class="line"><span>      &#x3C;n>m = key expires in n months</span></span>
+<span class="line"><span>      &#x3C;n>y = key expires in n years</span></span>
+<span class="line"><span>Key is valid for? (0) 2y</span></span></code></pre>
+<p>We then need to associate a name with the key, pick a name you’re good with, ideally something used to identify you or whoever is going to be using the key. I’m going to set the name for this to be <code>hello world</code>.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Key expires at Tue 20 May 2025 08:45:54 PM EDT</span></span>
+<span class="line"><span>Is this correct? (y/N) y</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>GnuPG needs to construct a user ID to identify your key.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Real name: hello world </span></span></code></pre>
+<p>You will then be prompted to enter an email address, this is <strong>optional</strong>, so I am going to leave it blank.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Email address: </span></span></code></pre>
+<p>Next you get the option to add a comment, put something here to help you remember what the key is for. This is <strong>optional</strong>.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>Comment: This is a test key </span></span></code></pre>
+<p>Once you’ve finished you will get the option to edit these fields in case you made a mistake, I’m happy with this key so I’m going to choose okay.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>You selected this USER-ID:</span></span>
+<span class="line"><span>    "hello world (This is a test key)"</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O</span></span></code></pre>
+<p>The last step (<strong>optional</strong>), is to enter a passphrase, you will likely get a dialog or prompt in your terminal to enter it, here’s what mine looks like:
+<img src="/assets/custom/pictures/2023-05-21_gpg-password-entry.jpg" alt="Password Entry Box"></p>
+<p>You should protect your key with a passphrase to ensure that it cannot be used by anyone who doesn’t know the passphrase. Ideally this would be strong enough to resist brute force for enough to time revoke the key, or even better forever.</p>
+<p>Once you’ve set a passphrase, you will see an output like this:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>We need to generate a lot of random bytes. It is a good idea to perform</span></span>
+<span class="line"><span>some other action (type on the keyboard, move the mouse, utilize the</span></span>
+<span class="line"><span>disks) during the prime generation; this gives the random number</span></span>
+<span class="line"><span>generator a better chance to gain enough entropy.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>We need to generate a lot of random bytes. It is a good idea to perform</span></span>
+<span class="line"><span>some other action (type on the keyboard, move the mouse, utilize the</span></span>
+<span class="line"><span>disks) during the prime generation; this gives the random number</span></span>
+<span class="line"><span>generator a better chance to gain enough entropy.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>gpg: revocation certificate stored as '/home/minno/.gnupg/openpgp-revocs.d/B44FA5959352450581BAE339E135DD909794B108.rev'</span></span>
+<span class="line"><span>public and secret key created and signed.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>pub   rsa3072 2023-05-22 [SC] [expires: 2025-05-21]</span></span>
+<span class="line"><span>      B44FA5959352450581BAE339E135DD909794B108</span></span>
+<span class="line"><span>uid                      hello world (This is a test key)</span></span>
+<span class="line"><span>sub   rsa3072 2023-05-22 [E] [expires: 2025-05-21]</span></span></code></pre>
+<p>This is your new GPG key, your key can be identified via the <code>fingerprint</code>, which is the long string show above the <code>uid</code>, mine for this key is <code>B44FA5959352450581BAE339E135DD909794B108</code></p>
+<br>
+<h2 id="quick-usage">Quick usage</h2>
+<br>
+<h3 id="listing-keys">Listing keys</h3>
+<p>To see <strong>public</strong> keys you have:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --list-keys</span></span></code></pre>
+<p>To see <strong>private</strong> keys you have:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --list-secret-keys</span></span></code></pre>
+<br>
+<h3 id="exporting-keys">Exporting keys</h3>
+<p>To export the a <strong>public</strong> key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --output</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">some-file-path.gpg</span><span style="color:#9A9A9A">"</span><span style="color:#C97E6D"> --armor</span><span style="color:#C97E6D"> --export</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">fingerprint / user-id</span><span style="color:#9A9A9A">"</span><span style="color:#E6E6E6"> </span></span></code></pre>
+<p>To export a <strong>private</strong> key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --output</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">some-file-path.asc</span><span style="color:#9A9A9A">"</span><span style="color:#C97E6D"> --armor</span><span style="color:#C97E6D"> --export-secret-keys</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">fingerprint / user-id</span><span style="color:#9A9A9A">"</span><span style="color:#E6E6E6"> </span></span></code></pre>
+<ul>
+<li>
+<p><code>--output</code> or <code>-o</code> is used to specify the output file for the key, or if not specified it puts it into stdout.</p>
+</li>
+<li>
+<p><code>--armor</code> wraps the key into ASCII instead of binary format.</p>
+</li>
+<li>
+<p><code>--export</code> is determines which <strong>public</strong> key to export, where <code>fingerprint / user-id</code> is either the fingerprint of the key you want to export, or the name / email on that key.</p>
+</li>
+<li>
+<p><code>--export-secret-keys</code> is determines which <strong>private</strong> key to export, where <code>fingerprint / user-id</code> is either the fingerprint of the key you want to export, or the name / email on that key.</p>
+</li>
+</ul>
+<p><strong>NOTE</strong>: order matters here, <code>--export</code> and <code>--export-secret-keys</code> should usually be last</p>
+<br>
+<h3 id="importing-keys">Importing keys</h3>
+<p>To import a <strong>public</strong> or <strong>private</strong> key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --import</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">some-file-path.gpg</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<br>
+<h3 id="signing--trusting-keys">Signing / trusting keys</h3>
+<p>Once you have imported someones public key, signing that key will tell your software you trust and have verified that it is associated with the person in question.</p>
+<p>To sign a key you’ve imported:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --sign-key</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">fingerprint / user-id</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<p>If you have multiple <strong>private</strong> keys, you can specify which key to sign with using <code>--default-key</code> and the fingerprint or user-id.</p>
+<p>Once you’ve signed their key, you can export it and send it back to them. This lets them import the key to gain a “stamp of approval” when interacting with others.</p>
+<br>
+<h3 id="encrypting-data">Encrypting data</h3>
+<p>Once you have someones <strong>public</strong> key, you can use it to encrypt a message for them.</p>
+<p>This can be done like so:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --encrypt</span><span style="color:#C97E6D"> --sign</span><span style="color:#C97E6D"> --armor</span><span style="color:#C97E6D"> --recipient</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">name</span><span style="color:#9A9A9A">"</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">path-to-file</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<ul>
+<li>
+<p><code>--encrypt</code> encrypts the file with the recipient’s public key.</p>
+</li>
+<li>
+<p><code>--sign</code> (<strong>optionally</strong>) signs the file with your private key.</p>
+</li>
+<li>
+<p><code>--armor</code> wraps the data in ASCII instead of binary format.</p>
+</li>
+<li>
+<p><code>--recipient</code> or <code>-r</code> specifies the public key using it’s name</p>
+</li>
+<li>
+<p>lastly the path to the file you want to encrypt / sign</p>
+</li>
+</ul>
+<p>If you have multiple <strong>private</strong> keys, you can specify which key to sign with using <code>--default-key</code> and the fingerprint or user-id.</p>
+<br>
+<h3 id="signing-data">Signing data</h3>
+<p>To sign a piece of data with your <strong>private</strong> key:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --sign</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">path-to-file</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<p>If you want to make a message readable, but still sign it with your <strong>private</strong> key, you can use <code>--clearsign</code>.</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#C97E6D"> --clearsign</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">path-to-file</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<p>This will output something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>-----BEGIN PGP SIGNED MESSAGE-----</span></span>
+<span class="line"><span>Hash: SHA256</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>hello world</span></span>
+<span class="line"><span>-----BEGIN PGP SIGNATURE-----</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>iQJeBAEBCABIFiEE5oWKLvg0/hlBE+xWteUE4eykbTIFAmRrAT0qHDYyNDUxNDE1</span></span>
+<span class="line"><span>K21pbm5vd29AdXNlcnMubm9yZXBseS5naXRodWIuY29tAAoJELXlBOHspG0yhwMQ</span></span>
+<span class="line"><span>AMg8TRGB0Q18vQy0DDbla7CDC53mtP5uUP341+o3QWbCujyw+cR+N3zo0C3txz4B</span></span>
+<span class="line"><span>69yV34U48RaQdeIO+uF1cL0kCmTE4AVDPpIeqdVH/IeWsgi5cpy2ZdAFXON4bheC</span></span>
+<span class="line"><span>EU7yfBdPfX1J5Ton+I3AVW2ChzCKhifPrw3KuKKDcOZRLn06F3tgigWjV9DAq8Bm</span></span>
+<span class="line"><span>Apqnc7oFY55Wg7wPjI36sitGvxfbMGcy3z6D2PlwJjFkRWEHjkP3jaCqv5ptiI4b</span></span>
+<span class="line"><span>PjjuR+vpE7e+UnQWP2NtOAGFBSkz2rItU6vVtqyFKa9TEgrmRbaFqEUbwVPpUR32</span></span>
+<span class="line"><span>kTBgI2r+FHxdUeZpc2IDCwbkhnqnC5fJsIhJkiwoYBgtEDOSkS5Y73QYufsO2o7J</span></span>
+<span class="line"><span>9qph8MLGq4LNseIbrcB+U7aCcg4lSkolPXpHpHrWPWehG5nzwzXy3dm4zJ/wUaUx</span></span>
+<span class="line"><span>7akeCKV8Yom+Q3IeKREBw13bgDUGot9pSz0WD79WTQL9gjY/WlH1k3xAs3JA5fVK</span></span>
+<span class="line"><span>MS4ddHX5qBiqt+LrE506MoN0Bjvuct7DvNy87e/68iU9mC8kK+95zIqASoa8qSWO</span></span>
+<span class="line"><span>5MZ2JQxpIrT6KJcDBE7XQWvknKDbmi8lX94Upbhu9WeFv15aUf13/+CXXjHlBF2m</span></span>
+<span class="line"><span>0XvhzxQlVgpqk0evlTviMjOqqCe4tUk0w/rWDWHBhiCv</span></span>
+<span class="line"><span>=1IjM</span></span>
+<span class="line"><span>-----END PGP SIGNATURE-----</span></span></code></pre>
+<br>
+<h3 id="verifying-signed-data">Verifying signed data</h3>
+<p>You can decrypt / verify using:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="sh"><code><span class="line"><span style="color:#D9A3A3">$</span><span style="color:#C97E6D"> gpg</span><span style="color:#9A9A9A"> "</span><span style="color:#C97E6D">path-to-file</span><span style="color:#9A9A9A">"</span></span></code></pre>
+<p>If you do not have the public key of the signer, you will get something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gpg: WARNING: no command supplied.  Trying to guess what you mean ...</span></span>
+<span class="line"><span>gpg: Signature made Mon 22 May 2023 01:54:11 AM EDT</span></span>
+<span class="line"><span>gpg:                using RSA key E6858A2EF834FE194113EC56B5E504E1ECA46D32</span></span>
+<span class="line"><span>gpg:                issuer "62451415+minnowo@users.noreply.github.com"</span></span>
+<span class="line"><span>gpg: Can't check signature: No public key</span></span></code></pre>
+<p>If you have the public key, but did not trust it, you will get something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gpg: WARNING: no command supplied.  Trying to guess what you mean ...</span></span>
+<span class="line"><span>gpg: Signature made Mon 22 May 2023 01:54:11 AM EDT</span></span>
+<span class="line"><span>gpg:                using RSA key E6858A2EF834FE194113EC56B5E504E1ECA46D32</span></span>
+<span class="line"><span>gpg:                issuer "62451415+minnowo@users.noreply.github.com"</span></span>
+<span class="line"><span>gpg: Good signature from "Minnowo (Alice Nyaa) Github &#x3C;62451415+Minnowo@users.noreply.github.com>" [unknown]</span></span>
+<span class="line"><span>gpg: WARNING: This key is not certified with a trusted signature!</span></span>
+<span class="line"><span>gpg:          There is no indication that the signature belongs to the owner.</span></span>
+<span class="line"><span>Primary key fingerprint: E685 8A2E F834 FE19 4113  EC56 B5E5 04E1 ECA4 6D32</span></span></code></pre>
+<p>If you have the public key and trust it, you will get something like:</p>
+<pre class="astro-code catfish-red" style="background-color:#161616;color:#e6e6e6; overflow-x: auto;" tabindex="0" data-language="plaintext"><code><span class="line"><span>gpg: WARNING: no command supplied.  Trying to guess what you mean ...</span></span>
+<span class="line"><span>gpg: Signature made Mon 22 May 2023 01:54:11 AM EDT</span></span>
+<span class="line"><span>gpg:                using RSA key E6858A2EF834FE194113EC56B5E504E1ECA46D32</span></span>
+<span class="line"><span>gpg:                issuer "62451415+minnowo@users.noreply.github.com"</span></span>
+<span class="line"><span>gpg: Good signature from "Minnowo (Alice Nyaa) Github &#x3C;62451415+Minnowo@users.noreply.github.com>" [full]</span></span></code></pre>
+<p>You can use <code>--output</code> or <code>-o</code> to specify the output file of any encrypted / signed data.</p>
+<p><strong>NOTE</strong>: the input file should be specified last after any parameters you provid</p>  </div> </div>  </div> <footer class="border-t border-dashed border-c-surface1 p-4 text-center text-[13px]"> <a href="https://github.com/minnowo/minnowo.github.io" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">Source Code</a> <a href="/feed.xml" class="px-2.5 text-c-overlay2 transition-all duration-200 hover:text-c-maroon">RSS Feed</a>  </footer> <a href="/assets/AppleWorm/" class="!leading-none !m-0 float-right text-transparent transition-all duration-200 hover:!text-c-flamingo">Apple Worm</a> </div> </body></html>
