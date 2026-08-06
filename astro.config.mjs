@@ -8,6 +8,10 @@ import catfishRedTheme from './shiki-theme.mjs';
 export default defineConfig({
   site: 'https://minnowo.github.io',
   trailingSlash: 'always',
+  redirects: {
+    // the about page was removed; external links still point at /about
+    '/about': '/',
+  },
   vite: {
     plugins: [tailwindcss()],
   },

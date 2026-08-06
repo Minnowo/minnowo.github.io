@@ -19,5 +19,4 @@ export const NAV = [
   { href: '/archive/', label: '/archive' },
   { href: '/tags/', label: '/tags' },
   { href: '/links/', label: '/links' },
-  { href: '/about/', label: '/about' },
 ];
