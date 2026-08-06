@@ -1,25 +1,28 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import PostMeta from '../components/PostMeta.astro';
 import { getVisiblePosts, postUrl } from '../lib/posts';
 
 const posts = (await getVisiblePosts()).slice(0, 10);
 ---
 
 <PageLayout>
-    {posts.map((post) => (
-        <>
-            <h2 class="post-title">
-                <a href={postUrl(post.id)}>{post.data.title}</a>
-            </h2>
-
-            <PostMeta date={post.data.date} tags={post.data.tags} />
-
-            <div class="post-descr">
-                <p>{post.data.description}</p>
+    <div class="board-grid">
+        {posts.map((post) => (
+            <div class="board-tile">
+                <span class="board-pin" aria-hidden="true"></span>
+                <h2 class="post-title"><a href={postUrl(post.id)}>{post.data.title}</a></h2>
+                <time class="board-tile-date">{post.data.date.toISOString().slice(0, 10)}</time>
+                <p class="post-descr">{post.data.description}</p>
+                {post.data.tags.length > 0 && (
+                    <ul class="board-tile-tags">
+                        {post.data.tags.map((tag) => (
+                            <li><a class="tag-link" href={`/tag/${tag}/`}>{tag}</a></li>
+                        ))}
+                    </ul>
+                )}
             </div>
-        </>
-    ))}
+        ))}
+    </div>
 
     <div class="post-footer">
         <div class="column-full">

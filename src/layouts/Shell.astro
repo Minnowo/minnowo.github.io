@@ -1,7 +1,6 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
-import Sidebar from '../components/Sidebar.astro';
 import { SITE } from '../site.config';
 
 export interface Props {
@@ -19,7 +18,6 @@ const pageTitle = title ? `${SITE.title} | ${title}` : SITE.title;
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
     <meta name="theme-color" content="#222222"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/assets/css/fa-svg.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
     <link href="/assets/css/code_highlight.css" rel="stylesheet">
 </head>
@@ -29,16 +27,8 @@ const pageTitle = title ? `${SITE.title} | ${title}` : SITE.title;
 <Nav />
 
 <div class="wrapper">
-    <div class="content container container-center">
-
-        <div class="container-sidebar-left container-transition dynamic-margin container-hidden">
-            <Sidebar />
-        </div>
-
-        <div class="container-content-right container-transition dynamic-margin" style="padding: 0;">
-            <slot />
-        </div>
-
+    <div class="content container">
+        <slot />
     </div>
     <Footer />
 </div>

@@ -1,6 +1,5 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
-import IconCalendar from '../components/IconCalendar.astro';
 import { getVisiblePosts, postUrl } from '../lib/posts';
 
 const posts = (await getVisiblePosts()).filter((post) => post.data.tags.includes('note'));
@@ -14,7 +13,6 @@ const posts = (await getVisiblePosts()).filter((post) => post.data.tags.includes
                 {posts.map((post) => (
                     <li>
                         <div class="post-time">
-                            <IconCalendar />
                             <time>{post.data.date.toISOString().slice(0, 10)}</time>
                             <a href={postUrl(post.id)}>{post.data.title}</a>
                         </div>

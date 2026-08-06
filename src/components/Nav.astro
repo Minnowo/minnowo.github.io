@@ -3,15 +3,15 @@ import { SITE, NAV } from '../site.config';
 ---
 
 <nav class="navbar">
-    <div class="navbar-collapse nav_pad">
-        <a class="navbar-brand container-transition" href="/">
+    <div class="navbar-collapse">
+        <a class="navbar-brand" href="/">
             <img src="/favicon.png" alt="">
             {SITE.name}
         </a>
 
-        <div class="navbar-nav container-transition">
+        <div class="navbar-nav">
             {NAV.map((item) => (
-                <a class="nav-item nav-link link-fade" href={item.href}>{item.label}</a>
+                <a class="nav-link link-fade" href={item.href}>{item.label}</a>
             ))}
         </div>
     </div>

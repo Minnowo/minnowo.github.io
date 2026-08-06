@@ -39,38 +39,39 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
             <h4 id={letter} style="float:middle">[{letter}]</h4>
             <br />
 
-            {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
-                const slug = link.data.title
-                  .toLowerCase()
-                  .trim()
-                  .replace(/[^a-z0-9]+/g, '-')
-                  .replace(/^-+|-+$/g, '');
-                return (
-                    <div class="link-item">
-                        <h2 id={slug}>
-                            <a href={`#${slug}`}>#</a>
-                            {' '}{link.data.title}
-                        </h2>
+            <div class="board-grid">
+                {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
+                    const slug = link.data.title
+                      .toLowerCase()
+                      .trim()
+                      .replace(/[^a-z0-9]+/g, '-')
+                      .replace(/^-+|-+$/g, '');
+                    return (
+                        <div class="link-item board-tile">
+                            <span class="board-pin" aria-hidden="true"></span>
+                            <h2 id={slug}>
+                                <a href={`#${slug}`}>#</a>
+                                {' '}{link.data.title}
+                            </h2>
 
-                        <p>{link.data.description}</p>
+                            <p>{link.data.description}</p>
 
-                        <ul>
-                            {link.data.urls.map((url, i) => (
-                                <li class="truncate">
-                                    <strong>{link.data.url_prefix[i]}</strong>{' '}
-                                    <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                            <ul>
+                                {link.data.urls.map((url, i) => (
+                                    <li class="truncate">
+                                        <strong>{link.data.url_prefix[i]}</strong>{' '}
+                                        <a href={url} target="_blank" rel="noopener noreferrer">{url}</a>
 
-                                    {link.data.desc[i] && (
-                                        <p class="dont_truncate">{link.data.desc[i]}</p>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-
-                        <hr style="background-color: rgba(255, 255, 255, 0.5)" />
-                    </div>
-                );
-            })}
+                                        {link.data.desc[i] && (
+                                            <p class="dont_truncate">{link.data.desc[i]}</p>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     ))}
 </PageLayout>
