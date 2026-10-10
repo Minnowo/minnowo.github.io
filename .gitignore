@@ -28,3 +28,7 @@ mount.sh
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# sub-site checkouts (see scripts/build-subsites.sh)
+.subsites/
+ponkotsu-css/

@@ -19,4 +19,15 @@ export const NAV = [
   { href: '/archive/', label: '/archive' },
   { href: '/tags/', label: '/tags' },
   { href: '/links/', label: '/links' },
+  { href: '/sites/', label: '/sites' },
+];
+
+// Sub-sites are built separately and copied into dist/<name>/ by
+// scripts/build-subsites.sh. They are listed on /sites/.
+export const SITES = [
+  {
+    name: 'ponkotsu',
+    href: '/ponkotsu/',
+    description: 'A simplified Material Design 3 style for Tailwind v4. Live preview, color generator and reference.',
+  },
 ];

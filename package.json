@@ -8,7 +8,9 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:subsites": "bash scripts/build-subsites.sh",
+    "build:all": "npm run build && npm run build:subsites"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",
