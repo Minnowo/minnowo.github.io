@@ -13,8 +13,7 @@ pre.astro-code {
   overflow-x: auto;
   word-wrap: normal;
   white-space: pre;
-  border: 1px solid var(--border-color, #383838);
-  border-radius: var(--radius, 12px);
+    border-radius: var(--radius, 12px);
 }
 
 .filename + pre.astro-code {
@@ -30,33 +29,18 @@ pre.astro-code code {
 
 pre.astro-code::-webkit-scrollbar {
   height: 10px;
-  background-color: var(--color-c-crust, #161616);
+  background-color: var(--color-c-surface-container-2, #413c3f);
   border-radius: 0 0 var(--radius, 12px) var(--radius, 12px);
 }
 
 pre.astro-code::-webkit-scrollbar-thumb {
-  background-color: var(--color-c-maroon, #c97e6d);
+  background-color: var(--color-c-outline, #b4a8af);
   border-radius: 8px;
-}
-
-pre.astro-code ::selection {
-  background-color: rgba(199, 152, 122, 0.35);
-}
-
-/* Inline code (not inside a fenced code block) */
-p > code, li > code, h5 > code, .note > code {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.9em;
-  color: var(--color-c-peach, #c7987a);
-  background-color: var(--color-c-crust, #161616);
-  border: 1px solid var(--border-color, #383838);
-  border-radius: 4px;
-  padding: 1px 5px;
 }
 
 /* line numbers, if ever enabled via shikiConfig */
 .line-number {
-  border-right: dashed 1px var(--color-c-overlay1, #545454);
-  color: var(--color-c-overlay1, #545454);
+  border-right: dashed 1px var(--color-c-outline, #b4a8af);
+  color: var(--color-c-outline, #b4a8af);
   padding-right: 5px;
 }

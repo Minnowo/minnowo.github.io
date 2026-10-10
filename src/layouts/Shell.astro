@@ -17,19 +17,17 @@ const pageTitle = title ? `${SITE.title} | ${title}` : SITE.title;
     <meta charset="UTF-8">
     <title>{pageTitle}</title>
     <link rel="shortcut icon" type="image/png" href="/favicon.png">
-    <meta name="theme-color" content="#222222"/>
+    <meta name="theme-color" content="#2b2729"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/assets/css/code_highlight.css" rel="stylesheet">
 </head>
 
-<body class="m-0 bg-c-base text-[15px] leading-relaxed text-c-text">
+<body>
 
 <Nav />
 
-<div class="relative min-h-full">
-    <div class="mx-auto w-full max-w-200 px-4 pt-6 pb-35">
-        <slot />
-    </div>
+<div class="mx-auto flex w-full max-w-200 flex-col gap-4 px-4 py-4">
+    <slot />
     <Footer />
 </div>
 

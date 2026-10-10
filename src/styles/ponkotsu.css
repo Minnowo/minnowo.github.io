@@ -1,0 +1,481 @@
+@import 'tailwindcss';
+
+@theme static {
+    --color-*: initial;
+    --color-c-primary: #e2badc;
+    --color-c-on-primary: #4e1c4f;
+    --color-c-primary-container: #745471;
+    --color-c-on-primary-container: #ffffff;
+    --color-c-secondary: #a7caec;
+    --color-c-on-secondary: #003351;
+    --color-c-secondary-container: #3f627f;
+    --color-c-on-secondary-container: #ffffff;
+    --color-c-tertiary: #d7c68f;
+    --color-c-on-tertiary: #3b2f00;
+    --color-c-tertiary-container: #6a5e30;
+    --color-c-on-tertiary-container: #ffffff;
+    --color-c-error: #edbaba;
+    --color-c-on-error: #541f22;
+    --color-c-error-container: #7c5455;
+    --color-c-on-error-container: #ffffff;
+    --color-c-success: #aecdc1;
+    --color-c-on-success: #00382c;
+    --color-c-success-container: #48645a;
+    --color-c-on-success-container: #ffffff;
+    --color-c-surface: #2b2729;
+    --color-c-on-surface: #e9e0e3;
+    --color-c-on-surface-variant: #cfc3ca;
+    --color-c-surface-container-1: #353134;
+    --color-c-surface-container-2: #413c3f;
+    --color-c-surface-container-3: #4c484a;
+    --color-c-surface-container-4: #585356;
+    --color-c-surface-container-5: #655f62;
+    --color-c-surface-container-6: #716c6e;
+    --color-c-surface-dim: #2b2729;
+    --color-c-surface-bright: #544f51;
+    --color-c-outline: #b4a8af;
+    --color-c-outline-variant: #655c62;
+    --color-c-inverse-surface: #ffffff;
+    --color-c-inverse-on-surface: #4a4548;
+    --color-c-inverse-primary: #9e639a;
+    --color-c-pink: #d49bd0;
+    --color-c-on-pink: #330835;
+    --color-c-d-pink: #b284cf;
+    --color-c-on-d-pink: #2e024a;
+    --color-c-l-pink: #e5b9e0;
+    --color-c-on-l-pink: #2d102e;
+    --color-c-red: #ed9698;
+    --color-c-on-red: #3b070e;
+    --color-c-d-red: #d67a97;
+    --color-c-on-d-red: #3e001c;
+    --color-c-l-red: #fab5b6;
+    --color-c-on-l-red: #350e11;
+    --color-c-yellow: #ccaa55;
+    --color-c-on-yellow: #251a00;
+    --color-c-d-yellow: #c78a2f;
+    --color-c-on-d-yellow: #2a1800;
+    --color-c-l-yellow: #dfc483;
+    --color-c-on-l-yellow: #251a00;
+    --color-c-green: #6dbda4;
+    --color-c-on-green: #002018;
+    --color-c-d-green: #51a675;
+    --color-c-on-d-green: #002110;
+    --color-c-l-green: #9cd2bf;
+    --color-c-on-l-green: #002018;
+    --color-c-blue: #92aee7;
+    --color-c-on-blue: #001a40;
+    --color-c-d-blue: #5a9bd5;
+    --color-c-on-d-blue: #001d33;
+    --color-c-l-blue: #b4c7f0;
+    --color-c-on-l-blue: #051b3b;
+    --color-c-primary-hover: #cfa6ca;
+    --color-c-primary-focus: #bd92b8;
+    --color-c-secondary-hover: #92b6d8;
+    --color-c-secondary-focus: #7ea3c5;
+    --color-c-tertiary-hover: #c3b27d;
+    --color-c-tertiary-focus: #af9f6b;
+    --color-c-error-hover: #daa6a6;
+    --color-c-error-focus: #c79292;
+    --color-c-success-hover: #99baad;
+    --color-c-success-focus: #84a79a;
+    --color-c-surface-container-1-hover: #484346;
+    --color-c-surface-container-1-focus: #5c575a;
+    --color-c-primary-hover-tint: #e2badc1f;
+    --color-c-primary-focus-tint: #e2badc3d;
+    --color-c-secondary-hover-tint: #a7caec1f;
+    --color-c-secondary-focus-tint: #a7caec3d;
+    --color-c-tertiary-hover-tint: #d7c68f1f;
+    --color-c-tertiary-focus-tint: #d7c68f3d;
+    --color-c-error-hover-tint: #edbaba1f;
+    --color-c-error-focus-tint: #edbaba3d;
+    --color-c-success-hover-tint: #aecdc11f;
+    --color-c-success-focus-tint: #aecdc13d;
+    --color-c-on-surface-hover-tint: #e9e0e31f;
+    --color-c-on-surface-focus-tint: #e9e0e33d;
+}
+
+[data-theme='light'] {
+    --color-c-primary: #745471;
+    --color-c-on-primary: #ffeff9;
+    --color-c-primary-container: #e2badc;
+    --color-c-on-primary-container: #000000;
+    --color-c-secondary: #3f627f;
+    --color-c-on-secondary: #ecf4ff;
+    --color-c-secondary-container: #a7caec;
+    --color-c-on-secondary-container: #000000;
+    --color-c-tertiary: #734f8e;
+    --color-c-on-tertiary: #fdefff;
+    --color-c-tertiary-container: #e1b6fd;
+    --color-c-on-tertiary-container: #000000;
+    --color-c-error: #7c5455;
+    --color-c-on-error: #fff0f0;
+    --color-c-error-container: #edbaba;
+    --color-c-on-error-container: #000000;
+    --color-c-success: #48645a;
+    --color-c-on-success: #c9ffeb;
+    --color-c-success-container: #aecdc1;
+    --color-c-on-success-container: #000000;
+    --color-c-surface: #e3dbde;
+    --color-c-on-surface: #1e1b1d;
+    --color-c-on-surface-variant: #4d444a;
+    --color-c-surface-container-1: #d4cdd0;
+    --color-c-surface-container-2: #c6bfc2;
+    --color-c-surface-container-3: #b9b1b4;
+    --color-c-surface-container-4: #aba4a7;
+    --color-c-surface-container-5: #9d979a;
+    --color-c-surface-container-6: #908a8d;
+    --color-c-surface-dim: #c4bcbf;
+    --color-c-surface-bright: #e3dbde;
+    --color-c-outline: #655c62;
+    --color-c-outline-variant: #b4a8af;
+    --color-c-inverse-surface: #1e1b1d;
+    --color-c-inverse-on-surface: #dad2d5;
+    --color-c-inverse-primary: #d796d1;
+    --color-c-pink: #8d4a8d;
+    --color-c-on-pink: #ffc0fa;
+    --color-c-d-pink: #65288d;
+    --color-c-on-d-pink: #ebc7ff;
+    --color-c-l-pink: #cb94c7;
+    --color-c-on-l-pink: #250029;
+    --color-c-red: #a2464b;
+    --color-c-on-red: #ffc7c7;
+    --color-c-d-red: #831f48;
+    --color-c-on-d-red: #ffc5d4;
+    --color-c-l-red: #e38f91;
+    --color-c-on-l-red: #2c0105;
+    --color-c-yellow: #7c5f00;
+    --color-c-on-yellow: #fdcf56;
+    --color-c-d-yellow: #643f00;
+    --color-c-on-d-yellow: #ffcb8a;
+    --color-c-l-yellow: #c3a251;
+    --color-c-on-l-yellow: #181000;
+    --color-c-green: #00715a;
+    --color-c-on-green: #71e9c7;
+    --color-c-d-green: #00522f;
+    --color-c-on-d-green: #6deca4;
+    --color-c-l-green: #67b49d;
+    --color-c-on-l-green: #00150e;
+    --color-c-blue: #3562ac;
+    --color-c-on-blue: #c2d5ff;
+    --color-c-d-blue: #004a77;
+    --color-c-on-d-blue: #b4d8ff;
+    --color-c-l-blue: #8ba6dd;
+    --color-c-on-l-blue: #00102c;
+    --color-c-primary-hover: #846580;
+    --color-c-primary-focus: #947790;
+    --color-c-secondary-hover: #53728e;
+    --color-c-secondary-focus: #66839d;
+    --color-c-tertiary-hover: #82619b;
+    --color-c-tertiary-focus: #9274a9;
+    --color-c-error-hover: #8b6566;
+    --color-c-error-focus: #9b7778;
+    --color-c-success-hover: #56756a;
+    --color-c-success-focus: #65877a;
+    --color-c-surface-container-1-hover: #bcb5b8;
+    --color-c-surface-container-1-focus: #a49ea0;
+    --color-c-primary-hover-tint: #7454711f;
+    --color-c-primary-focus-tint: #7454713d;
+    --color-c-secondary-hover-tint: #3f627f1f;
+    --color-c-secondary-focus-tint: #3f627f3d;
+    --color-c-tertiary-hover-tint: #734f8e1f;
+    --color-c-tertiary-focus-tint: #734f8e3d;
+    --color-c-error-hover-tint: #7c54551f;
+    --color-c-error-focus-tint: #7c54553d;
+    --color-c-success-hover-tint: #48645a1f;
+    --color-c-success-focus-tint: #48645a3d;
+    --color-c-on-surface-hover-tint: #1e1b1d1f;
+    --color-c-on-surface-focus-tint: #1e1b1d3d;
+}
+
+
+@theme {
+    --radius-sm: 4px;
+    --radius-md: 8px;
+}
+
+@layer base {
+    html {
+        -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+        color: var(--color-c-on-surface);
+        background-color: var(--color-c-surface);
+        line-height: 1.5;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        color: var(--color-c-on-surface);
+    }
+    h1 { font-size: 1.75rem; line-height: 2.25rem; font-weight: 425; }
+    h2 { font-size: 1.375rem; line-height: 1.75rem; font-weight: 425; }
+    h3 { font-size: 1.125rem; line-height: 1.5rem; font-weight: 500; }
+    h4, h5, h6 { font-size: 1rem; line-height: 1.5rem; font-weight: 500; }
+
+    strong, b {
+        font-weight: 500;
+    }
+
+    small {
+        color: var(--color-c-on-surface-variant);
+        @apply text-sm;
+    }
+
+    a {
+        color: var(--color-c-primary);
+        text-decoration: none;
+        @apply std-focus;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--color-c-outline-variant);
+    }
+
+    code, pre {
+        font-family: ui-monospace, monospace;
+        background: var(--color-c-surface-container-1);
+        @apply rounded-sm;
+    }
+    code {
+        @apply px-1 py-0.5;
+    }
+    pre {
+        @apply p-3 overflow-x-auto;
+    }
+    pre code {
+        background: transparent;
+        padding: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid var(--color-c-outline-variant);
+        @apply px-2 py-1 text-left;
+    }
+    th {
+        background: var(--color-c-surface-container-2);
+        font-weight: 500;
+    }
+
+    fieldset {
+        border: 1px solid var(--color-c-outline-variant);
+        min-width: 0;
+        @apply rounded-md p-3;
+    }
+    legend {
+        color: var(--color-c-on-surface-variant);
+        @apply px-1 text-sm;
+    }
+
+    /* A caption doesn't forward clicks/hover to its field; the field itself does. */
+    label {
+        color: var(--color-c-on-surface-variant);
+        pointer-events: none;
+        @apply text-sm;
+    }
+    label > * {
+        pointer-events: auto;
+    }
+    label:has(> input[type="checkbox"], > input[type="radio"]) {
+        color: var(--color-c-on-surface);
+        pointer-events: auto;
+        @apply text-base;
+    }
+
+    input, select, textarea, button {
+        @apply input-like;
+    }
+
+    /* Fields default to a ~20 character width (the size attribute), which stops
+       their containers shrinking on narrow screens. A real width replaces it. */
+    input, select, textarea {
+        min-width: 0;
+    }
+    label > input, label > select, label > textarea {
+        width: 100%;
+    }
+
+    button {
+        user-select: none;
+        -webkit-touch-callout: none;
+        @apply enabled:hover:cursor-pointer
+            not-disabled:not-aria-disabled:focus:border-c-outline
+            not-disabled:not-aria-disabled:focus:inset-ring-0
+            not-disabled:not-aria-disabled:focus-within:border-c-outline
+            not-disabled:not-aria-disabled:focus-within:inset-ring-0
+            not-disabled:not-aria-disabled:hover:bg-c-surface-container-1-hover
+            not-disabled:not-aria-disabled:active:bg-c-surface-container-1-focus
+            std-focus!
+            ;
+    }
+
+    input[type="checkbox"], input[type="radio"], input[type="range"], input[type="color"] {
+        all: revert;
+        pointer-events: auto;
+        accent-color: var(--color-c-primary);
+        @apply hover:cursor-pointer std-focus;
+    }
+    input[type="checkbox"]:disabled, input[type="radio"]:disabled, input[type="range"]:disabled, input[type="color"]:disabled {
+        @apply cursor-not-allowed opacity-60;
+    }
+
+    ::selection {
+        background: var(--color-c-primary);
+        color: var(--color-c-on-primary);
+    }
+}
+
+@utility std-focus {
+    @apply focus-visible:outline-solid
+        focus-visible:outline-2
+        focus-visible:outline-c-primary
+        focus-visible:outline-offset-2
+}
+
+@utility input-like {
+    @apply text-c-on-surface
+        text-base font-normal
+        bg-c-surface-container-1
+
+        rounded-sm
+        px-2
+        py-1
+        border
+        border-c-outline
+        not-disabled:not-aria-disabled:hover:bg-c-surface-container-1-hover
+        not-disabled:not-aria-disabled:focus:border-c-primary
+        not-disabled:not-aria-disabled:focus:inset-ring-1
+        not-disabled:not-aria-disabled:focus:inset-ring-c-primary
+        not-disabled:not-aria-disabled:focus-within:border-c-primary
+        not-disabled:not-aria-disabled:focus-within:inset-ring-1
+        not-disabled:not-aria-disabled:focus-within:inset-ring-c-primary
+        focus:outline-none
+        focus-within:outline-none
+        std-focus
+
+        disabled:bg-c-surface-container-2
+        disabled:text-c-on-surface-variant
+        disabled:border-c-outline-variant
+        disabled:cursor-not-allowed
+        disabled:opacity-60
+
+        aria-disabled:bg-c-surface-container-2
+        aria-disabled:text-c-on-surface-variant
+        aria-disabled:border-c-outline-variant
+        aria-disabled:cursor-not-allowed
+        aria-disabled:opacity-60
+        aria-disabled:pointer-events-none;
+}
+
+/* input-like on a wrapper (a composite field): the wrapper draws hover/focus,
+   the fields inside stay flat. */
+.input-like :is(input, select, textarea, .input-like) {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/*
+ * surface-N backs onto surface-container-N directly, so the number tells
+ * you the tone step - no separate name mapping to remember. Starts at 1,
+ * not 0: the page background is plain `surface`, set on <body>, so nothing
+ * needs to nest *below* surface-1.
+ */
+@utility surface-1 {
+    background: var(--color-c-surface-container-1);
+    @apply text-c-on-surface rounded-md p-3;
+}
+@utility surface-2 {
+    background: var(--color-c-surface-container-2);
+    @apply text-c-on-surface rounded-md p-3;
+}
+@utility surface-3 {
+    background: var(--color-c-surface-container-3);
+    @apply text-c-on-surface rounded-md p-3;
+}
+@utility surface-4 {
+    background: var(--color-c-surface-container-4);
+    @apply text-c-on-surface rounded-md p-3;
+}
+@utility surface-5 {
+    background: var(--color-c-surface-container-5);
+    @apply text-c-on-surface rounded-md p-3;
+}
+@utility surface-6 {
+    background: var(--color-c-surface-container-6);
+    @apply text-c-on-surface rounded-md p-3;
+}
+
+/* Opt-in border: on its own for a box flush with the page, or added to a
+   surface-N that needs a drawn boundary. */
+@utility surface-border {
+    @apply text-c-on-surface border border-c-outline-variant rounded-md p-3;
+}
+
+@utility btn-filled {
+    @apply px-3 py-1 rounded font-medium border-none enabled:hover:cursor-pointer
+        disabled:opacity-38 disabled:cursor-not-allowed;
+}
+@utility btn-primary {
+    @apply btn-filled bg-c-primary text-c-on-primary
+        enabled:hover:bg-c-primary-hover enabled:active:bg-c-primary-focus;
+}
+@utility btn-secondary {
+    @apply btn-filled bg-c-secondary text-c-on-secondary
+        enabled:hover:bg-c-secondary-hover
+        enabled:active:bg-c-secondary-focus;
+}
+@utility btn-tertiary {
+    @apply btn-filled bg-c-tertiary text-c-on-tertiary
+        enabled:hover:bg-c-tertiary-hover
+        enabled:active:bg-c-tertiary-focus;
+}
+@utility btn-error {
+    @apply btn-filled bg-c-error text-c-on-error
+        enabled:hover:bg-c-error-hover enabled:active:bg-c-error-focus;
+}
+@utility btn-success {
+    @apply btn-filled bg-c-success text-c-on-success
+        enabled:hover:bg-c-success-hover
+        enabled:active:bg-c-success-focus;
+}
+
+@utility btn-outlined {
+    @apply px-3 py-1 rounded font-medium bg-transparent border enabled:hover:cursor-pointer
+        border-c-outline text-c-on-surface
+        enabled:hover:bg-c-on-surface-hover-tint
+        enabled:active:bg-c-on-surface-focus-tint
+        disabled:opacity-38 disabled:cursor-not-allowed;
+}
+@utility btn-outlined-primary {
+    @apply btn-outlined border-c-primary text-c-primary
+        enabled:hover:bg-c-primary-hover-tint
+        enabled:active:bg-c-primary-focus-tint;
+}
+@utility btn-outlined-secondary {
+    @apply btn-outlined border-c-secondary text-c-secondary
+        enabled:hover:bg-c-secondary-hover-tint
+        enabled:active:bg-c-secondary-focus-tint;
+}
+@utility btn-outlined-tertiary {
+    @apply btn-outlined border-c-tertiary text-c-tertiary
+        enabled:hover:bg-c-tertiary-hover-tint
+        enabled:active:bg-c-tertiary-focus-tint;
+}
+@utility btn-outlined-error {
+    @apply btn-outlined border-c-error text-c-error
+        enabled:hover:bg-c-error-hover-tint
+        enabled:active:bg-c-error-focus-tint;
+}
+@utility btn-outlined-success {
+    @apply btn-outlined border-c-success text-c-success
+        enabled:hover:bg-c-success-hover-tint
+        enabled:active:bg-c-success-focus-tint;
+}
+

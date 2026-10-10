@@ -13,50 +13,43 @@ const letters = [...new Set(allLinks.map((link) => firstLetter(link.data.title))
 ---
 
 <PageLayout title="Links">
-    <ul class="m-0 mb-4 flex list-none flex-wrap gap-x-3 p-0">
+    <ul class="flex list-none flex-wrap gap-2">
         {letters.map((letter) => (
-            <li>
-                <a class="text-c-peach hover:text-c-flamingo" href={`#${letter}`}>{letter}</a>
-            </li>
+            <li><a href={`#${letter}`}>{letter}</a></li>
         ))}
     </ul>
 
     {letters.map((letter) => (
-        <>
-            <h4 id={letter} class="mt-6 text-c-maroon">[{letter}]</h4>
+        <div class="flex flex-col gap-2">
+            <h3 id={letter}>[{letter}]</h3>
 
-            <ul class="m-0 mb-4 list-none divide-y divide-dashed divide-c-surface0 p-0">
-                {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
-                    const slug = link.data.title
-                      .toLowerCase()
-                      .trim()
-                      .replace(/[^a-z0-9]+/g, '-')
-                      .replace(/^-+|-+$/g, '');
-                    return (
-                        <li class="py-3 first:pt-0 last:pb-0">
-                            <h2 id={slug}>
-                                <a class="mr-1 text-c-overlay1 hover:text-c-flamingo" href={`#${slug}`}>#</a>
-                                {link.data.title}
-                            </h2>
+            {allLinks.filter((link) => firstLetter(link.data.title) === letter).map((link) => {
+                const slug = link.data.title
+                  .toLowerCase()
+                  .trim()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '');
+                return (
+                    <div class="surface-2 flex flex-col gap-2">
+                        <div>
+                            <h4 id={slug}><a href={`#${slug}`}>#</a> {link.data.title}</h4>
+                            <small>{link.data.description}</small>
+                        </div>
 
-                            <p class="mb-2 text-c-subtext1">{link.data.description}</p>
-
-                            <ul class="m-0 list-none p-0">
-                                {link.data.urls.map((url, i) => (
-                                    <li class="py-0.5 text-sm">
-                                        <strong class="mr-1 text-c-peach">{link.data.url_prefix[i]}</strong>
-                                        <a class="inline-block max-w-full truncate align-bottom text-c-text hover:text-c-flamingo" href={url} target="_blank" rel="noopener noreferrer">{url}</a>
-
-                                        {link.data.desc[i] && (
-                                            <p class="text-c-subtext0">{link.data.desc[i]}</p>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                        </li>
-                    );
-                })}
-            </ul>
-        </>
+                        <ul class="flex list-none flex-col gap-2">
+                            {link.data.urls.map((url, i) => (
+                                <li class="flex flex-col">
+                                    <span class="min-w-0">
+                                        <strong>{link.data.url_prefix[i]}</strong>{' '}
+                                        <a class="inline-block max-w-full truncate align-bottom" href={url} target="_blank" rel="noopener noreferrer">{url}</a>
+                                    </span>
+                                    {link.data.desc[i] && <small>{link.data.desc[i]}</small>}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                );
+            })}
+        </div>
     ))}
 </PageLayout>

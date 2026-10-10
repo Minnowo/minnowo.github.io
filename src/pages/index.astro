@@ -6,26 +6,24 @@ const posts = (await getVisiblePosts()).slice(0, 10);
 ---
 
 <PageLayout>
-    <ul class="m-0 list-none divide-y divide-dashed divide-c-surface0 p-0">
+    <div class="flex flex-col gap-2">
         {posts.map((post) => (
-            <li class="py-3 first:pt-0 last:pb-0">
-                <h2 class="mb-1">
-                    <a class="text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
-                </h2>
-                <time class="mb-1.5 block text-[0.8em] text-c-subtext0">{post.data.date.toISOString().slice(0, 10)}</time>
-                <p class="mb-2 text-c-subtext1">{post.data.description}</p>
+            <div class="surface-2 flex flex-col gap-2">
+                <div>
+                    <h2><a href={postUrl(post.id)}>{post.data.title}</a></h2>
+                    <small><time>{post.data.date.toISOString().slice(0, 10)}</time></small>
+                </div>
+                <p>{post.data.description}</p>
                 {post.data.tags.length > 0 && (
-                    <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0">
+                    <ul class="flex list-none flex-wrap gap-2">
                         {post.data.tags.map((tag) => (
-                            <li><a class="inline-block rounded text-[0.8em] text-c-base! bg-c-peach px-1.5 py-px hover:bg-c-flamingo hover:no-underline" href={`/tag/${tag}/`}>{tag}</a></li>
+                            <li><a class="btn-outlined-primary" href={`/tag/${tag}/`}>{tag}</a></li>
                         ))}
                     </ul>
                 )}
-            </li>
+            </div>
         ))}
-    </ul>
-
-    <div class="mt-8 text-center">
-        <h3><a class="text-c-peach hover:text-c-flamingo hover:underline" href="/archive/">Archive</a></h3>
     </div>
+
+    <h3 class="text-center"><a href="/archive/">Archive</a></h3>
 </PageLayout>

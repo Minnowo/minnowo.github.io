@@ -2,15 +2,14 @@
 import { SITE, NAV } from '../site.config';
 ---
 
-<nav class="flex items-center justify-between border-t-[3px] border-t-c-maroon border-b border-b-c-crust bg-c-mantle px-4 text-lg">
-    <a class="flex items-center py-2 pr-4 text-[22px] font-bold text-c-text before:mr-2.5 before:h-2.5 before:w-2.5 before:rotate-45 before:bg-c-maroon before:content-[''] hover:text-c-text" href="/">
-        <img src="/favicon.png" alt="" class="hidden">
-        {SITE.name}
+<nav class="surface-1 mx-auto mt-4 flex w-full max-w-200 flex-wrap items-center justify-between gap-2 rounded-none sm:rounded-md">
+    <a class="text-c-on-surface" href="/">
+        <strong>{SITE.name}</strong>
     </a>
 
-    <div class="flex flex-wrap items-center gap-1">
+    <div class="flex flex-wrap items-center gap-2">
         {NAV.map((item) => (
-            <a class="p-2 text-c-subtext0 transition-all duration-200 before:mr-0.5 before:text-c-overlay1 before:content-['/'] hover:text-c-text" href={item.href}>{item.label}</a>
+            <a href={item.href}>{item.label}</a>
         ))}
     </div>
 </nav>

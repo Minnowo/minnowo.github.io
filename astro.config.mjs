@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import catfishRedTheme from './shiki-theme.mjs';
+import ponkotsuTheme from './shiki-theme.mjs';
 
 // This is a user/organization page (minnowo.github.io), so it is served
 // from the domain root - no `base` path needed. If you ever convert this
@@ -17,9 +17,9 @@ export default defineConfig({
   },
   markdown: {
     shikiConfig: {
-      // Custom theme built from the site's own red palette (see
+      // Custom theme built from the site's own ponkotsu palette (see
       // shiki-theme.mjs) instead of a bundled third-party theme.
-      theme: catfishRedTheme,
+      theme: ponkotsuTheme,
       wrap: false,
     },
   },

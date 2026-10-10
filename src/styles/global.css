@@ -1,81 +1,22 @@
-@import "tailwindcss";
+@import "./ponkotsu.css";
 @plugin "@tailwindcss/typography";
 
-/* red-family palette, exposed as Tailwind theme tokens (text-c-*, bg-c-*, border-c-*, ...) */
 @theme {
-  --color-c-rosewater: #d9a3a3;
-  --color-c-flamingo: #c75a5a;
-  --color-c-red: #a74c48;
-  --color-c-maroon: #c97e6d;
-  --color-c-peach: #c7987a;
-
-  --color-c-text: #e6e6e6;
-  --color-c-subtext1: #c8c8c8;
-  --color-c-subtext0: #9a9a9a;
-
-  --color-c-overlay2: #6a6a6a;
-  --color-c-overlay1: #545454;
-
-  --color-c-surface1: #383838;
-  --color-c-surface0: #2c2c2c;
-
-  --color-c-base: #1b1b1b;
-  --color-c-mantle: #242424;
-  --color-c-crust: #161616;
-
   --font-mono: "Fira Code", "JetBrains Mono", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
 }
 
 :root {
-  /* legacy custom-property names still consumed by code_highlight.css
-     and shiki-theme.mjs's fallback values (out of scope of this rewrite) */
-  --border-color: var(--color-c-surface1);
-  --radius: 10px;
-}
-
-@layer base {
-  h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 0.5rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-  h1 { font-size: 1.8em; }
-  h2 { font-size: 1.4em; }
-  h3 { font-size: 1.15em; }
-  h4 { font-size: 1.05em; }
-  h5 { font-size: 0.9em; }
-  h6 { font-size: 0.8em; }
-}
-
-::selection {
-  background: color-mix(in srgb, var(--color-c-peach) 35%, transparent);
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-c-crust);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-c-surface1);
-  border-radius: 8px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-c-maroon);
+  /* consumed by code_highlight.css */
+  --border-color: var(--color-c-outline-variant);
+  --radius: 8px;
 }
 
 /* markdown-authoring helper classes (raw HTML in .md content, not reachable via component classes) */
 @layer components {
   .filename {
-    background: var(--color-c-crust);
-    color: var(--color-c-subtext0);
-    border: 1px solid var(--color-c-surface1);
-    border-bottom: none;
-    border-radius: 10px 10px 0 0;
+    background: var(--color-c-surface-container-2);
+    color: var(--color-c-on-surface-variant);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     margin: 0;
     padding: 4px 0 4px 1em;
   }
@@ -85,10 +26,8 @@
   }
 
   .key {
-    font-size: 0.9em;
-    background: var(--color-c-surface0);
-    border: 1px solid var(--color-c-surface1);
-    border-radius: 4px;
+    background: var(--color-c-surface-container-2);
+    border-radius: var(--radius-sm);
     padding: 0 6px;
   }
 
@@ -99,31 +38,27 @@
 }
 
 /* Markdown post content - raw HTML rendered from .md files, so it can't
-   carry Tailwind classes directly. Scoped typography, built on the
-   @tailwindcss/typography plugin and recolored to the site palette. */
+   carry classes directly. Built on the typography plugin, recolored with
+   ponkotsu role tokens. */
 .post-content {
-  --tw-prose-body: var(--color-c-text);
-  --tw-prose-headings: var(--color-c-text);
-  --tw-prose-lead: var(--color-c-subtext1);
-  --tw-prose-links: var(--color-c-peach);
-  --tw-prose-bold: var(--color-c-text);
-  --tw-prose-counters: var(--color-c-subtext0);
-  --tw-prose-bullets: var(--color-c-overlay1);
-  --tw-prose-hr: var(--color-c-surface1);
-  --tw-prose-quotes: var(--color-c-subtext1);
-  --tw-prose-quote-borders: var(--color-c-maroon);
-  --tw-prose-captions: var(--color-c-subtext0);
-  --tw-prose-code: var(--color-c-text);
-  --tw-prose-pre-code: var(--color-c-text);
+  --tw-prose-body: var(--color-c-on-surface);
+  --tw-prose-headings: var(--color-c-on-surface);
+  --tw-prose-lead: var(--color-c-on-surface-variant);
+  --tw-prose-links: var(--color-c-primary);
+  --tw-prose-bold: var(--color-c-on-surface);
+  --tw-prose-counters: var(--color-c-on-surface-variant);
+  --tw-prose-bullets: var(--color-c-outline);
+  --tw-prose-hr: var(--color-c-outline-variant);
+  --tw-prose-quotes: var(--color-c-on-surface-variant);
+  --tw-prose-quote-borders: var(--color-c-primary);
+  --tw-prose-captions: var(--color-c-on-surface-variant);
+  --tw-prose-code: var(--color-c-on-surface);
+  --tw-prose-pre-code: var(--color-c-on-surface);
   --tw-prose-pre-bg: transparent;
-  --tw-prose-th-borders: var(--color-c-surface1);
-  --tw-prose-td-borders: var(--color-c-surface0);
+  --tw-prose-th-borders: var(--color-c-outline-variant);
+  --tw-prose-td-borders: var(--color-c-outline-variant);
 
   max-width: none;
-}
-
-.post-content a:hover {
-  color: var(--color-c-flamingo);
 }
 
 .post-content :is(h1, h2, h3, h4, h5, h6) {
@@ -131,28 +66,22 @@
   margin-top: -50px;
 }
 
-.post-content hr {
-  border-top-style: dashed;
-}
-
 .post-content img {
-  border-radius: 10px;
-  border: 1px solid var(--color-c-surface1);
+  border-radius: var(--radius-md);
 }
 
 .post-content img + em {
   display: block;
   text-align: center;
-  color: var(--color-c-subtext0);
-  font-size: 0.85em;
+  color: var(--color-c-on-surface-variant);
+  font-size: 0.875rem;
 }
 
-/* inline code outside fenced blocks (fenced blocks are themed by shiki via code_highlight.css) */
 .post-content :not(pre) > code {
   font-family: var(--font-mono);
 }
 
-/* typography plugin wraps inline code in literal backticks via ::before/::after - drop them */
+/* typography plugin wraps inline code in literal backticks - drop them */
 .post-content code::before,
 .post-content code::after {
   content: none;

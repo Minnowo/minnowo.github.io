@@ -19,14 +19,14 @@ const { posts } = Astro.props;
 ---
 
 <PageLayout>
-    <h2>All posts with tag: {tag}</h2>
+    <h1>Tag: {tag}</h1>
 
-    <ul class="m-0 mb-4 list-none p-0">
+    <ul class="flex list-none flex-col gap-2">
         {posts.map((post) => (
-            <li class="border-b border-dashed border-c-surface0 py-2">
-                <time class="inline-block min-w-[9em] text-[0.85em] text-c-overlay2">{post.data.date.toDateString()}</time>
-                <a class="font-bold text-c-peach hover:text-c-flamingo hover:underline" href={postUrl(post.id)}>{post.data.title}</a>
-                <p class="mt-1 mb-0 text-[0.9em] text-c-subtext0">{post.data.description}</p>
+            <li class="surface-2 flex flex-col gap-1">
+                <h4><a href={postUrl(post.id)}>{post.data.title}</a></h4>
+                <small><time>{post.data.date.toDateString()}</time></small>
+                <p>{post.data.description}</p>
             </li>
         ))}
     </ul>
